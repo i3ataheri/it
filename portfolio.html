@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض أعمال عبدالله البلوشي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Almarai', sans-serif;
+            background: #1a1a2e;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* وسط‌چین کردن کل محتوا */
+        }
+
+        .header {
+            text-align: center; /* وسط‌چین کردن متن‌ها */
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-card:active { transform: scale(0.95); background: rgba(255, 255, 255, 0.2); }
+
+        .category-card i {
+            font-size: 35px;
+            margin-bottom: 5px;
+            color: #23a6d5;
+        }
+
+        .category-card span {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* اصلاح دکمه بازگشت برای وسط‌چین شدن قطعی */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 18px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i> العودة للرئيسية
+        </a>
+        <h1>معرض الأعمال</h1>
+        <p>اختر القسم لتصفح المشاريع</p>
+    </div>
+
+    <div class="grid-container">
+        <a href="menus.html" class="category-card">
+            <i class="fas fa-utensils"></i>
+            <span>منيو المطاعم</span>
+        </a>
+
+        <a href="profiles.html" class="category-card">
+            <i class="fas fa-id-badge"></i>
+            <span>البروفايلات</span>
+        </a>
+
+        <a href="3dprint.html" class="category-card">
+            <i class="fas fa-cube"></i>
+            <span>طباعة 3D</span>
+        </a>
+
+        <a href="video-menus.html" class="category-card">
+            <i class="fas fa-play-circle"></i>
+            <span>منيو فيديو</span>
+        </a>
+        
+        <a href="google-review.html" class="category-card">
+            <i class="fas fa-star"></i>
+            <span>تقييم جوجل</span>
+        </a>
+
+        <a href="https://wa.me/966548471318" class="category-card" style="border-color: #25d366;">
+            <i class="fab fa-whatsapp" style="color: #25d366;"></i>
+            <span>طلب خاص</span>
+        </a>
+    </div>
+
+</body>
+</html>
