@@ -40,26 +40,26 @@
         }
 
         .theme-switcher {
-    position: absolute;
-    top: 30px;
-    left: 30px;
+            position: absolute;
+            top: 15px;
+            right: 15px;
 
-    width: 45px;
-    height: 45px;
+            width: 45px;
+            height: 45px;
 
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 50%;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 50%;
 
-    cursor: pointer;
-    color: var(--accent);
+            cursor: pointer;
+            color: var(--accent);
 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         .mobile-profile {
             width: 90%; max-width: 370px;
@@ -122,15 +122,16 @@
 </head>
 <body data-theme="light">
 
-    <div class="theme-switcher" onclick="toggleTheme()">
-        <span id="theme-text"></span>
-        <i id="theme-icon" class="fas fa-moon"></i>
-    </div>
-
     <div class="mobile-profile">
+
+        <div class="theme-switcher" onclick="toggleTheme()">
+            <span id="theme-text"></span>
+            <i id="theme-icon" class="fas fa-moon"></i>
+        </div>
+
         <div class="profile-icon-box">
-    <i class="fas fa-laptop-code"></i>
-</div>
+            <i class="fas fa-laptop-code"></i>
+        </div>
         
         <h1>عبدالله البلوشي</h1>
         <span class="occupation">Creative Developer</span>
