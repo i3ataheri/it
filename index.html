@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عبدالله البلوشي | UI Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #f0f2f5;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --accent: #ff5f00;
+            --item: #f8f9fa;
+            --border: #e2e8f0;
+            --glow: rgba(255, 95, 0, 0.2);
+        }
+
+        [data-theme="dark"] {
+            --bg: #000000;
+            --card: #0a0a0a;
+            --text: #ffffff;
+            --accent: #00d2ff;
+            --item: #111111;
+            --border: #222222;
+            --glow: rgba(0, 210, 255, 0.4);
+        }
+
+        * { box-sizing: border-box; transition: 0.3s ease-in-out; }
+        
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg);
+            height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            color: var(--text);
+        }
+
+        .theme-switcher {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+
+    width: 45px;
+    height: 45px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+
+    cursor: pointer;
+    color: var(--accent);
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+        .mobile-profile {
+            width: 90%; max-width: 370px;
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 40px;
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-icon-box {
+            width: 80px; height: 80px;
+            background: var(--accent);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            display: flex; justify-content: center; align-items: center;
+            margin: 0 auto 20px;
+            font-size: 32px; color: #fff;
+            box-shadow: 0 10px 25px var(--glow);
+        }
+
+        h1 { font-family: 'Almarai', sans-serif; font-weight: 800; font-size: 26px; margin-bottom: 5px; }
+        
+        .occupation {
+            font-size: 13px; font-weight: 700; color: var(--accent);
+            text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 30px; display: block;
+        }
+
+        .services-list { text-align: right; margin-bottom: 30px; padding: 0; list-style: none; }
+
+        .services-list li {
+            font-size: 14px; font-weight: 600;
+            margin-bottom: 12px;
+            background: var(--item);
+            padding: 14px 18px; border-radius: 20px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-left: 1px solid var(--border);
+        }
+
+        .services-list i { color: var(--accent); font-size: 16px; }
+        .list-text { flex-grow: 1; margin-right: 15px; }
+
+        .btn-whatsapp {
+            background: var(--accent); color: #fff;
+            padding: 18px; border-radius: 25px;
+            text-decoration: none; font-weight: 800; font-size: 18px;
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            box-shadow: 0 8px 20px var(--glow);
+        }
+
+        .btn-portfolio {
+            margin-top: 15px; display: block;
+            color: var(--text); text-decoration: none;
+            font-weight: 700; font-size: 15px; opacity: 0.6;
+        }
+
+        .btn-whatsapp:hover { transform: translateY(-3px); filter: brightness(1.1); }
+    </style>
+</head>
+<body data-theme="light">
+
+    <div class="theme-switcher" onclick="toggleTheme()">
+        <span id="theme-text"></span>
+        <i id="theme-icon" class="fas fa-moon"></i>
+    </div>
+
+    <div class="mobile-profile">
+        <div class="profile-icon-box">
+    <i class="fas fa-laptop-code"></i>
+</div>
+        
+        <h1>عبدالله البلوشي</h1>
+        <span class="occupation">Creative Developer</span>
+
+        <ul class="services-list">
+            <li><i class="fas fa-code"></i> <span class="list-text">تصميم وبرمجة قوائم HTML</span></li>
+            <li><i class="fas fa-utensils"></i> <span class="list-text">تصميم منيو أونلاين تفاعلي</span></li>
+            <li><i class="fas fa-video"></i> <span class="list-text">انشــــاء منيو فيديو احترافي</span></li>
+            <li><i class="fas fa-cube"></i> <span class="list-text">طباعة ميدالـــــــــــــــــــــــــــيات 3D</span></li>
+            <li><i class="fas fa-star"></i> <span class="list-text">ستاندات تقييم جوجل ذكية</span></li>
+            <li><i class="fas fa-layer-group"></i> <span class="list-text">طباعة ثلاثية الأبعاد للهدايا</span></li>
+        </ul>
+
+        <a href="https://wa.me/966548471318" class="btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> اطلب الآن
+        </a>
+        <a href="portfolio.html" class="btn-portfolio">مشاهدة أعمالي</a>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const text = document.getElementById('theme-text');
+            const icon = document.getElementById('theme-icon');
+            
+            if (body.getAttribute('data-theme') === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                icon.className = "fas fa-sun";
+            } else {
+                body.setAttribute('data-theme', 'light');
+                icon.className = "fas fa-moon";
+            }
+        }
+    </script>
+</body>
+</html>
