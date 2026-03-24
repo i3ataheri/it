@@ -3,122 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض أعمال عبدالله البلوشي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>أعمالي | عبدالله البلوشي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --bg: #f0f2f5;
+            --card: rgba(255,255,255,0.7);
+            --text: #1a1a1a;
+            --accent: #ff5f00;
+            --item: rgba(255, 255, 255, 0.9); 
+            --border: rgba(0,0,0,0.05);
+            --glow: rgba(255, 95, 0, 0.3); /* توهج برتقالي للوضع الفاتح */
+        }
+        [data-theme="dark"] {
+            --bg: #0a0a0a;
+            --card: rgba(20,20,20,0.6);
+            --text: #ffffff;
+            --accent: #00d2ff;
+            --item: rgba(255,255,255,0.05); 
+            --border: rgba(255,255,255,0.1);
+            --glow: rgba(0, 210, 255, 0.4); /* توهج أزرق للوضع المظلم */
+        }
+
+        * { box-sizing: border-box; transition: 0.3s ease-in-out; }
+        
         body {
-            margin: 0;
-            font-family: 'Almarai', sans-serif;
-            background: #1a1a2e;
-            color: white;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* وسط‌چین کردن کل محتوا */
+            margin: 0; padding: 20px 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex; justify-content: center;
         }
 
+        .portfolio-container {
+            width: 95%; max-width: 450px;
+            background: var(--card);
+            border-radius: 35px;
+            padding: 30px 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            text-align: center;
+            position: relative; /* لإضافة العناصر المطلقة إذا لزم الأمر */
+        }
+
+        /* رأس الصفحة */
         .header {
-            text-align: center; /* وسط‌چین کردن متن‌ها */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 30px;
-            width: 100%;
+            padding: 0 10px;
         }
 
-        .grid-container {
+        /* زر الشاشة الرئيسية الجديد (أيقونة البيت) */
+        .home-btn {
+            width: 45px; height: 45px;
+            background: var(--item);
+            border-radius: 15px;
+            display: flex; justify-content: center; align-items: center;
+            text-decoration: none; color: var(--text);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-size: 18px; /* حجم الأيقونة */
+        }
+        .home-btn:hover { transform: scale(1.05); background: var(--card); }
+
+        h2 { font-family: 'Almarai', sans-serif; margin: 0; font-size: 22px; flex-grow: 1; text-align: center; }
+
+        /* مفتاح تغيير الثيم مع التوهج */
+        .theme-switcher-portfolio {
+            width: 45px; height: 45px;
+            background: var(--card);
+            border-radius: 50%; /* دائري بالكامل */
+            cursor: pointer;
+            color: var(--accent);
+            display: flex; justify-content: center; align-items: center;
+            /* إضافة التوهج هنا */
+            box-shadow: 0 0 15px var(--glow); 
+            border: 1px solid var(--border);
+        }
+        .theme-switcher-portfolio:hover { transform: scale(1.05); }
+
+        /* تصنيفات الأعمال */
+        .categories {
+            display: flex; gap: 8px;
+            overflow-x: auto;
+            padding: 5px 0 20px;
+            scrollbar-width: none;
+        }
+        .categories::-webkit-scrollbar { display: none; }
+        
+        .cat-chip {
+            padding: 8px 18px;
+            background: var(--item);
+            border-radius: 50px;
+            font-size: 12px;
+            white-space: nowrap;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            font-weight: 700;
+        }
+        .cat-chip.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 5px 15px var(--glow);
+        }
+
+        /* شبكة المشاريع */
+        .projects-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            max-width: 500px;
-            width: 100%;
-            margin: 0 auto;
+            margin-bottom: 50px; /* مسافة للزر العائم */
         }
 
-        .category-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .project-card {
+            background: var(--item);
             border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            text-decoration: none;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 120px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 30px; color: var(--accent);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .project-info {
+            padding: 12px;
+            text-align: right;
+        }
+
+        .project-info h3 {
+            font-size: 14px; margin: 0 0 5px;
+            font-family: 'Almarai', sans-serif;
+        }
+
+        .project-info p {
+            font-size: 11px; margin: 0;
+            opacity: 0.7;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* زر التواصل العائم */
+        .fab-contact {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--accent);
             color: white;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .category-card:active { transform: scale(0.95); background: rgba(255, 255, 255, 0.2); }
-
-        .category-card i {
-            font-size: 35px;
-            margin-bottom: 5px;
-            color: #23a6d5;
-        }
-
-        .category-card span {
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        /* اصلاح دکمه بازگشت برای وسط‌چین شدن قطعی */
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 20px;
-            color: rgba(255, 255, 255, 0.7);
+            width: 55px; height: 55px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 24px;
+            box-shadow: 0 10px 20px var(--glow);
             text-decoration: none;
-            font-size: 14px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 8px 18px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
         }
+        .fab-contact:hover { transform: scale(1.1); filter: brightness(1.1); }
+
     </style>
 </head>
-<body>
+<body data-theme="light">
 
-    <div class="header">
-        <a href="index.html" class="back-btn">
-            <i class="fas fa-arrow-right"></i> العودة للرئيسية
-        </a>
-        <h1>معرض الأعمال</h1>
-        <p>اختر القسم لتصفح المشاريع</p>
+    <div class="portfolio-container">
+        <div class="header">
+            <a href="index.html" class="home-btn" title="الشاشة الرئيسية">
+                <i class="fas fa-home"></i>
+            </a>
+            
+            <h2>معرض الأعمال</h2>
+
+            <div class="theme-switcher-portfolio" onclick="toggleTheme()" title="تغيير المظهر">
+                <i id="theme-icon" class="fas fa-moon"></i>
+            </div>
+        </div>
+
+        <div class="categories">
+            <div class="cat-chip active">الكل</div>
+            <div class="cat-chip">منيو تفاعلي</div>
+            <div class="cat-chip">طباعة 3D</div>
+            <div class="cat-chip">برمجة</div>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img" style="background-color: rgba(255, 95, 0, 0.1);">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="project-info">
+                    <h3>منيو مطعم فاخر</h3>
+                    <p>تصميم HTML تفاعلي</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img" style="background-color: rgba(0, 210, 255, 0.1);">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="project-info">
+                    <h3>ميدالية لوجو</h3>
+                    <p>طباعة ثلاثية الأبعاد</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img" style="background-color: rgba(212, 175, 55, 0.1);">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="project-info">
+                    <h3>ستاند NFC</h3>
+                    <p>تقييمات جوجل ماب</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img" style="background-color: rgba(155, 89, 182, 0.1);">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="project-info">
+                    <h3>فيديو ترويجي</h3>
+                    <p>موشن جرافيك منيو</p>
+                </div>
+            </div>
+            
+            </div>
     </div>
 
-    <div class="grid-container">
-        <a href="menus.html" class="category-card">
-            <i class="fas fa-utensils"></i>
-            <span>منيو المطاعم</span>
-        </a>
+    <a href="https://wa.me/966548471318" class="fab-contact">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-        <a href="profiles.html" class="category-card">
-            <i class="fas fa-id-badge"></i>
-            <span>البروفايلات</span>
-        </a>
-
-        <a href="3dprint.html" class="category-card">
-            <i class="fas fa-cube"></i>
-            <span>طباعة 3D</span>
-        </a>
-
-        <a href="video-menus.html" class="category-card">
-            <i class="fas fa-play-circle"></i>
-            <span>منيو فيديو</span>
-        </a>
-        
-        <a href="google-review.html" class="category-card">
-            <i class="fas fa-star"></i>
-            <span>تقييم جوجل</span>
-        </a>
-
-        <a href="https://wa.me/966548471318" class="category-card" style="border-color: #25d366;">
-            <i class="fab fa-whatsapp" style="color: #25d366;"></i>
-            <span>طلب خاص</span>
-        </a>
-    </div>
-
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            if (body.getAttribute('data-theme') === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                icon.className = "fas fa-sun";
+            } else {
+                body.setAttribute('data-theme', 'light');
+                icon.className = "fas fa-moon";
+            }
+        }
+    </script>
 </body>
 </html>
