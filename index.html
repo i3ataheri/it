@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>عبدالله البلوشي | UI Studio</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <style>
 :root {
   --bg: #f0f2f5;
@@ -30,17 +32,19 @@
 * { box-sizing: border-box; transition: 0.3s ease-in-out; }
 
 body {
-  margin: 0; padding: 0;
+  margin: 0;
   font-family: 'Tajawal', sans-serif;
   background-color: var(--bg);
   min-height: 100vh;
-  display: flex; justify-content: center; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--text);
-  overflow-x: hidden;
 }
 
 .mobile-profile {
-  width: 92%; max-width: 380px;
+  width: 92%;
+  max-width: 380px;
   background: var(--card);
   border-radius: 35px;
   padding: 50px 20px 30px;
@@ -49,73 +53,89 @@ body {
   backdrop-filter: blur(20px);
   box-shadow: 0 20px 50px rgba(0,0,0,0.15);
   border: 1px solid var(--border);
-  z-index: 1;
 }
 
 .theme-switcher {
   position: absolute;
-  top: 25px; right: 25px;
-  width: 45px; height: 45px;
+  top: 25px;
+  right: 25px;
+  width: 45px;
+  height: 45px;
   background: var(--card);
   border-radius: 50%;
   cursor: pointer;
   color: var(--accent);
-  display: flex; justify-content: center; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-shadow: 0 0 15px var(--glow);
-  z-index: 10;
 }
 
 .profile-icon-box {
-  width: 90px; height: 90px;
+  width: 90px;
+  height: 90px;
   background: var(--accent);
   border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%;
-  display: flex; justify-content: center; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto 20px;
-  font-size: 36px; color: #fff;
+  font-size: 36px;
+  color: #fff;
   box-shadow: 0 0 25px var(--glow);
 }
-.profile-icon-box:hover { transform: scale(1.05) rotate(5deg); }
 
-h1 { font-family: 'Almarai', sans-serif; font-weight: 800; font-size: 26px; margin-bottom: 5px; }
-.occupation {
-  font-size: 12px; font-weight: 700; color: var(--accent);
-  text-transform: uppercase; letter-spacing: 1px;
-  margin-bottom: 30px; display: block;
+h1 {
+  font-family: 'Almarai', sans-serif;
+  font-weight: 800;
+  font-size: 26px;
 }
 
-.services-list { text-align: right; margin-bottom: 30px; padding: 0; list-style: none; }
+.occupation {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 30px;
+  display: block;
+}
+
+.services-list {
+  text-align: right;
+  margin-bottom: 30px;
+  padding: 0;
+  list-style: none;
+}
+
 .services-list li {
-  font-size: 14px; font-weight: 600;
+  font-size: 14px;
+  font-weight: 600;
   margin-bottom: 12px;
-  background: var(--item); 
-  padding: 14px 18px; border-radius: 18px;
-  display: flex; align-items: center; justify-content: space-between;
+  background: var(--item);
+  padding: 14px 18px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border: 1px solid var(--border);
 }
-.services-list li:hover { transform: translateX(5px); background: var(--card); }
-.services-list i { color: var(--accent); font-size: 16px; }
-.list-text { flex-grow: 1; margin-right: 15px; }
 
-/* اصلاح بخش دکمه‌ها برای اطمینان از کلیک‌پذیری */
 .buttons-row {
   display: flex;
   gap: 10px;
-  position: relative;
-  z-index: 99; /* برای آمدن به بالاترین لایه */
 }
 
 .btn-whatsapp {
   flex: 1.4;
-  background: var(--accent);
+  background: #25D366; /* سبز واتساپ */
   color: #fff;
   padding: 16px;
   border-radius: 20px;
   text-decoration: none;
   font-weight: 800;
-  font-size: 16px;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  box-shadow: 0 10px 20px var(--glow);
-  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-portfolio {
@@ -126,27 +146,18 @@ h1 { font-family: 'Almarai', sans-serif; font-weight: 800; font-size: 26px; marg
   border-radius: 20px;
   text-decoration: none;
   font-weight: 800;
-  font-size: 14px;
-  display: flex; align-items: center; justify-content: center; gap: 8px; 
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  cursor: pointer !important;
-  pointer-events: auto; /* فعال کردن رویدادهای موس */
-}
-
-.btn-portfolio i {
-  font-size: 16px;
-  margin-left: 2px;
-}
-
-.btn-whatsapp:hover, .btn-portfolio:hover { 
-  transform: translateY(-3px); 
-  filter: brightness(1.1); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 </style>
 </head>
+
 <body data-theme="light">
 
 <div class="mobile-profile">
+
   <div class="theme-switcher" onclick="toggleTheme()">
     <i id="theme-icon" class="fas fa-moon"></i>
   </div>
@@ -154,34 +165,37 @@ h1 { font-family: 'Almarai', sans-serif; font-weight: 800; font-size: 26px; marg
   <div class="profile-icon-box">
     <i class="fas fa-laptop-code"></i>
   </div>
-  
+
   <h1>عبدالله البلوشي</h1>
   <span class="occupation">Creative Developer</span>
-  
+
   <ul class="services-list">
-    <li><i class="fas fa-code"></i> <span class="list-text">تصميم وبرمجة قوائم HTML</span></li>
-    <li><i class="fas fa-utensils"></i> <span class="list-text">تصميم منيو أونلاين تفاعلي</span></li>
-    <li><i class="fas fa-video"></i> <span class="list-text">انشــــاء منيو فيديو احترافي</span></li>
-    <li><i class="fas fa-cube"></i> <span class="list-text">طباعة ميداليات 3D</span></li>
-    <li><i class="fas fa-star"></i> <span class="list-text">ستاندات تقييم جوجل ذكية</span></li>
-    <li><i class="fas fa-layer-group"></i> <span class="list-text">طباعة ثلاثية الأبعاد للهدايا</span></li>
+    <li><i class="fas fa-code"></i> تصميم وبرمجة قوائم HTML</li>
+    <li><i class="fas fa-utensils"></i> تصميم منيو أونلاين</li>
+    <li><i class="fas fa-video"></i> منيو فيديو احترافي</li>
+    <li><i class="fas fa-cube"></i> طباعة 3D</li>
+    <li><i class="fas fa-star"></i> ستاند تقييم جوجل</li>
+    <li><i class="fas fa-layer-group"></i> هدايا ثلاثية الأبعاد</li>
   </ul>
-  
+
   <div class="buttons-row">
     <a href="https://wa.me/966548471318" class="btn-whatsapp" target="_blank">
       <i class="fab fa-whatsapp"></i> اطلب الآن
     </a>
-    
-    <a href="portfolio/index.html">Portfolio</a>
-       أعمالي <i class="fas fa-briefcase"></i>
+
+    <!-- ✅ اصلاح شد اینجا -->
+    <a href="portfolio/index.html" class="btn-portfolio">
+      أعمالي <i class="fas fa-briefcase"></i>
     </a>
   </div>
+
 </div>
 
 <script>
 function toggleTheme() {
   const body = document.body;
   const icon = document.getElementById('theme-icon');
+
   if (body.getAttribute('data-theme') === 'light') {
     body.setAttribute('data-theme', 'dark');
     icon.className = "fas fa-sun";
