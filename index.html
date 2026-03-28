@@ -85,22 +85,24 @@ body {
 
 .profile-icon-box {
   width: 90px; height: 90px;
-  background: #ffffff; /* پس‌زمینه دایره را سفید کردم تا لوگوی رنگی بهتر دیده شود */
+  /* حالا همرنگ کادر اصلی و دارای حالت شیشه‌ای است */
+  background: var(--card); 
+  backdrop-filter: blur(10px);
   display: flex; justify-content: center; align-items: center;
   margin: 0 auto 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* سایه ملایم‌تر برای پس‌زمینه سفید */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
   animation: avatarFloat 4s ease-in-out infinite;
   overflow: hidden;
-  border: 2px solid var(--accent); /* حاشیه دور دایره را حفظ کردم */
+  border: 2px solid var(--border); /* حاشیه ملایم برای هماهنگی با کادر */
 }
 
-/* استایل مخصوص برای فایل SVG با حفظ رنگ اصلی */
 .profile-icon-box img {
-  width: 60px; /* اندازه را کمی بزرگتر کردم */
-  height: 60px;
+  width: 65px; /* اندازه لوگو را کمی تنظیم کردم */
+  height: 65px;
   object-fit: contain;
-  /* فیلتر رنگی که باعث مشکل شده بود، پاک شد */
+  /* فیلترها کاملاً حذف شدند تا ۳ رنگ اصلی لوگوی تو (قرمز، سبز، آبی یا هر چه هست) دقیق دیده شود */
 }
+  
 
 h1 { font-family: 'Almarai', sans-serif; font-weight: 800; font-size: 26px; margin-bottom: 8px; }
 
