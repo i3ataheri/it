@@ -1,0 +1,204 @@
+/* تنظیمات متغیرها و تم‌ها */
+:root {
+    --bg: #f0f2f5;
+    --card: rgba(255,255,255,0.7);
+    --text: #1a1a1a;
+    --accent: #ff5f00; 
+    --item: rgba(255, 255, 255, 0.9); 
+    --border: rgba(0,0,0,0.05);
+    --maalam-color: #34495e; 
+    --maalam-bg: rgba(52, 73, 94, 0.1);
+}
+
+[data-theme="dark"] {
+    --bg: #0a0a0a;
+    --card: rgba(20,20,20,0.6);
+    --text: #ffffff;
+    --item: rgba(255,255,255,0.05); 
+    --border: rgba(255,255,255,0.1);
+    --maalam-color: #81ecec; 
+    --maalam-bg: rgba(129, 236, 236, 0.15);
+}
+
+/* تنظیمات کلی */
+* { 
+    box-sizing: border-box; 
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+body {
+    margin: 0; 
+    padding: 20px;
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex; 
+    justify-content: center;
+    perspective: 1000px; /* برای سه‌بعدی شدن انیمیشن کارت‌ها */
+    min-height: 100vh;
+}
+
+/* کانتینر اصلی پورتفولیو */
+.portfolio-container {
+    width: 100%;
+    max-width: 450px; 
+    background: var(--card);
+    border-radius: 35px;
+    padding: 30px 20px;
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    align-self: flex-start;
+}
+
+/* بهینه‌سازی برای دسکتاپ و مانیتورهای عریض */
+@media (min-width: 850px) {
+    .portfolio-container {
+        max-width: 90%; 
+        padding: 40px;
+    }
+}
+
+/* هدر */
+.header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 30px; 
+    padding: 0 10px;
+}
+
+.home-btn {
+    width: 45px; 
+    height: 45px; 
+    background: var(--item);
+    border-radius: 15px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    text-decoration: none; 
+    color: var(--text);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.home-btn:hover { 
+    background: var(--accent); 
+    color: white; 
+    transform: scale(1.1) rotate(-5deg); 
+}
+
+.theme-switcher-portfolio {
+    width: 45px; 
+    height: 45px; 
+    background: var(--card);
+    border-radius: 50%; 
+    cursor: pointer; 
+    color: var(--accent);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    border: 1px solid var(--border);
+}
+
+/* شبکه کارت‌ها (Grid) */
+.projects-grid {
+    display: grid;
+    /* auto-fit باعث می‌شود فضا کاملاً پر شود و جای خالی نماند */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+/* استایل کارت‌ها */
+.project-card {
+    background: var(--item);
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    display: flex; 
+    flex-direction: column;
+    height: 100%;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+/* انیمیشن Tilt و درخشش (Glow) اختصاصی */
+.project-card:hover {
+    transform: translateY(-8px) scale(1.02) rotateX(5deg);
+    box-shadow: 0 12px 25px var(--card-glow);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.project-img {
+    width: 100%; 
+    height: 110px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-size: 35px;
+}
+
+.project-info {
+    padding: 15px; 
+    text-align: right;
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+}
+
+.project-info h3 { 
+    font-size: 14px; 
+    margin: 0 0 5px; 
+    font-family: 'Almarai', sans-serif; 
+    font-weight: 800; 
+}
+
+.project-info p { 
+    font-size: 11px; 
+    margin: 0; 
+    opacity: 0.7; 
+}
+
+/* دکمه واتساپ شناور (خارج از کادر) */
+.fab-contact {
+    position: fixed; 
+    bottom: 25px; 
+    left: 25px;
+    background: #25d366; 
+    color: white;
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    font-size: 28px; 
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+    text-decoration: none; 
+    z-index: 999;
+}
+
+.fab-contact:hover { 
+    transform: scale(1.1) rotate(15deg); 
+    background: #20ba5a; 
+}
+
+/* تنظیمات موبایل */
+@media (max-width: 480px) {
+    .projects-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 12px; 
+    }
+    .project-img { height: 95px; font-size: 30px; }
+    .portfolio-container { padding: 25px 15px; }
+    .fab-contact { 
+        width: 55px; 
+        height: 55px; 
+        bottom: 20px; 
+        left: 20px; 
+    }
+}
