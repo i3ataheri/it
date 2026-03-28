@@ -88,9 +88,18 @@ body {
   background: var(--accent);
   display: flex; justify-content: center; align-items: center;
   margin: 0 auto 20px;
-  font-size: 36px; color: #fff;
   box-shadow: 0 10px 25px var(--glow);
   animation: avatarFloat 4s ease-in-out infinite;
+  overflow: hidden; /* برای جلوگیری از بیرون زدگی تصویر */
+}
+
+/* استایل مخصوص برای فایل SVG شما */
+.profile-icon-box img {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  /* اگر فایل SVG شما مشکی است، کد زیر آن را سفید می‌کند */
+  filter: brightness(0) invert(1);
 }
 
 h1 { font-family: 'Almarai', sans-serif; font-weight: 800; font-size: 26px; margin-bottom: 8px; }
@@ -153,26 +162,19 @@ h1 { font-family: 'Almarai', sans-serif; font-weight: 800; font-size: 26px; marg
   </div>
 
   <div class="profile-icon-box">
-    <i class="fas fa-laptop-code"></i>
+    <img src="codeksa.svg" alt="Avatar">
   </div>
 
   <h1>عبدالله البلوشي</h1>
   <span class="occupation">Creative Developer</span>
 
   <ul class="services-list">
-
     <li><i class="fas fa-code"></i> تصميم وبرمجة HTML</li>
-
     <li><i class="fas fa-utensils"></i> تصميم منــــــــــيو أونلاين</li>
-
     <li><i class="fas fa-video"></i> منيو فيديو احـــــــــــــترافي</li>
-
     <li><i class="fas fa-cube"></i> طــــــــــــــــــــــــــــــــــــــــــــــــباعة 3D</li>
-
     <li><i class="fas fa-star"></i> ســــــــــــــــتاند تقييم جوجل</li>
-
     <li><i class="fas fa-layer-group"></i> هدايا ثلاثــــــــــــــــية الأبعاد</li>
-
   </ul>
 
   <div class="buttons-row">
@@ -190,7 +192,6 @@ function toggleTheme() {
   const body = document.body;
   const icon = document.getElementById('theme-icon');
   
-  // اضافه کردن انیمیشن چرخش به آیکون
   icon.style.transform = "rotate(360deg) scale(0)";
   
   setTimeout(() => {
