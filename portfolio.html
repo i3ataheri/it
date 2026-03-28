@@ -14,7 +14,6 @@
             --accent: #ff5f00; 
             --item: rgba(255, 255, 255, 0.9); 
             --border: rgba(0,0,0,0.05);
-            --glow: rgba(255, 95, 0, 0.3);
             --maalam-color: #34495e; 
             --maalam-bg: rgba(52, 73, 94, 0.1);
         }
@@ -36,11 +35,13 @@
             background-color: var(--bg);
             color: var(--text);
             display: flex; justify-content: center;
+            perspective: 1000px;
         }
 
         .portfolio-container {
-            width: 100%;
-            max-width: 450px; /* پیش‌فرض موبایل */
+            width: 95%;
+            /* تغییر مهم: عرض در پی‌سی آزادتر می‌شود و در موبایل محدود */
+            max-width: 450px; 
             background: var(--card);
             border-radius: 35px;
             padding: 30px 20px;
@@ -48,9 +49,17 @@
             border: 1px solid var(--border);
             text-align: center;
             box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            transition: max-width 0.5s ease;
         }
 
-        /* استایل هدر */
+        /* تنظیمات اختصاصی برای مانیتورهای بزرگ */
+        @media (min-width: 800px) {
+            .portfolio-container {
+                max-width: 1400px; /* اجازه رشد تا عرض زیاد */
+                width: 90%;
+            }
+        }
+
         .header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 30px; padding: 0 10px;
@@ -69,54 +78,55 @@
             border: 1px solid var(--border);
         }
 
-        /* گرید هوشمند و ریسپانسیو */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 15px;
+            /* تغییر مهم: auto-fit باعث می‌شود کارت‌ها فضا را کاملاً پر کنند */
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
             width: 100%;
         }
 
-        /* استایل کارت‌ها */
         .project-card {
             background: var(--item);
-            border-radius: 20px;
+            border-radius: 22px;
             overflow: hidden;
             border: 1px solid var(--border);
             text-decoration: none;
             color: inherit;
             display: flex; flex-direction: column;
             height: 100%;
+            transform-style: preserve-3d;
+            position: relative;
         }
 
         .project-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-8px) scale(1.02) rotateX(4deg);
+            box-shadow: 0 12px 25px var(--card-glow);
+            border-color: rgba(255,255,255,0.2);
         }
 
         .project-img {
-            width: 100%; height: 100px;
+            width: 100%; height: 110px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 32px;
+            font-size: 35px;
         }
 
         .project-info {
-            padding: 12px; text-align: right;
+            padding: 15px; text-align: right;
             flex-grow: 1; display: flex; flex-direction: column; justify-content: center;
         }
 
-        .project-info h3 { font-size: 13px; margin: 0 0 4px; font-family: 'Almarai', sans-serif; }
-        .project-info p { font-size: 10px; margin: 0; opacity: 0.7; }
+        .project-info h3 { font-size: 14px; margin: 0 0 5px; font-family: 'Almarai', sans-serif; font-weight: 800; }
+        .project-info p { font-size: 11px; margin: 0; opacity: 0.7; }
 
-        /* ریسپانسیو اختصاصی پی‌سی */
-        @media (min-width: 1024px) {
-            .portfolio-container { max-width: 1200px; } /* عرض کانتینر در پی‌سی باز می‌شود */
-            .project-img { height: 140px; }
-        }
-
-        /* ریسپانسیو موبایل‌های خیلی کوچک */
-        @media (max-width: 380px) {
-            .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        /* موبایل‌های کوچک: اجبار به ۲ ستون */
+        @media (max-width: 480px) {
+            .projects-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 12px; 
+            }
+            .project-img { height: 90px; font-size: 28px; }
+            .project-info h3 { font-size: 12px; }
         }
 
         .fab-contact {
@@ -124,7 +134,7 @@
             background: var(--accent); color: white;
             width: 55px; height: 55px; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            font-size: 24px; box-shadow: 0 10px 20px var(--glow);
+            font-size: 24px; box-shadow: 0 10px 20px rgba(255, 95, 0, 0.2);
             text-decoration: none; z-index: 100;
         }
     </style>
@@ -140,7 +150,7 @@
 
         <div class="projects-grid">
             
-            <a href="https://hrm.mnu.workers.dev/" class="project-card">
+            <a href="https://hrm.mnu.workers.dev/" class="project-card" style="--card-glow: rgba(129, 236, 236, 0.15);">
                 <div class="project-img" style="color: var(--maalam-color); background-color: var(--maalam-bg);">
                     <i class="fas fa-kaaba"></i>
                 </div>
@@ -150,7 +160,7 @@
                 </div>
             </a>
 
-            <a href="folder1/index.html" class="project-card">
+            <a href="folder1/index.html" class="project-card" style="--card-glow: rgba(255, 95, 0, 0.15);">
                 <div class="project-img" style="color: #ff5f00; background-color: rgba(255, 95, 0, 0.1);">
                     <i class="fas fa-utensils"></i>
                 </div>
@@ -160,7 +170,7 @@
                 </div>
             </a>
 
-            <a href="folder2/index.html" class="project-card">
+            <a href="folder2/index.html" class="project-card" style="--card-glow: rgba(0, 210, 255, 0.15);">
                 <div class="project-img" style="color: #00d2ff; background-color: rgba(0, 210, 255, 0.1);">
                     <i class="fas fa-cube"></i>
                 </div>
@@ -170,7 +180,7 @@
                 </div>
             </a>
 
-            <a href="folder3/index.html" class="project-card">
+            <a href="folder3/index.html" class="project-card" style="--card-glow: rgba(255, 188, 0, 0.15);">
                 <div class="project-img" style="color: #ffbc00; background-color: rgba(255, 188, 0, 0.1);">
                     <i class="fas fa-star"></i>
                 </div>
@@ -180,7 +190,7 @@
                 </div>
             </a>
 
-            <a href="folder4/index.html" class="project-card">
+            <a href="folder4/index.html" class="project-card" style="--card-glow: rgba(165, 94, 234, 0.15);">
                 <div class="project-img" style="color: #a55eea; background-color: rgba(165, 94, 234, 0.1);">
                     <i class="fas fa-video"></i>
                 </div>
@@ -190,7 +200,7 @@
                 </div>
             </a>
 
-            <a href="icon/index.html" class="project-card">
+            <a href="icon/index.html" class="project-card" style="--card-glow: rgba(38, 222, 129, 0.15);">
                 <div class="project-img" style="color: #26de81; background-color: rgba(38, 222, 129, 0.1);">
                     <i class="fas fa-share-nodes"></i>
                 </div>
