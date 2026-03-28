@@ -89,34 +89,33 @@
             margin-bottom: 50px;
         }
 
-        .project-card {
-            background: var(--item);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            text-decoration: none;
-            color: inherit;
-            display: flex; flex-direction: column;
-            height: 100%;
-            position: relative; /* برای انیمیشن */
-        }
 
-        /* انیمیشن اصلی تمام کارت‌ها هنگام هاور */
-        .project-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(255,255,255,0.1);
-            /* درخشش اختصاصی بر اساس متغیر `--card-glow` */
-            box-shadow: 0 15px 30px var(--card-glow);
-            z-index: 10;
-        }
+        .projects-grid {
+    display: grid;
+    /* این خط جادو می‌کند: در موبایل حداقل 140px و در پی‌سی تا هر چقدر جا شود */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+    gap: 15px;
+    margin-bottom: 50px;
+    width: 100%;
+}
 
-        .project-img {
-            width: 100%;
-            height: 100px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 32px;
-            transition: all 0.3s ease;
-        }
+/* برای اطمینان از اینکه در موبایل‌های خیلی کوچک هم 2 ستون بماند */
+@media (max-width: 380px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+/* تنظیمات برای مانیتورهای بزرگ (Desktop) */
+@media (min-width: 1024px) {
+    .portfolio-container {
+        max-width: 90%; /* کانتینر در پی‌سی عریض‌تر شود */
+    }
+    .project-img {
+        height: 140px; /* آیکون‌ها در پی‌سی کمی بزرگتر شوند */
+    }
+}
 
         /* انیمیشن کوچک آیکون هنگام هاور */
         .project-card:hover .project-img i {
