@@ -29,7 +29,8 @@
   --glow: rgba(0, 210, 255, 0.4);
   --btn-alt: #ffcc00;
 }
-* { box-sizing: border-box; transition: 0.3s ease-in-out; }
+
+* { box-sizing: border-box; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
 
 body {
   margin: 0; padding: 0;
@@ -38,6 +39,7 @@ body {
   height: 100vh;
   display: flex; justify-content: center; align-items: center;
   color: var(--text);
+  overflow: hidden;
 }
 
 .mobile-profile {
@@ -52,6 +54,7 @@ body {
   border: 1px solid var(--border);
 }
 
+/* --- انیمیشن آیکون تغییر تم --- */
 .theme-switcher {
   position: absolute;
   top: 25px; right: 25px;
@@ -62,35 +65,40 @@ body {
   color: var(--accent);
   display: flex; justify-content: center; align-items: center;
   box-shadow: 0 0 15px var(--glow);
+  z-index: 100;
+}
+
+.theme-switcher i {
+  font-size: 20px;
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s;
+}
+
+.theme-switcher:active i {
+  transform: scale(0.5) rotate(180deg);
+}
+
+/* --- انیمیشن آواتار --- */
+@keyframes avatarFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%; }
+  50% { transform: translateY(-10px) rotate(5deg); border-radius: 50%; }
 }
 
 .profile-icon-box {
   width: 90px; height: 90px;
   background: var(--accent);
-  border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%;
   display: flex; justify-content: center; align-items: center;
   margin: 0 auto 20px;
   font-size: 36px; color: #fff;
-  box-shadow: 0 0 25px var(--glow);
+  box-shadow: 0 10px 25px var(--glow);
+  animation: avatarFloat 4s ease-in-out infinite;
 }
 
-/* فاصله مناسب زیر نام */
-h1 { 
-  font-family: 'Almarai', sans-serif; 
-  font-weight: 800; 
-  font-size: 26px; 
-  margin-bottom: 8px; /* افزایش فاصله تا زیرعنوان */
-}
+h1 { font-family: 'Almarai', sans-serif; font-weight: 800; font-size: 26px; margin-bottom: 8px; }
 
-/* تراز بودن و فاصله حروف برای Creative Developer */
 .occupation {
-  font-size: 13.5px; 
-  font-weight: 700; 
-  color: var(--accent);
-  text-transform: uppercase; 
-  letter-spacing: 2.1px; /* تنظیم مجدد برای تراز دقیق */
-  margin-bottom: 30px; 
-  display: block;
+  font-size: 13.5px; font-weight: 700; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 2.1px;
+  margin-bottom: 30px; display: block;
 }
 
 .services-list { text-align: right; margin-bottom: 30px; padding: 0; list-style: none; }
@@ -104,34 +112,37 @@ h1 {
 }
 .services-list i { color: var(--accent); font-size: 16px; margin-left: 12px; }
 
-.buttons-row {
-  display: flex;
-  gap: 10px;
+/* --- انیمیشن دکمه‌ها با خط داخلی --- */
+.buttons-row { display: flex; gap: 10px; position: relative; z-index: 10; }
+
+.btn-whatsapp, .btn-portfolio {
   position: relative;
-  z-index: 10;
-}
-
-.btn-whatsapp {
-  flex: 1.4;
-  background: #25D366;
-  color: #fff;
-  padding: 16px;
   border-radius: 20px;
   text-decoration: none;
   font-weight: 800;
   display: flex; justify-content: center; align-items: center; gap: 8px;
+  padding: 16px;
+  overflow: hidden;
 }
 
-.btn-portfolio {
-  flex: 1;
-  background: var(--btn-alt);
-  color: #fff;
-  padding: 16px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-weight: 800;
-  display: flex; justify-content: center; align-items: center; gap: 8px;
+.btn-whatsapp { flex: 1.4; background: #25D366; color: #fff; }
+.btn-portfolio { flex: 1; background: var(--btn-alt); color: #fff; }
+
+.btn-whatsapp::after, .btn-portfolio::after {
+  content: '';
+  position: absolute;
+  top: 4px; left: 4px; right: 4px; bottom: 4px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: 0.3s ease;
+  pointer-events: none;
 }
+
+.btn-whatsapp:hover::after, .btn-portfolio:hover::after { opacity: 1; transform: scale(1); }
+.btn-whatsapp:hover, .btn-portfolio:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); }
+
 </style>
 </head>
 <body data-theme="light">
@@ -149,12 +160,19 @@ h1 {
   <span class="occupation">Creative Developer</span>
 
   <ul class="services-list">
+
     <li><i class="fas fa-code"></i> تصميم وبرمجة HTML</li>
+
     <li><i class="fas fa-utensils"></i> تصميم منــــــــــيو أونلاين</li>
+
     <li><i class="fas fa-video"></i> منيو فيديو احـــــــــــــترافي</li>
+
     <li><i class="fas fa-cube"></i> طــــــــــــــــــــــــــــــــــــــــــــــــباعة 3D</li>
+
     <li><i class="fas fa-star"></i> ســــــــــــــــتاند تقييم جوجل</li>
-    <li><i class="fas fa-layer-group"></i> هدايا ثلاثــــــــــــــــــية الأبعاد</li>
+
+    <li><i class="fas fa-layer-group"></i> هدايا ثلاثــــــــــــــــية الأبعاد</li>
+
   </ul>
 
   <div class="buttons-row">
@@ -171,13 +189,20 @@ h1 {
 function toggleTheme() {
   const body = document.body;
   const icon = document.getElementById('theme-icon');
-  if (body.getAttribute('data-theme') === 'light') {
-    body.setAttribute('data-theme', 'dark');
-    icon.className = "fas fa-sun";
-  } else {
-    body.setAttribute('data-theme', 'light');
-    icon.className = "fas fa-moon";
-  }
+  
+  // اضافه کردن انیمیشن چرخش به آیکون
+  icon.style.transform = "rotate(360deg) scale(0)";
+  
+  setTimeout(() => {
+    if (body.getAttribute('data-theme') === 'light') {
+      body.setAttribute('data-theme', 'dark');
+      icon.className = "fas fa-sun";
+    } else {
+      body.setAttribute('data-theme', 'light');
+      icon.className = "fas fa-moon";
+    }
+    icon.style.transform = "rotate(0deg) scale(1)";
+  }, 300);
 }
 </script>
 
