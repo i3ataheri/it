@@ -32,7 +32,7 @@ body {
     color: var(--text);
     display: flex; 
     justify-content: center;
-    perspective: none; /* حذف پرسپکتیو در موبایل */
+    perspective: none;
     min-height: 100vh;
 }
 
@@ -49,14 +49,7 @@ body {
     align-self: flex-start;
 }
 
-@media (min-width: 850px) {
-    .portfolio-container {
-        max-width: 90%; 
-        padding: 40px;
-    }
-}
-
-/* ۴. هدر و دکمه‌ها - اصلاح تراز دسکتاپ و حذف فاصله */
+/* ================= HEADER FIX ================= */
 .header {
     display: flex;
     justify-content: space-between;
@@ -64,12 +57,11 @@ body {
     width: 100%;
 }
 
-
-@media (min-width: 850px) {
-    .header {
-        max-width: 810px; /* تنظیم تراز با کارت‌ها در PC */
-    }
+/* 🔥 مهم: این خط مشکل شب/روز رو حل می‌کنه */
+.theme-switcher-portfolio {
+    margin-left: auto;
 }
+/* ============================================= */
 
 .home-btn, .theme-switcher-portfolio {
     width: 45px; 
@@ -112,36 +104,27 @@ body {
     flex-direction: column;
     height: 100%;
     position: relative;
-    -webkit-tap-highlight-color: transparent; /* حذف هایلایت آبی */
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* --- شروعِ اصلاحِ قطعیِ پرش در موبایل (بدون استفاده از transform) --- */
-
-/* فعال‌سازی افکتِ هاور فقط برای کامپیوتر (با ماوس) */
+/* هاور دسکتاپ */
 @media (hover: hover) {
-    .project-card {
-        transform-style: preserve-3d;
-    }
     .project-card:hover {
-        transform: translateY(-8px) scale(1.02) rotateX(5deg);
+        transform: translateY(-8px) scale(1.02);
     }
 }
 
-/* افکتِ فشردن در موبایل (صفحات لمسی) - بدون هیچ جابه‌جایی */
+/* موبایل */
 @media (hover: none) {
     .project-card:active {
-        /* ایجاد یک سایه‌ی داخلی تیره برای حس فشردن */
         box-shadow: inset 0 0 15px rgba(0,0,0,0.15) !important;
         background: rgba(0,0,0,0.03) !important;
-        transition: all 0.1s ease !important; /* سریع‌تر برای لمس */
+        transition: all 0.1s ease !important;
     }
-    /* حذف هرگونه هاور در لمس */
     .project-card:hover {
         transform: none !important;
     }
 }
-
-/* --- پایانِ اصلاحِ قطعیِ پرش در موبایل --- */
 
 .project-img {
     width: 100%; 
@@ -174,8 +157,7 @@ body {
     opacity: 0.7; 
 }
 
-/* ۶. استایل‌های نوری اختصاصی (Glow) */
-
+/* glow cards */
 .card-maalam .project-img { color: var(--maalam-color); background: var(--maalam-bg); }
 .card-maalam:hover { border-color: var(--maalam-color); box-shadow: 0 10px 25px var(--maalam-bg); }
 
@@ -212,7 +194,6 @@ body {
 .card-mobile .project-img { color: #c2185b; background: rgba(194, 24, 91, 0.1); }
 .card-mobile:hover { border-color: #c2185b; box-shadow: 0 10px 25px rgba(194, 24, 91, 0.2); }
 
-/* ۷. دکمه واتساپ شناور */
 .fab-contact {
     position: fixed; 
     bottom: 25px; 
@@ -231,25 +212,16 @@ body {
     z-index: 999;
 }
 
-.fab-contact:hover { 
-    transform: scale(1.1) rotate(15deg); 
-    background: #20ba5a; 
-}
-
-/* --- شروعِ اصلاحِ مشکلِ واتس‌اپ روی کارت‌ها در موبایل --- */
 @media (max-width: 480px) {
     .projects-grid { 
         grid-template-columns: repeat(2, 1fr); 
         gap: 12px; 
     }
     .project-img { height: 95px; font-size: 30px; }
-    
     .portfolio-container { 
         padding: 25px 15px; 
-        /* اضافه کردن فضای خالی در پایین پورتفولیو برای واتس‌اپ */
         padding-bottom: 90px !important; 
     }
-    
     .fab-contact { 
         width: 55px; 
         height: 55px; 
@@ -257,4 +229,3 @@ body {
         left: 20px; 
     }
 }
-/* --- پایانِ اصلاحِ مشکلِ واتس‌اپ روی کارت‌ها --- */
