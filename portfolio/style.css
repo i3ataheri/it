@@ -50,7 +50,6 @@ body {
     text-align: center;
     box-shadow: 0 15px 30px rgba(0,0,0,0.05);
     align-self: flex-start;
-    padding-bottom: 220px; /* فضای خالی برای واتساپ */
 }
 
 @media (min-width: 850px) {
