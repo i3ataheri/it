@@ -201,6 +201,10 @@ body {
 .card-mobile .project-img { color: #c2185b; background: rgba(194, 24, 91, 0.1); }
 .card-mobile:hover { border-color: #c2185b; box-shadow: 0 10px 25px rgba(194, 24, 91, 0.2); }
 
+/* 13. تطبيقات الخر */
+.card-mobile .project-img { color: #B7F1A5; background: rgba(194, 24, 91, 0.1); }
+.card-mobile:hover { border-color: #B7F1A5; box-shadow: 0 10px 25px rgba(194, 24, 91, 0.2); }
+
 /* ۷. دکمه واتساپ شناور */
 .fab-contact {
     position: fixed;
