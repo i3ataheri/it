@@ -222,7 +222,6 @@ body {
     transform: scale(1.1) rotate(15deg); 
     background: #20ba5a; 
 }
-
 /* ۸. ریسپانسیو موبایل */
 @media (max-width: 480px) {
     .projects-grid { 
@@ -230,7 +229,12 @@ body {
         gap: 12px; 
     }
     .project-img { height: 95px; font-size: 30px; }
-    .portfolio-container { padding: 25px 15px; }
+    
+    .portfolio-container { 
+        padding: 25px 15px; 
+        padding-bottom: 90px; /* این خط اضافه شد برای ایجاد فضای خالی پایین واتس‌اپ */
+    }
+
     .fab-contact { 
         width: 55px; 
         height: 55px; 
