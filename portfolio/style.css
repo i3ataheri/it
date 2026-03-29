@@ -1,4 +1,3 @@
-/* ۱. تنظیمات متغیرها و تم‌ها */
 :root {
     --bg: #f0f2f5;
     --card: rgba(255,255,255,0.7);
@@ -20,7 +19,6 @@
     --maalam-bg: rgba(129, 236, 236, 0.15);
 }
 
-/* ۲. تنظیمات کلی و ریست */
 * { 
     box-sizing: border-box; 
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
@@ -38,7 +36,6 @@ body {
     min-height: 100vh;
 }
 
-/* ۳. کانتینر اصلی پورتفولیو */
 .portfolio-container {
     width: 100%;
     max-width: 450px; 
@@ -59,13 +56,19 @@ body {
     }
 }
 
-/* ۴. هدر و دکمه‌ها */
 .header {
     display: flex; 
     justify-content: space-between; 
     align-items: center;
-    margin-bottom: 30px; 
+    margin: 0 auto 30px auto; 
     padding: 0 10px;
+    max-width: 100%;
+}
+
+@media (min-width: 850px) {
+    .header {
+        max-width: 800px; 
+    }
 }
 
 .home-btn, .theme-switcher-portfolio {
@@ -91,7 +94,6 @@ body {
     transform: scale(1.1) rotate(-5deg); 
 }
 
-/* ۵. شبکه گرید کارت‌ها */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -111,10 +113,20 @@ body {
     height: 100%;
     transform-style: preserve-3d;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.project-card:hover {
-    transform: translateY(-8px) scale(1.02) rotateX(5deg);
+/* اصلاح پرش در موبایل */
+@media (hover: hover) {
+    .project-card:hover {
+        transform: translateY(-8px) scale(1.02) rotateX(5deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .project-card:active {
+        transform: scale(0.98); 
+    }
 }
 
 .project-img {
@@ -148,57 +160,43 @@ body {
     opacity: 0.7; 
 }
 
-/* ۶. استایل‌های نوری اختصاصی (Glow) برای ۱۲ کارت */
-
-/* 1. معالم الحرمين */
+/* کارت‌های رنگی */
 .card-maalam .project-img { color: var(--maalam-color); background: var(--maalam-bg); }
 .card-maalam:hover { border-color: var(--maalam-color); box-shadow: 0 10px 25px var(--maalam-bg); }
 
-/* 2. فيديو ترويجي */
 .card-v .project-img { color: #a29bfe; background: rgba(162, 155, 254, 0.1); }
 .card-v:hover { border-color: #a29bfe; box-shadow: 0 10px 25px rgba(162, 155, 254, 0.2); }
 
-/* 3. ستاند NFC (تم تحديث الاسم) */
 .card-nfc .project-img { color: #fdcb6e; background: rgba(253, 203, 110, 0.1); }
 .card-nfc:hover { border-color: #fdcb6e; box-shadow: 0 10px 25px rgba(253, 203, 110, 0.2); }
 
-/* 4. تصميم لوجو */
 .card-logo .project-img { color: #00d2ff; background: rgba(0, 210, 255, 0.1); }
 .card-logo:hover { border-color: #00d2ff; box-shadow: 0 10px 25px rgba(0, 210, 255, 0.2); }
 
-/* 5. منيو مطعم */
 .card-menu .project-img { color: #ff7675; background: rgba(255, 118, 117, 0.1); }
 .card-menu:hover { border-color: #ff7675; box-shadow: 0 10px 25px rgba(255, 118, 117, 0.2); }
 
-/* 6. استاند جوجل (تم تحديث الاسم واللون والأيقونة) */
 .card-google .project-img { color: #4285F4; background: rgba(66, 133, 244, 0.1); }
 .card-google:hover { border-color: #4285F4; box-shadow: 0 10px 25px rgba(66, 133, 244, 0.3); }
 
-/* 7. بروفايل أونلاين */
 .card-profile .project-img { color: #00cec9; background: rgba(0, 206, 201, 0.1); }
 .card-profile:hover { border-color: #00cec9; box-shadow: 0 10px 25px rgba(0, 206, 201, 0.2); }
 
-/* 8. معرض الصور */
 .card-gallery .project-img { color: #ef5350; background: rgba(239, 83, 80, 0.1); }
 .card-gallery:hover { border-color: #ef5350; box-shadow: 0 10px 25px rgba(239, 83, 80, 0.2); }
 
-/* 9. برمجة واجهات */
 .card-frontend .project-img { color: #5c6bc0; background: rgba(92, 107, 192, 0.1); }
 .card-frontend:hover { border-color: #5c6bc0; box-shadow: 0 10px 25px rgba(92, 107, 192, 0.2); }
 
-/* 10. تطوير السيرفرات */
 .card-backend .project-img { color: #455a64; background: rgba(69, 90, 100, 0.1); }
 .card-backend:hover { border-color: #455a64; box-shadow: 0 10px 25px rgba(69, 90, 100, 0.2); }
 
-/* 11. قواعد البيانات */
 .card-db .project-img { color: #8d6e63; background: rgba(141, 110, 99, 0.1); }
 .card-db:hover { border-color: #8d6e63; box-shadow: 0 10px 25px rgba(141, 110, 99, 0.2); }
 
-/* 12. تطبيقات الجوال */
 .card-mobile .project-img { color: #c2185b; background: rgba(194, 24, 91, 0.1); }
 .card-mobile:hover { border-color: #c2185b; box-shadow: 0 10px 25px rgba(194, 24, 91, 0.2); }
 
-/* ۷. دکمه واتساپ شناور */
 .fab-contact {
     position: fixed; 
     bottom: 25px; 
@@ -222,7 +220,6 @@ body {
     background: #20ba5a; 
 }
 
-/* ۸. ریسپانسیو موبایل */
 @media (max-width: 480px) {
     .projects-grid { 
         grid-template-columns: repeat(2, 1fr); 
