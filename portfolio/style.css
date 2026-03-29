@@ -229,7 +229,7 @@ body {
 /* ۸. اصلاح نهایی بخش موبایل */
 @media (max-width: 480px) {
     body {
-        padding-bottom: 100px !important; 
+        padding-bottom: 75px !important; 
     }
 
     .fab-contact { 
