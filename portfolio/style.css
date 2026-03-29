@@ -223,11 +223,11 @@ body {
     background: #20ba5a; 
 }
 
-/* ۸. ریسپانسیو موبایل */
+/* ۸. ریسپانسیو موبایل و تنظیم واتس‌اپ شناور */
 @media (max-width: 480px) {
-    /* اضافه کردن فاصله به کل صفحه برای اینکه واتس‌اپ زیر کادر نباشد */
+    /* ۱. ایجاد فاصله در پایین صفحه برای اینکه کارت آخر زیر واتس‌اپ نرود */
     body {
-        padding-bottom: 70px !important; 
+        padding-bottom: 70px !important;
     }
 
     .projects-grid { 
@@ -237,17 +237,18 @@ body {
     
     .project-img { height: 95px; font-size: 30px; }
     
-    /* کادر کارت‌ها به حالت قبل برمی‌گردد بدون فضای اضافی داخلی */
     .portfolio-container { 
-        padding: 25px 15px; 
-        margin-bottom: 20px;
+        padding: 25px 15px;
+        margin-bottom: 20px; /* فاصله کادر از ته صفحه */
     }
 
+    /* ۲. تنظیم واتس‌اپ برای ماندن در حالت شناور و ثابت */
     .fab-contact { 
+        position: fixed; /* جادوی شناور ماندن */
         width: 55px; 
         height: 55px; 
-        bottom: 15px; /* چسبیدن به کفِ کل صفحه گوشی */
-        left: 15px; 
-        position: fixed; /* ثابت ماندن خارج از کادر */
+        bottom: 20px; /* فاصله ثابت از پایین گوشی */
+        left: 20px;   /* فاصله ثابت از سمت چپ گوشی */
+        z-index: 99999; /* همیشه روی همه المان‌ها باشد */
     }
 }
