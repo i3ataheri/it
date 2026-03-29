@@ -64,6 +64,7 @@ body {
     margin: 0 -5px 30px -5px;
 }
 
+
 @media (min-width: 850px) {
     .header {
         max-width: 810px; /* تنظیم تراز با کارت‌ها در PC */
