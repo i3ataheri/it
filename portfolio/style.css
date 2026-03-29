@@ -222,23 +222,32 @@ body {
     transform: scale(1.1) rotate(15deg); 
     background: #20ba5a; 
 }
+
 /* ۸. ریسپانسیو موبایل */
 @media (max-width: 480px) {
+    /* اضافه کردن فاصله به کل صفحه برای اینکه واتس‌اپ زیر کادر نباشد */
+    body {
+        padding-bottom: 100px !important; 
+    }
+
     .projects-grid { 
         grid-template-columns: repeat(2, 1fr); 
         gap: 12px; 
     }
+    
     .project-img { height: 95px; font-size: 30px; }
     
+    /* کادر کارت‌ها به حالت قبل برمی‌گردد بدون فضای اضافی داخلی */
     .portfolio-container { 
         padding: 25px 15px; 
-        padding-bottom: 90px; /* این خط اضافه شد برای ایجاد فضای خالی پایین واتس‌اپ */
+        margin-bottom: 20px;
     }
 
     .fab-contact { 
         width: 55px; 
         height: 55px; 
-        bottom: 20px; 
-        left: 20px; 
+        bottom: 15px; /* چسبیدن به کفِ کل صفحه گوشی */
+        left: 15px; 
+        position: fixed; /* ثابت ماندن خارج از کادر */
     }
 }
