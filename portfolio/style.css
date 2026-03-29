@@ -227,7 +227,7 @@ body {
 @media (max-width: 480px) {
     /* اضافه کردن فاصله به کل صفحه برای اینکه واتس‌اپ زیر کادر نباشد */
     body {
-        padding-bottom: 100px !important; 
+        padding-bottom: 70px !important; 
     }
 
     .projects-grid { 
