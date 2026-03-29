@@ -214,7 +214,7 @@ body {
     font-size: 28px; 
     box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
     text-decoration: none; 
-    z-index: 999;
+    z-index: 9999;
 }
 
 .fab-contact:hover { 
