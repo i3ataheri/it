@@ -50,7 +50,7 @@ body {
     text-align: center;
     box-shadow: 0 15px 30px rgba(0,0,0,0.05);
     align-self: flex-start;
-        padding-bottom: 220px; /* فضای خالی برای واتساپ */
+    padding-bottom: 220px; /* فضای خالی برای واتساپ */
 }
 
 @media (min-width: 850px) {
@@ -201,21 +201,21 @@ body {
 
 /* ۷. دکمه واتساپ شناور */
 .fab-contact {
-    position: fixed; 
-    bottom: 25px; 
-    left: 25px;
-    background: #25d366; 
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #25d366;
     color: white;
-    width: 60px; 
-    height: 60px; 
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    display: flex; 
-    justify-content: center; 
+    display: flex;
+    justify-content: center;
     align-items: center;
-    font-size: 28px; 
+    font-size: 28px;
     box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
-    text-decoration: none; 
-    z-index: 9999;
+    text-decoration: none;
+    z-index: 9999; /* همیشه روی همه چیز */
 }
 
 .fab-contact:hover { 
