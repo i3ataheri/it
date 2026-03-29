@@ -223,32 +223,30 @@ body {
     background: #20ba5a; 
 }
 
-/* ۸. ریسپانسیو موبایل و تنظیم واتس‌اپ شناور */
+/* ۸. ریسپانسیو موبایل و فیکس کردن نهایی واتس‌اپ */
 @media (max-width: 480px) {
-    /* ۱. ایجاد فاصله در پایین صفحه برای اینکه کارت آخر زیر واتس‌اپ نرود */
     body {
-        padding-bottom: 70px !important;
+        /* ایجاد فضای خالی در پایین کل صفحه برای دکمه */
+        padding-bottom: 70px !important; 
     }
 
+    .portfolio-container { 
+        padding: 25px 15px;
+        margin-bottom: 20px;
+    }
+
+    .fab-contact { 
+        position: fixed !important; /* اجبار به شناور ماندن */
+        bottom: 25px !important; 
+        left: 25px !important;
+        width: 60px !important; 
+        height: 60px !important;
+        display: flex !important;
+        z-index: 999999 !important; /* بالاتر از همه چیز */
+    }
+    
     .projects-grid { 
         grid-template-columns: repeat(2, 1fr); 
         gap: 12px; 
-    }
-    
-    .project-img { height: 95px; font-size: 30px; }
-    
-    .portfolio-container { 
-        padding: 25px 15px;
-        margin-bottom: 20px; /* فاصله کادر از ته صفحه */
-    }
-
-    /* ۲. تنظیم واتس‌اپ برای ماندن در حالت شناور و ثابت */
-    .fab-contact { 
-        position: fixed; /* جادوی شناور ماندن */
-        width: 55px; 
-        height: 55px; 
-        bottom: 20px; /* فاصله ثابت از پایین گوشی */
-        left: 20px;   /* فاصله ثابت از سمت چپ گوشی */
-        z-index: 99999; /* همیشه روی همه المان‌ها باشد */
     }
 }
