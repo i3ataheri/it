@@ -3,96 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أعمالي | عبدالله البلوشي</title>
+    <title>معرض أعمال عبدالله البلوشي</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="light">
+<body>
 
     <div class="portfolio-container">
+        
         <div class="header">
-            <a href="../index.html" class="home-btn">
-                <i class="fas fa-home"></i>
-            </a>
-            <h2>معرض الأعمال</h2>
-            <div class="theme-switcher-portfolio" onclick="toggleTheme()">
-                <i id="theme-icon" class="fas fa-moon"></i>
+            <a href="#" class="home-btn"><i class="fas fa-home"></i></a>
+            <div class="theme-switcher-portfolio" id="themeToggle">
+                <i class="fas fa-moon"></i>
             </div>
+        </div>
+
+        <div style="margin-bottom: 25px;">
+            <h2 style="font-family: 'Almarai', sans-serif; font-weight: 800; font-size: 22px; margin: 0; color: var(--text);">معرض الأعمال</h2>
         </div>
 
         <div class="projects-grid">
             
-            <a href="https://hrm.mnu.workers.dev/" class="project-card" style="--card-glow: rgba(129, 236, 236, 0.15);">
-                <div class="project-img" style="color: var(--maalam-color); background-color: var(--maalam-bg);">
-                    <i class="fas fa-kaaba"></i>
-                </div>
-                <div class="project-info">
-                    <h3>معالم الحرمين</h3>
-                    <p>مشروع معالم الحرمين للميداليات بتقنية NFC</p>
-                </div>
+            <a href="#" class="project-card card-maalam">
+                <div class="project-img"><i class="fas fa-kaaba"></i></div>
+                <div class="project-info"><h3>معالم الحرمين</h3><p>جولة افتراضية ذكية</p></div>
             </a>
 
-            <a href="folder1/index.html" class="project-card" style="--card-glow: rgba(255, 95, 0, 0.15);">
-                <div class="project-img" style="color: #ff5f00; background-color: rgba(255, 95, 0, 0.1);">
-                    <i class="fas fa-utensils"></i>
-                </div>
-                <div class="project-info">
-                    <h3>منيو مطعم</h3>
-                    <p>تصميم تفاعلي مودرن</p>
-                </div>
+            <a href="#" class="project-card card-v">
+                <div class="project-img"><i class="fa-solid fa-video"></i></div>
+                <div class="project-info"><h3>فيديو ترويجي</h3><p>مونتاج وإخراج احترافي</p></div>
             </a>
 
-            <a href="folder2/index.html" class="project-card" style="--card-glow: rgba(0, 210, 255, 0.15);">
-                <div class="project-img" style="color: #00d2ff; background-color: rgba(0, 210, 255, 0.1);">
-                    <i class="fas fa-cube"></i>
-                </div>
-                <div class="project-info">
-                    <h3>ميدالية لوجو</h3>
-                    <p>طباعة ثلاثية الأبعاد</p>
-                </div>
+            <a href="#" class="project-card card-nfc">
+                <div class="project-img"><i class="fa-solid fa-star"></i></div>
+                <div class="project-info"><h3>ستاند NFC</h3><p>تقنية الاتصال الذكي</p></div>
             </a>
 
-            <a href="folder3/index.html" class="project-card" style="--card-glow: rgba(255, 188, 0, 0.15);">
-                <div class="project-img" style="color: #ffbc00; background-color: rgba(255, 188, 0, 0.1);">
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="project-info">
-                    <h3>ستاند NFC</h3>
-                    <p>تقييمات جوجل ماب</p>
-                </div>
+            <a href="#" class="project-card card-logo">
+                <div class="project-img"><i class="fa-solid fa-cube"></i></div>
+                <div class="project-info"><h3>ميداليات 3D</h3><p>طباعة ميدالية حسب الطلب</p></div>
             </a>
 
-            <a href="folder4/index.html" class="project-card" style="--card-glow: rgba(165, 94, 234, 0.15);">
-                <div class="project-img" style="color: #a55eea; background-color: rgba(165, 94, 234, 0.1);">
-                    <i class="fas fa-video"></i>
-                </div>
-                <div class="project-info">
-                    <h3>فيديو ترويجي</h3>
-                    <p>موشن جرافيك منيو</p>
-                </div>
+            <a href="#" class="project-card card-menu">
+                <div class="project-img"><i class="fas fa-utensils"></i></div>
+                <div class="project-info"><h3>المنيو الرقمي</h3><p>منيو ذكي وسريع لعملائك</p></div>
             </a>
 
-            <a href="https://ta.mnu.workers.dev/icon/index.html" class="project-card" style="--card-glow: rgba(38, 222, 129, 0.15);">
-                <div class="project-img" style="color: #26de81; background-color: rgba(38, 222, 129, 0.1);">
-                    <i class="fas fa-share-nodes"></i>
-                </div>
+            <a href="#" class="project-card card-google">
+                <div class="project-img"><i class="fa-solid fa-share-nodes"></i></div>
                 <div class="project-info">
                     <h3>مكتبة الأيقونات</h3>
-                    <p>أيقونات التواصل الاجتماعي</p>
+                     <p>أيقونات التواصل الاجتماعي</p>
                 </div>
             </a>
-             <a href="#" class="project-card card-online-profile">
-         <div class="project-img">
-                <i class="far fa-id-card project-icon"></i>
-            </div>
-             <div class="project-info">
-                <h3>بروفایل آنلاین</h3>
-                <p>تصميم السيرة الذاتية التفاعلية</p> </div>
-       </a>
-            
+
+            <a href="#" class="project-card card-profile">
+                <div class="project-img"><i class="fas fa-user-tie"></i></div>
+                <div class="project-info"><h3>بروفايل أونلاين</h3><p>سيرة ذاتية تفاعلية</p></div>
+            </a>
+
+            <a href="#" class="project-card card-gallery">
+                <div class="project-img"><i class="fas fa-images"></i></div>
+                <div class="project-info"><h3>معرض الصور</h3><p>عرض أعمالك باحترافية</p></div>
+            </a>
+
+            <a href="#" class="project-card card-frontend">
+                <div class="project-img"><i class="fas fa-code"></i></div>
+                <div class="project-info"><h3>برمجة واجهات</h3><p>تطوير HTML/CSS/JS</p></div>
+            </a>
+
+            <a href="#" class="project-card card-backend">
+                <div class="project-img"><i class="fas fa-server"></i></div>
+                <div class="project-info"><h3>تطوير السيرفرات</h3><p>حلول Node.js و Redis</p></div>
+            </a>
+
+            <a href="#" class="project-card card-db">
+                <div class="project-img"><i class="fas fa-database"></i></div>
+                <div class="project-info"><h3>قواعد البيانات</h3><p>إدارة وهيكلة البيانات</p></div>
+            </a>
+
+            <a href="#" class="project-card card-mobile">
+                <div class="project-img"><i class="fas fa-mobile-alt"></i></div>
+                <div class="project-info"><h3>تطبيقات الجوال</h3><p>برمجة تطبيقات مصغرة</p></div>
+            </a>
+
         </div>
     </div>
 
@@ -100,6 +98,15 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script src="script.js"></script>
+    <script>
+        const btn = document.getElementById('themeToggle');
+        btn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', targetTheme);
+            btn.innerHTML = targetTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+    </script>
+
 </body>
 </html>
