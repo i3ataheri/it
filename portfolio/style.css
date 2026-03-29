@@ -32,7 +32,7 @@ body {
     color: var(--text);
     display: flex; 
     justify-content: center;
-    perspective: 2000px; /* افزایش پرسپکتیو برای عمق بهتر */
+    perspective: none; /* حذف پرسپکتیو در موبایل */
     min-height: 100vh;
 }
 
@@ -112,37 +112,37 @@ body {
     display: flex; 
     flex-direction: column;
     height: 100%;
-    transform-style: preserve-3d;
     position: relative;
     -webkit-tap-highlight-color: transparent; /* حذف هایلایت آبی */
 }
 
-/* --- شروعِ اصلاحِ اساسیِ پرش در موبایل --- */
+/* --- شروعِ اصلاحِ قطعیِ پرش در موبایل (بدون استفاده از transform) --- */
 
-/* حذف افکتِ هاور برای هر نوع صفحه‌لمسی */
-@media (hover: none) {
-    .project-card:hover {
-        transform: none !important;
-        box-shadow: none !important;
-        border-color: var(--border) !important;
-    }
-}
-
-/* فعال‌سازی افکت فشردن (پایین رفتن) در موبایل */
-.project-card:active {
-    transform: translateY(3px) scale(0.98) !important;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
-    transition: all 0.1s ease !important; /* سریع‌تر برای موبایل */
-}
-
-/* افکتِ هاور فقط برای کامپیوتر */
+/* فعال‌سازی افکتِ هاور فقط برای کامپیوتر (با ماوس) */
 @media (hover: hover) {
+    .project-card {
+        transform-style: preserve-3d;
+    }
     .project-card:hover {
         transform: translateY(-8px) scale(1.02) rotateX(5deg);
     }
 }
 
-/* --- پایانِ اصلاحِ اساسیِ پرش در موبایل --- */
+/* افکتِ فشردن در موبایل (صفحات لمسی) - بدون هیچ جابه‌جایی */
+@media (hover: none) {
+    .project-card:active {
+        /* ایجاد یک سایه‌ی داخلی تیره برای حس فشردن */
+        box-shadow: inset 0 0 15px rgba(0,0,0,0.15) !important;
+        background: rgba(0,0,0,0.03) !important;
+        transition: all 0.1s ease !important; /* سریع‌تر برای لمس */
+    }
+    /* حذف هرگونه هاور در لمس */
+    .project-card:hover {
+        transform: none !important;
+    }
+}
+
+/* --- پایانِ اصلاحِ قطعیِ پرش در موبایل --- */
 
 .project-img {
     width: 100%; 
@@ -213,6 +213,7 @@ body {
 .card-mobile .project-img { color: #c2185b; background: rgba(194, 24, 91, 0.1); }
 .card-mobile:hover { border-color: #c2185b; box-shadow: 0 10px 25px rgba(194, 24, 91, 0.2); }
 
+/* ۷. دکمه واتساپ شناور */
 .fab-contact {
     position: fixed; 
     bottom: 25px; 
@@ -236,13 +237,20 @@ body {
     background: #20ba5a; 
 }
 
+/* --- شروعِ اصلاحِ مشکلِ واتس‌اپ روی کارت‌ها در موبایل --- */
 @media (max-width: 480px) {
     .projects-grid { 
         grid-template-columns: repeat(2, 1fr); 
         gap: 12px; 
     }
     .project-img { height: 95px; font-size: 30px; }
-    .portfolio-container { padding: 25px 15px; }
+    
+    .portfolio-container { 
+        padding: 25px 15px; 
+        /* اضافه کردن فضای خالی در پایین پورتفولیو برای واتس‌اپ */
+        padding-bottom: 90px !important; 
+    }
+    
     .fab-contact { 
         width: 55px; 
         height: 55px; 
@@ -250,3 +258,4 @@ body {
         left: 20px; 
     }
 }
+/* --- پایانِ اصلاحِ مشکلِ واتس‌اپ روی کارت‌ها --- */
