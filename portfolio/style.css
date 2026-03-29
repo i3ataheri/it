@@ -8,6 +8,9 @@
     --border: rgba(0,0,0,0.05);
     --maalam-color: #34495e; 
     --maalam-bg: rgba(52, 73, 94, 0.1);
+    /* متغیرهای کارت هفتم */
+    --profile-color: #008f95;
+    --profile-bg: rgba(0, 143, 149, 0.1);
 }
 
 [data-theme="dark"] {
@@ -18,6 +21,9 @@
     --border: rgba(255,255,255,0.1);
     --maalam-color: #81ecec; 
     --maalam-bg: rgba(129, 236, 236, 0.15);
+    /* متغیرهای کارت هفتم در حالت شب */
+    --profile-color: #00d2ff;
+    --profile-bg: rgba(0, 210, 255, 0.1);
 }
 
 /* تنظیمات کلی */
@@ -128,7 +134,7 @@ body {
 /* انیمیشن Tilt و درخشش (Glow) اختصاصی */
 .project-card:hover {
     transform: translateY(-8px) scale(1.02) rotateX(5deg);
-    box-shadow: 0 12px 25px var(--card-glow);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
     border-color: rgba(255,255,255,0.2);
 }
 
@@ -161,6 +167,17 @@ body {
     font-size: 11px; 
     margin: 0; 
     opacity: 0.7; 
+}
+
+/* استایل اختصاصی کارت پروفایل آنلاین */
+.card-profile .project-img {
+    color: var(--profile-color);
+    background: var(--profile-bg);
+}
+
+.card-profile:hover {
+    border-color: var(--profile-color);
+    box-shadow: 0 10px 20px var(--profile-bg);
 }
 
 /* دکمه واتساپ شناور (خارج از کادر) */
