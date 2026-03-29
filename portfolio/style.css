@@ -58,11 +58,10 @@ body {
 
 /* ۴. هدر و دکمه‌ها - اصلاح تراز دسکتاپ و حذف فاصله */
 .header {
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin: 0 auto 30px auto; 
-    max-width: 100%;
+    margin: 0 -5px 30px -5px;
 }
 
 @media (min-width: 850px) {
