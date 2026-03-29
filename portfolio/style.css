@@ -32,7 +32,7 @@ body {
     color: var(--text);
     display: flex; 
     justify-content: center;
-    perspective: 1000px;
+    perspective: 2000px; /* افزایش پرسپکتیو برای عمق بهتر */
     min-height: 100vh;
 }
 
@@ -56,6 +56,7 @@ body {
     }
 }
 
+/* ۴. هدر و دکمه‌ها - اصلاح تراز دسکتاپ و حذف فاصله */
 .header {
     display: flex; 
     justify-content: space-between; 
@@ -67,7 +68,7 @@ body {
 
 @media (min-width: 850px) {
     .header {
-        max-width: 800px; 
+        max-width: 810px; /* تنظیم تراز با کارت‌ها در PC */
     }
 }
 
@@ -113,21 +114,35 @@ body {
     height: 100%;
     transform-style: preserve-3d;
     position: relative;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent; /* حذف هایلایت آبی */
 }
 
-/* اصلاح پرش در موبایل */
+/* --- شروعِ اصلاحِ اساسیِ پرش در موبایل --- */
+
+/* حذف افکتِ هاور برای هر نوع صفحه‌لمسی */
+@media (hover: none) {
+    .project-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        border-color: var(--border) !important;
+    }
+}
+
+/* فعال‌سازی افکت فشردن (پایین رفتن) در موبایل */
+.project-card:active {
+    transform: translateY(3px) scale(0.98) !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+    transition: all 0.1s ease !important; /* سریع‌تر برای موبایل */
+}
+
+/* افکتِ هاور فقط برای کامپیوتر */
 @media (hover: hover) {
     .project-card:hover {
         transform: translateY(-8px) scale(1.02) rotateX(5deg);
     }
 }
 
-@media (max-width: 480px) {
-    .project-card:active {
-        transform: scale(0.98); 
-    }
-}
+/* --- پایانِ اصلاحِ اساسیِ پرش در موبایل --- */
 
 .project-img {
     width: 100%; 
@@ -160,7 +175,8 @@ body {
     opacity: 0.7; 
 }
 
-/* کارت‌های رنگی */
+/* ۶. استایل‌های نوری اختصاصی (Glow) */
+
 .card-maalam .project-img { color: var(--maalam-color); background: var(--maalam-bg); }
 .card-maalam:hover { border-color: var(--maalam-color); box-shadow: 0 10px 25px var(--maalam-bg); }
 
