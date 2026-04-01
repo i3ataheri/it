@@ -183,7 +183,7 @@ body {
 
 
 /* استایل اختصاصی دکمه پروفایل در سمت چپ */
-.profile-icon-only {
+.briefcase {
     position: fixed;
     top: 25px;
     left: 25px; /* قرارگیری در سمت چپ */
