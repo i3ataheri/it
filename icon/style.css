@@ -177,3 +177,36 @@ body {
     box-shadow: 0 0 25px var(--neon-blue);
     border-color: transparent;
 }
+
+
+
+
+
+/* استایل اختصاصی دکمه پروفایل در سمت چپ */
+.profile-icon-only {
+    position: fixed;
+    top: 25px;
+    left: 25px; /* قرارگیری در سمت چپ */
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 20px;
+    z-index: 9999;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.profile-icon-only:hover {
+    background: var(--neon-pink); /* رنگ متفاوت برای تشخیص از دکمه خانه */
+    color: #030712;
+    transform: scale(1.1) rotate(-15deg); /* چرخش به سمت مخالف برای جذابیت */
+    box-shadow: 0 0 25px var(--neon-pink);
+    border-color: transparent;
+}
