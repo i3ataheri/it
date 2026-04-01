@@ -182,7 +182,7 @@ body {
 
 
 
-/* ۱. حالت عادی دکمه (شبیه دکمه خانه) */
+/* اصلاح نهایی دکمه سمت چپ با رنگ آبی هماهنگ */
 .briefcase {
     position: fixed;
     top: 25px;
@@ -203,11 +203,10 @@ body {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* ۲. حالت هوور (وقتی ماوس روی آن می‌رود) */
 .briefcase:hover {
-    background: var(--neon-pink); 
+    background: var(--neon-blue); /* تغییر به آبی نئونی برای هماهنگی کامل */
     color: #030712;
     transform: scale(1.1) rotate(-15deg); 
-    box-shadow: 0 0 25px var(--neon-pink);
+    box-shadow: 0 0 25px var(--neon-blue);
     border-color: transparent;
 }
