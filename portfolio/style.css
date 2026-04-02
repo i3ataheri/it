@@ -181,9 +181,9 @@ body {
 .card-profile .project-img { color: #00cec9; background: rgba(0, 206, 201, 0.1); }
 .card-profile:hover { border-color: #00cec9; box-shadow: 0 10px 25px rgba(0, 206, 201, 0.2); }
 
-/* 8. معرض الصور */
-.card-gallery .project-img { color: #ef5350; background: rgba(239, 83, 80, 0.1); }
-.card-gallery:hover { border-color: #ef5350; box-shadow: 0 10px 25px rgba(239, 83, 80, 0.2); }
+/* 8. بطاقات العمل */
+.b-c .project-img { color: #ef5350; background: rgba(239, 83, 80, 0.1); }
+.b-c:hover { border-color: #ef5350; box-shadow: 0 10px 25px rgba(239, 83, 80, 0.2); }
 
 /* 9. برمجة واجهات */
 .card-frontend .project-img { color: #5c6bc0; background: rgba(92, 107, 192, 0.1); }
