@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HT Digital Card | Final Shine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,900&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --white: #ffffff;
+        }
+
+        html, body {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden; 
+            background: radial-gradient(circle at center, #151515 0%, #000 100%);
+            display: flex; justify-content: center; align-items: center;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .card-wrapper {
+            width: 82vw;
+            height: 70vh;
+            max-width: 360px;
+            max-height: 560px;
+            perspective: 2000px;
+        }
+
+        .card-inner {
+            width: 100%; height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .card-wrapper.active .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .face {
+            position: absolute;
+            width: 100%; height: 100%;
+            backface-visibility: hidden;
+            border-radius: 35px;
+            background: #0d0d0d;
+            border: 1.2px solid var(--gold); 
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+            display: flex; flex-direction: column;
+            box-sizing: border-box;
+            padding: 30px 20px;
+            overflow: hidden;
+            align-items: center; /* سنترة المحتوى أفقياً */
+        }
+
+        .face::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -150%;
+            width: 60%; height: 200%;
+            background: linear-gradient(
+                to right, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent
+            );
+            transform: rotate(25deg);
+            transition: 0s ease-in-out;
+        }
+
+        .card-wrapper:hover .face::after {
+            left: 150%;
+            transition: 1s ease-in-out;
+        }
+
+        .front {
+            justify-content: center; 
+            background: linear-gradient(145deg, #111, #000);
+        }
+
+        .visual-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .visual-logo img {
+            width: 180px; /* حجم الشعار في الواجهة */
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.2));
+        }
+
+        .back {
+            transform: rotateY(180deg);
+            justify-content: space-between;
+        }
+
+        .back-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .back-logo img {
+            width: 70px; /* حجم الشعار في الخلفية */
+            height: auto;
+            display: block;
+        }
+
+        .info-center {
+            text-align: center;
+            width: 100%;
+        }
+
+        .info-center h1 {
+            font-size: 1.6rem;
+            color: var(--white);
+            font-weight: 900;
+            margin: 0;
+        }
+
+        .info-center p {
+            color: var(--gold);
+            font-size: 0.85rem;
+            margin: 8px 0;
+        }
+
+        .line-art {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            margin: 10px auto;
+            opacity: 0.5;
+        }
+
+        .contact-details {
+            width: 100%;
+            display: flex; flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-box {
+            background: rgba(255,255,255,0.02);
+            padding: 12px;
+            border-radius: 15px;
+            border-right: 3px solid var(--gold);
+            text-align: right;
+        }
+
+        .contact-box small {
+            display: block;
+            font-size: 0.6rem;
+            color: #666;
+            margin-bottom: 2px;
+        }
+
+        .contact-box span {
+            font-size: 0.85rem;
+            color: #ddd;
+            direction: ltr;
+            display: block;
+        }
+
+        .flip-btn {
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-btn {
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 4px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-wrapper" onclick="this.classList.toggle('active')">
+        <div class="card-inner">
+            
+            <div class="face front">
+                <div class="visual-logo">
+                    <img src="logo1.svg" alt="Logo">
+                </div>
+                <div class="flip-btn">إضغط للاستكشاف</div>
+            </div>
+            
+            <div class="face back">
+                <div class="back-logo">
+                    <img src="logo1.svg" alt="Logo">
+                </div>
+                
+                <div class="info-center">
+                    <h1>عبدالله البلوشي</h1>
+                    <p>مطور مبرمج وواجهات رقمية</p>
+                    <div class="line-art"></div>
+                </div>
+
+                <div class="contact-details">
+                    <div class="contact-box">
+                        <small>التواصل المباشر</small>
+                        <span>+966 5x xxx xxxx</span>
+                    </div>
+                    <div class="contact-box">
+                        <small>البريد المهني</small>
+                        <span>info@ht-dev.sa</span>
+                    </div>
+                    <div class="contact-box">
+                        <small>المنصة الرقمية</small>
+                        <span>www.ht-digital.sa</span>
+                    </div>
+                </div>
+
+                <div class="back-btn">العودة</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
