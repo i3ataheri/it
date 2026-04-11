@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض بطاقات العمل | Biz Card Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #ef5350; 
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(20, 20, 20, 0.8);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 120px 20px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--primary-red);
+            font-weight: 900;
+            margin-bottom: 40px;
+            text-shadow: 0 0 15px rgba(239, 83, 80, 0.3);
+        }
+
+        .nav-btn {
+            position: fixed;
+            top: 25px;
+            width: 50px;
+            height: 50px;
+            background: #000;
+            color: var(--primary-red);
+            border: 2px solid var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            text-decoration: none;
+            z-index: 2000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-red);
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .home-right { right: 25px; }
+        .briefcase-left { left: 25px; }
+
+        .biz-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            cursor: pointer;
+        }
+
+        .b-c {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .b-c:hover { 
+            border-color: var(--primary-red); 
+            transform: translateY(-10px);
+        }
+
+        .b-c .project-img {
+            width: 60px; height: 60px;
+            border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; margin-bottom: 15px;
+            color: var(--primary-red); 
+            background: rgba(239, 83, 80, 0.1);
+        }
+
+        .b-c::after {
+            content: '';
+            position: absolute;
+            top: -100%; left: -150%;
+            width: 50%; height: 300%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(35deg);
+        }
+
+        .b-c:hover::after {
+            left: 200%;
+            transition: 0.7s ease-in-out;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #111;
+            width: 85%;
+            max-width: 380px;
+            height: 85vh;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            animation: modalPop 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes modalPop {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* دکمه بستن ساده در پایین بدون دایره */
+        .close-btn {
+            position: absolute;
+            bottom: 20px; 
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 30px; /* سایز بزرگ برای دید بهتر */
+            cursor: pointer; 
+            z-index: 10;
+            line-height: 1;
+            background: none;
+            border: none;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8); /* برای خوانایی بهتر روی محتوا */
+        }
+
+        #modalFrame { 
+            width: 100%; 
+            height: 100%; 
+            border: none;
+            background: transparent;
+        }
+
+        @media (max-width: 600px) {
+            .biz-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://ta.mnu.workers.dev" class="nav-btn home-right"><i class="fas fa-home"></i></a>
+    <a href="https://ta.mnu.workers.dev/portfolio/" class="nav-btn briefcase-left"><i class="fa-solid fa-briefcase"></i></a>
+
+    <h1>قائمة بطاقات العمل</h1>
+
+    <div class="biz-container" id="cardsGrid"></div>
+
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <iframe id="modalFrame" src=""></iframe>
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+        </div>
+    </div>
+
+    <script>
+        const cardData = [
+            { id: 1, title: "بطاقة عبدالله البلوشي", desc: "مطور واجهات رقمية - VIP", url: "ab.html" },
+            { id: 2, title: "مطعم النخبة", desc: "تصميم قائمة طعام رقمية", url: "lamsat.html" },
+            { id: 3, title: "شركة التكنولوجيا", desc: "بزنس كارد ذكي NFC", url: "tech.html" },
+            { id: 4, title: "مشروع رقم 4", desc: "وصف العمل", url: "link4.html" },
+            { id: 5, title: "مشروع رقم 5", desc: "وصف العمل", url: "link5.html" },
+            { id: 6, title: "مشروع رقم 6", desc: "وصف العمل", url: "link6.html" },
+            { id: 7, title: "مشروع رقم 7", desc: "وصف العمل", url: "link7.html" },
+            { id: 8, title: "مشروع رقم 8", desc: "وصف العمل", url: "link8.html" },
+            { id: 9, title: "مشروع رقم 9", desc: "وصف العمل", url: "link9.html" },
+            { id: 10, title: "مشروع رقم 10", desc: "وصف العمل", url: "link10.html" },
+            { id: 11, title: "مشروع رقم 11", desc: "وصف العمل", url: "link11.html" },
+            { id: 12, title: "مشروع رقم 12", desc: "وصف العمل", url: "link12.html" },
+            { id: 13, title: "مشروع رقم 13", desc: "وصف العمل", url: "link13.html" },
+            { id: 14, title: "مشروع رقم 14", desc: "وصف العمل", url: "link14.html" },
+            { id: 15, title: "مشروع رقم 15", desc: "وصف العمل", url: "link15.html" },
+            { id: 16, title: "مشروع رقم 16", desc: "وصف العمل", url: "link16.html" },
+            { id: 17, title: "مشروع رقم 17", desc: "وصف العمل", url: "link17.html" },
+            { id: 18, title: "مشروع رقم 18", desc: "وصف العمل", url: "link18.html" },
+            { id: 19, title: "مشروع رقم 19", desc: "وصف العمل", url: "link19.html" },
+            { id: 20, title: "مشروع رقم 20", desc: "وصف العمل", url: "link20.html" },
+            { id: 21, title: "مشروع رقم 21", desc: "وصف العمل", url: "link21.html" },
+            { id: 22, title: "مشروع رقم 22", desc: "وصف العمل", url: "link22.html" },
+            { id: 23, title: "مشروع رقم 23", desc: "وصف العمل", url: "link23.html" },
+            { id: 24, title: "مشروع رقم 24", desc: "وصف العمل", url: "link24.html" },
+            { id: 25, title: "مشروع رقم 25", desc: "وصف العمل", url: "link25.html" }
+        ];
+
+        const grid = document.getElementById('cardsGrid');
+        cardData.forEach(item => {
+            grid.innerHTML += `
+                <div class="card-link" onclick="openModal('${item.url}')">
+                    <div class="b-c">
+                        <div class="project-img">BC</div>
+                        <h3>${item.title}</h3>
+                        <p>${item.desc}</p>
+                    </div>
+                </div>
+            `;
+        });
+
+        function openModal(url) {
+            document.getElementById('modalFrame').src = url;
+            document.getElementById('modalOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+            document.getElementById('modalFrame').src = "";
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بطاقة عمل - لمسات للأفراح</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #fdf2f8; 
+            --card-bg: #ffffff; 
+            --text-main: #ad1457; 
+            --text-darker: #3a0318; 
+            --text-sub: #d4af37; 
+            --info-text: #666666; 
+            
+            --color-1: #f8bbd0;
+            --color-2: #d4af37;
+            --color-3: #f48fb1;
+            --color-4: #ad1457;
+            
+            /* رنگ ستاره‌ها: صورتی تیره (رنگ اصلی برند) */
+            --star-color: #ad1457; 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            direction: rtl;
+            padding: 20px;
+            overflow: hidden; 
+            position: relative; 
+        }
+
+        /* --- استایل ستاره‌های پس‌زمینه (رنگ و تعداد اصلاح شده) --- */
+        .stars-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            pointer-events: none; 
+        }
+
+        .star {
+            position: absolute;
+            background-color: var(--star-color);
+            border-radius: 50%; 
+            opacity: 0; 
+            animation: fall infinite linear, twinkle infinite ease-in-out;
+            /* سایه صورتی ملایم برای درخشش بیشتر */
+            box-shadow: 0 0 5px rgba(173, 20, 87, 0.4);
+        }
+
+        /* افکت درخشش ملایم: ترکیب صورتی و طلایی در شفافیت */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.6); }
+            50% { opacity: 0.9; transform: scale(1.1); }
+        }
+
+        /* انیمیشن سقوط و محو شدن */
+        @keyframes fall {
+            0% { top: -60px; }
+            100% { 
+                top: 110vh; 
+                opacity: 0; 
+            }
+        }
+
+        /* تولید ستاره‌های مختلف با تاخیرها، اندازه‌ها و انیمیشن‌های متنوع */
+        /* --- ستاره‌های کوچک و سریع --- */
+        .star:nth-child(1)  { width: 2.5px; height: 2.5px; left: 8%; animation-duration: 5s, 1.8s; animation-delay: 0s, 0s; }
+        .star:nth-child(2)  { width: 3px; height: 3px; left: 22%; animation-duration: 6s, 2s; animation-delay: 1.5s, 0.5s; }
+        .star:nth-child(3)  { width: 2px; height: 2px; left: 38%; animation-duration: 4.5s, 1.7s; animation-delay: 0.8s, 0.2s; }
+        .star:nth-child(4)  { width: 3.5px; height: 3.5px; left: 52%; animation-duration: 7s, 2.2s; animation-delay: 2.5s, 1s; }
+        .star:nth-child(5)  { width: 2.5px; height: 2.5px; left: 68%; animation-duration: 5.5s, 1.9s; animation-delay: 1s, 0.6s; }
+        .star:nth-child(6)  { width: 3px; height: 3px; left: 82%; animation-duration: 6s, 2s; animation-delay: 3s, 1.1s; }
+        .star:nth-child(7)  { width: 2px; height: 2px; left: 18%; animation-duration: 5s, 1.8s; animation-delay: 4.5s, 1.6s; }
+        .star:nth-child(8)  { width: 2.5px; height: 2.5px; left: 33%; animation-duration: 6.5s, 2.1s; animation-delay: 2s, 0.7s; }
+        .star:nth-child(9)  { width: 3px; height: 3px; left: 47%; animation-duration: 6s, 2s; animation-delay: 5s, 1.9s; }
+        .star:nth-child(10) { width: 2.5px; height: 2.5px; left: 63%; animation-duration: 5.5s, 1.9s; animation-delay: 3.5s, 1.3s; }
+        .star:nth-child(11) { width: 2px; height: 2px; left: 78%; animation-duration: 5s, 1.8s; animation-delay: 0.5s, 0.3s; }
+        .star:nth-child(12) { width: 3px; height: 3px; left: 93%; animation-duration: 6.5s, 2.1s; animation-delay: 6s, 2s; }
+        .star:nth-child(13) { width: 2.5px; height: 2.5px; left: 12%; animation-duration: 5.5s, 1.9s; animation-delay: 1.2s, 0.4s; }
+        .star:nth-child(14) { width: 2px; height: 2px; left: 28%; animation-duration: 5s, 1.8s; animation-delay: 3.8s, 1.4s; }
+        .star:nth-child(15) { width: 3px; height: 3px; left: 42%; animation-duration: 6s, 2s; animation-delay: 2s, 0.8s; }
+
+        /* --- ستاره‌های متوسط و ملایم (بیشتر) --- */
+        .star:nth-child(16) { width: 4.5px; height: 4.5px; left: 58%; animation-duration: 8s, 2.5s; animation-delay: 0.2s, 0.1s; }
+        .star:nth-child(17) { width: 5px; height: 5px; left: 73%; animation-duration: 9.5s, 2.8s; animation-delay: 2.8s, 1s; }
+        .star:nth-child(18) { width: 4px; height: 4px; left: 88%; animation-duration: 7.5s, 2.4s; animation-delay: 4.2s, 1.5s; }
+        .star:nth-child(19) { width: 5.5px; height: 5.5px; left: 14%; animation-duration: 10s, 3s; animation-delay: 6s, 2.2s; }
+        .star:nth-child(20) { width: 4.5px; height: 4.5px; left: 30%; animation-duration: 8s, 2.5s; animation-delay: 3s, 1.1s; }
+        .star:nth-child(21) { width: 5px; height: 5px; left: 45%; animation-duration: 9.5s, 2.8s; animation-delay: 5s, 1.8s; }
+        .star:nth-child(22) { width: 4px; height: 4px; left: 60%; animation-duration: 7.5s, 2.4s; animation-delay: 1.5s, 0.6s; }
+        .star:nth-child(23) { width: 5.5px; height: 5.5px; left: 75%; animation-duration: 10s, 3s; animation-delay: 3.5s, 1.3s; }
+        .star:nth-child(24) { width: 4.5px; height: 4.5px; left: 90%; animation-duration: 8s, 2.5s; animation-delay: 2s, 0.7s; }
+        .star:nth-child(25) { width: 5px; height: 5px; left: 5%; animation-duration: 9.5s, 2.8s; animation-delay: 6s, 2s; }
+        .star:nth-child(26) { width: 4px; height: 4px; left: 20%; animation-duration: 7.5s, 2.4s; animation-delay: 0.8s, 0.3s; }
+        .star:nth-child(27) { width: 5.5px; height: 5.5px; left: 35%; animation-duration: 10s, 3s; animation-delay: 4.8s, 1.6s; }
+        .star:nth-child(28) { width: 4.5px; height: 4.5px; left: 50%; animation-duration: 8s, 2.5s; animation-delay: 2s, 0.9s; }
+        .star:nth-child(29) { width: 5px; height: 5px; left: 65%; animation-duration: 9.5s, 2.8s; animation-delay: 3s, 1.2s; }
+        .star:nth-child(30) { width: 4px; height: 4px; left: 80%; animation-duration: 7.5s, 2.4s; animation-delay: 5.2s, 1.9s; }
+
+        /* --- ستاره‌های پراکنده و متفرقه --- */
+        .star:nth-child(31) { width: 2px; height: 2px; left: 2%; animation-duration: 4.8s, 1.7s; animation-delay: 0s, 0s; }
+        .star:nth-child(32) { width: 3.5px; height: 3.5px; left: 98%; animation-duration: 7.2s, 2.3s; animation-delay: 1s, 0.4s; }
+        .star:nth-child(33) { width: 2.5px; height: 2.5px; left: 16%; animation-duration: 5.8s, 1.9s; animation-delay: 3.2s, 1.1s; }
+        .star:nth-child(34) { width: 4px; height: 4px; left: 27%; animation-duration: 7.8s, 2.4s; animation-delay: 2s, 0.8s; }
+        .star:nth-child(35) { width: 2px; height: 2px; left: 36%; animation-duration: 4.8s, 1.7s; animation-delay: 4.5s, 1.7s; }
+        .star:nth-child(36) { width: 3px; height: 3px; left: 41%; animation-duration: 6.2s, 2.1s; animation-delay: 5.5s, 2s; }
+        .star:nth-child(37) { width: 5px; height: 5px; left: 49%; animation-duration: 9.8s, 2.9s; animation-delay: 6s, 2.2s; }
+        .star:nth-child(38) { width: 2.5px; height: 2.5px; left: 54%; animation-duration: 5.8s, 1.9s; animation-delay: 0.5s, 0.2s; }
+        .star:nth-child(39) { width: 3px; height: 3px; left: 59%; animation-duration: 6.2s, 2.1s; animation-delay: 2.5s, 0.9s; }
+        .star:nth-child(40) { width: 4px; height: 4px; left: 66%; animation-duration: 7.8s, 2.4s; animation-delay: 1.2s, 0.5s; }
+        .star:nth-child(41) { width: 2px; height: 2px; left: 71%; animation-duration: 4.8s, 1.7s; animation-delay: 3.8s, 1.3s; }
+        .star:nth-child(42) { width: 3.5px; height: 3.5px; left: 77%; animation-duration: 7.2s, 2.3s; animation-delay: 5s, 1.8s; }
+        .star:nth-child(43) { width: 2.5px; height: 2.5px; left: 81%; animation-duration: 5.8s, 1.9s; animation-delay: 2s, 0.7s; }
+        .star:nth-child(44) { width: 4px; height: 4px; left: 86%; animation-duration: 7.8s, 2.4s; animation-delay: 4s, 1.5s; }
+        .star:nth-child(45) { width: 2px; height: 2px; left: 91%; animation-duration: 4.8s, 1.7s; animation-delay: 0.1s, 0s; }
+        .star:nth-child(46) { width: 3px; height: 3px; left: 96%; animation-duration: 6.2s, 2.1s; animation-delay: 6s, 2s; }
+
+        /* --- استایل کارت زیبای شما (بدون تغییر) --- */
+        .card-container {
+            position: relative;
+            width: 320px; 
+            height: 530px; 
+            border-radius: 25px;
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            z-index: 10; 
+        }
+
+        .card-container::before {
+            content: '';
+            position: absolute;
+            width: 150%; 
+            height: 150%;
+            background: conic-gradient(
+                var(--color-1), 
+                var(--color-2), 
+                var(--color-3), 
+                var(--color-4), 
+                var(--color-1)
+            );
+            animation: rotate-border 6s linear infinite; 
+            z-index: 0;
+        }
+
+        @keyframes rotate-border {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .card-content {
+            position: relative;
+            width: calc(100% - 8px); 
+            height: calc(100% - 8px);
+            background-color: var(--card-bg);
+            border-radius: 22px; 
+            z-index: 1; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 25px; 
+            text-align: center;
+        }
+
+        .logo-wrapper {
+            margin-top: 10px;
+        }
+
+        .logo-monogram {
+            font-family: 'Great Vibes', cursive;
+            font-size: 60px;
+            color: var(--text-sub);
+            line-height: 1;
+            border: 2px solid var(--text-sub);
+            border-radius: 50%;
+            width: 85px;
+            height: 85px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header {
+            margin-top: 40px; 
+            margin-bottom: 20px;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+
+        .service-type {
+            font-size: 15px;
+            color: var(--text-darker); 
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .divider {
+            width: 60%;
+            height: 1.5px;
+            background: linear-gradient(to right, transparent, var(--text-sub), transparent);
+            margin-bottom: 25px;
+        }
+
+        .contact-info {
+            width: 100%;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .info-row {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: var(--info-text);
+            border-bottom: 1px solid #fdf2f8;
+            padding-bottom: 5px;
+        }
+
+        .info-row span.label {
+            color: var(--text-main);
+            font-weight: 700;
+            margin-left: 10px;
+            width: 65px; 
+            display: inline-block;
+        }
+
+        .info-row span.value {
+            font-weight: 600;
+            direction: ltr; 
+        }
+
+        .footer-note {
+            font-size: 14px;
+            color: var(--text-main);
+            font-weight: 600;
+            font-style: italic;
+            margin-top: auto; 
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars-container">
+        <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div>
+    </div>
+
+    <div class="card-container">
+        <div class="card-content">
+            
+            <div class="logo-wrapper">
+                <div class="logo-monogram">LA</div>
+            </div>
+
+            <div class="header">
+                <h1 class="logo-text">لمسات للأفراح</h1>
+                <p class="service-type">تنسيق وتجهيز المحافل والمجالس</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="contact-info">
+                <div class="info-row">
+                    <span class="label">المديرة:</span> 
+                    <span class="value">لمسة العتيبي</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">الجوال:</span> 
+                        <span class="value">+966 50 XXXXXXX</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">البريد:</span> 
+                    <span class="value">info@lamsat.sa</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">العنوان:</span> 
+                    <span class="value">الرياض - حي المروج</span>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                نجعل من مناسباتكم ذكريات لا تُنسى...
+            </div>
+            
+        </div>
+    </div>
+
+</body>
+</html>
