@@ -221,17 +221,18 @@
         ];
 
         const grid = document.getElementById('cardsGrid');
+
         cardData.forEach(item => {
-            grid.innerHTML += `
-                <div class="card-link" onclick="openModal('${item.url}')">
-                    <div class="b-c">
-                        <div class="project-img">BC</div>
-                        <h3>${item.title}</h3>
-                        <p>${item.desc}</p>
-                    </div>
-                </div>
-            `;
-        });
+    grid.innerHTML += `
+        <div class="card-link" onclick="openModal('${item.url}')">
+            <div class="b-c">
+                <div class="project-img">${item.iconText || 'BC'}</div> 
+                <h3>${item.title}</h3>
+                <p>${item.desc}</p>
+            </div>
+        </div>
+    `;
+});
 
         function openModal(url) {
             document.getElementById('modalFrame').src = url;
