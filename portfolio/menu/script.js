@@ -27,10 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = `card ${item.category}`;
             
-            // تولید تگ‌ها
             const tagsHTML = item.tags.map(t => `<span class="mini-tag">${t}</span>`).join('');
 
-            // ساختار جدید کارت شامل شماره (بدون هشتگ) کنار عنوان
             card.innerHTML = `
                 <div class="card-tag-row">${tagsHTML}</div>
                 <div class="card-header-flex">
@@ -46,38 +44,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ۲. مدیریت فیلترها و اسکرول دکمه فعال
+    // ۲. مدیریت فیلترها (بدون اسکرول صفحه)
     if (filterGroup) {
         filterGroup.addEventListener('click', (e) => {
             const btn = e.target.closest('.f-btn');
             if (!btn) return;
 
-            // تغییر حالت اکتیو دکمه‌ها
             document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
-            // اسکرول هوشمند دکمه به وسط (بسیار مهم برای موبایل)
+
             btn.scrollIntoView({
                 behavior: 'smooth',
                 inline: 'center',
                 block: 'nearest'
             });
 
-            // فیلتر کردن داده‌ها از آرایه پروژه‌ها
             const cat = btn.dataset.cat;
             const filtered = cat === 'all' ? projects : projects.filter(p => p.category === cat);
             
             renderCards(filtered);
-
-            // اسکرول نرم به بخش نمایش کارت‌ها
-            setTimeout(() => {
-                const gridPos = grid.getBoundingClientRect().top + window.pageYOffset;
-                window.scrollTo({ top: gridPos - 130, behavior: 'smooth' });
-            }, 300);
         });
     }
 
-    // ۳. سیستم جستجوی زنده (Live Search)
+    // ۳. سیستم جستجوی زنده
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase().trim();
@@ -86,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 p.title.toLowerCase().includes(term) || 
                 p.desc.toLowerCase().includes(term) ||
                 p.tags.some(t => t.toLowerCase().includes(term)) ||
-                p.id.toString().includes(term) // قابلیت جستجو بر اساس شماره محصول
+                p.id.toString().includes(term)
             );
             
             renderCards(filtered);
@@ -111,7 +100,7 @@ function openMenu(id) {
     if (modal && frame) {
         frame.src = `menu/${id}.html`;
         modal.style.display = 'block';
-        document.body.style.overflow = 'hidden'; // قفل کردن اسکرول صفحه اصلی
+        document.body.style.overflow = 'hidden';
     }
 }
 
@@ -121,7 +110,7 @@ function closeMenu() {
     
     if (modal && frame) {
         modal.style.display = 'none';
-        frame.src = ''; 
-        document.body.style.overflow = 'auto'; // باز کردن اسکرول
+        frame.src = '';
+        document.body.style.overflow = 'auto';
     }
 }
