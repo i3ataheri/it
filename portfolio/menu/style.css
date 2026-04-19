@@ -82,9 +82,10 @@ body {
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
+/* فاصله درست برای اینکه سرچ خراب نشه */
 .filter-box {
     max-width: 900px; 
-    margin: -30px auto 40px;
+    margin: -60px auto 40px;
     background: white; 
     border-radius: 35px; 
     padding: 35px;
@@ -112,14 +113,16 @@ body {
     font-size: 20px;
 }
 
+/* 🔥 اسکرول افقی فیلترها */
 .filter-group { 
     display: flex; 
     gap: 12px; 
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: nowrap;
     overflow-x: auto;
     padding: 5px 5px 20px;
     scrollbar-width: none;
+    scroll-behavior: smooth;
 }
 
 .filter-group::-webkit-scrollbar { display: none; }
@@ -138,6 +141,7 @@ body {
     gap: 10px;
     font-family: 'Almarai';
     font-size: 15px;
+    white-space: nowrap;
 }
 
 .f-btn.active { 
@@ -250,8 +254,6 @@ body {
     background: rgba(15,23,42,0.92); 
     backdrop-filter: blur(12px); 
     z-index: 9999; 
-    align-items: center;
-    justify-content: center;
 }
 
 .modal-body { 
@@ -291,17 +293,4 @@ body {
     border: none; 
     font-size: 26px; 
     color: var(--bg-dark); 
-}
-
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: clamp(22px, 6vw, 32px);
-        padding: 0 16px;
-        white-space: nowrap;
-    }
-}
-
-@media (max-width: 480px) {
-    .top-btns { gap: 8px; }
-    .btn-nav { padding: 10px 16px; font-size: 12px; }
 }
