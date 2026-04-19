@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة السفير الملكي - Clean Glass Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            /* إعدادات الوضع الداكن (Default) */
+            --لون_الخلفية: #0a0a0a;
+            --خلفية_بطاقة: rgba(255, 255, 255, 0.05); 
+            --نص_رئيسي: #ffffff;
+            --نص_فرعي: #b0b0b0;
+            --لون_التميز: #8e1b1e; 
+            --لون_الذهب: #ffcc33;
+            --حدود: rgba(255, 255, 255, 0.1);
+            --تأثير_الزجاج: blur(15px);
+        }
+
+        [data-theme="light"] {
+            /* إعدادات الوضع الفاتح */
+            --لون_الخلفية: #f8f9fa;
+            --خلفية_بطاقة: rgba(255, 255, 255, 0.8);
+            --نص_رئيسي: #1a1a1a;
+            --نص_فرعي: #555555;
+            --حدود: rgba(0, 0, 0, 0.08);
+            --تأثير_الزجاج: blur(5px);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--لون_الخلفية);
+            color: var(--نص_رئيسي);
+            margin: 0; padding: 0;
+            min-height: 100vh;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .top-controls {
+            position: fixed; top: 20px; left: 20px;
+            display: flex; flex-direction: column; gap: 12px; z-index: 1000;
+        }
+
+        .action-btn {
+            width: 45px; height: 45px;
+            border-radius: 12px; background: var(--لون_التميز);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; border: none; color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .header-area { text-align: center; padding: 50px 20px 30px; }
+        .logo-img {
+            width: 90px; height: 90px; border-radius: 50%;
+            border: 3px solid var(--لون_التميز); padding: 3px; margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .header-area h1 { font-family: 'Cairo'; font-weight: 900; font-size: 2rem; margin: 5px 0; }
+        .header-area p { color: var(--نص_فرعي); margin-bottom: 20px; }
+
+        .container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
+
+        .cat-card {
+            background: var(--خلفية_بطاقة);
+            backdrop-filter: var(--تأثير_الزجاج);
+            -webkit-backdrop-filter: var(--تأثير_الزجاج);
+            border-radius: 20px;
+            margin-bottom: 15px;
+            border: 1px solid var(--حدود);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: 0.3s ease;
+        }
+        
+        .cat-card.active { 
+            border-color: var(--لون_الذهب);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .cat-main { padding: 25px 15px; cursor: pointer; text-align: center; }
+        .cat-info h2 { 
+            margin: 0; 
+            font-family: 'Cairo'; 
+            font-size: 1.7rem; 
+            color: var(--نص_رئيسي); 
+        }
+
+        .items-box {
+            max-height: 0; opacity: 0; overflow: hidden;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .cat-card.active .items-box {
+            max-height: 2500px; opacity: 1;
+            padding-bottom: 15px;
+        }
+
+        .dish { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 12px 18px; 
+            border-bottom: 1px solid var(--حدود);
+            gap: 15px;
+        }
+        .dish:last-child { border-bottom: none; }
+
+        .dish-img {
+            width: 55px; height: 55px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid var(--حدود);
+        }
+
+        .dish-info { flex: 1; }
+        .dish h4 { margin: 0; font-size: 0.95rem; font-weight: 700; }
+        .dish p { margin: 3px 0 0; font-size: 0.75rem; color: var(--نص_فرعي); }
+        .price { color: var(--لون_الذهب); font-family: 'Cairo'; font-weight: 800; font-size: 0.95rem; white-space: nowrap; }
+
+        .footer { text-align: center; padding: 40px 0; color: var(--نص_رئيسي); background: var(--خلفية_بطاقة); border-radius: 25px; margin-top: 30px; margin-bottom: 20px; border: 1px solid var(--حدود); }
+        .social-icons a { color: white; background: var(--لون_التميز); width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin: 0 6px; text-decoration: none; }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <div class="top-controls">
+        <button class="action-btn" onclick="toggleTheme()"><i class="fas fa-adjust"></i></button>
+        <button class="action-btn" onclick="controlAll(true)"><i class="fas fa-folder-open"></i></button>
+        <button class="action-btn" onclick="controlAll(false)"><i class="fas fa-folder"></i></button>
+    </div>
+
+    <div class="header-area">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200&h=200&fit=crop" alt="Logo" class="logo-img">
+        <h1>مطعم السفير الملكي</h1>
+        <p>فخامة المذاق العربي</p>
+    </div>
+
+    <div class="container" id="menuGrid"></div>
+
+    <div class="container">
+        <footer class="footer">
+            <div><i class="fas fa-map-marker-alt" style="color:var(--لون_الذهب)"></i> الرياض، المملكة العربية السعودية</div>
+            <div class="social-icons" style="margin: 20px 0;">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div style="font-size: 0.75rem; opacity: 0.7;">&copy; ٢٠٢٦ السفير الملكي - جميع الحقوق محفوظة</div>
+        </footer>
+    </div>
+
+    <script>
+        function stretchTitle(text) {
+            if (text.length < 2) return text;
+            const mid = Math.floor(text.length / 2);
+            return text.slice(0, mid) + "ــــــــــــــــ" + text.slice(mid);
+        }
+
+        const categories = [
+            { t: "المقبلات", items: [
+                {n: "حمص بالصنوبر", d: "حمص ناعم وزيت زيتون", p: "٢٢ ر.س", img: "https://picsum.photos/id/488/100"},
+                {n: "متبل باذنجان", d: "مشوي مع طحينة", p: "١٨ ر.س", img: "https://picsum.photos/id/489/100"},
+                {n: "تبولة ملكية", d: "بقدونس ورمان", p: "١٥ ر.س", img: "https://picsum.photos/id/490/100"},
+                {n: "ورق عنب", d: "محشو بالأرز والليمون", p: "٢٥ ر.س", img: "https://picsum.photos/id/491/100"},
+                {n: "بابا غنوج", d: "باذنجان وخضار", p: "١٩ ر.س", img: "https://picsum.photos/id/492/100"}
+            ]},
+            { t: "المشويات", items: [
+                {n: "كباب لحم", d: "سيخان لحم بلدي", p: "٦٠ ر.س", img: "https://picsum.photos/id/635/100"},
+                {n: "شيش طاووق", d: "دجاج متبل بالزعفران", p: "٥٠ ر.س", img: "https://picsum.photos/id/636/100"},
+                {n: "ریش غنم", d: "٤ قطع فاخرة", p: "٨٥ ر.س", img: "https://picsum.photos/id/637/100"},
+                {n: "مشوي مشكل", d: "كباب، طاووق، أوصال", p: "٩٥ ر.س", img: "https://picsum.photos/id/638/100"},
+                {n: "عرايس لحم", d: "خبز محشو باللحم", p: "٣٥ ر.س", img: "https://picsum.photos/id/639/100"}
+            ]},
+            { t: "الأطباق", items: [
+                {n: "كبسة سعودية", d: "دجاج مع أرز بسمتي", p: "٤٥ ر.س", img: "https://picsum.photos/id/292/100"},
+                {n: "مندي غنم", d: "لحم مطهو في الحفرة", p: "٨٠ ر.س", img: "https://picsum.photos/id/293/100"},
+                {n: "جريش", d: "بالسمن والليمون", p: "٣٠ ر.س", img: "https://picsum.photos/id/294/100"},
+                {n: "سليق طايفي", d: "أرز بالحليب والدجاج", p: "٤٠ ر.س", img: "https://picsum.photos/id/295/100"},
+                {n: "بخاري دجاج", d: "أرز بخاري بالجزر", p: "٣٨ ر.س", img: "https://picsum.photos/id/296/100"}
+            ]},
+            { t: "البيتزا", items: [
+                {n: "مارغريتا", d: "صوص وجبن موزاريلا", p: "٣٥ ر.س", img: "https://picsum.photos/id/193/100"},
+                {n: "بيبروني", d: "بقر وجبن وشيدر", p: "٤٥ ر.س", img: "https://picsum.photos/id/194/100"},
+                {n: "بيتزا خضار", d: "فلفل، فطر، زيتون", p: "٤٠ ر.س", img: "https://picsum.photos/id/195/100"},
+                {n: "بيتزا دجاج", d: "دجاج مع صوص رانش", p: "٥٠ ر.س", img: "https://picsum.photos/id/196/100"},
+                {n: "بيتزا أجبان", d: "٤ أنواع أجبان", p: "٤٨ ر.س", img: "https://picsum.photos/id/197/100"}
+            ]},
+            { t: "الباستا", items: [
+                {n: "فیتوتشينى", d: "دجاج وكريمة وفطر", p: "٤٨ ر.س", img: "https://picsum.photos/id/493/100"},
+                {n: "لازانيا", d: "طبقات مكرونة باللحم", p: "٥٢ ر.س", img: "https://picsum.photos/id/494/100"},
+                {n: "بينى أرابياتا", d: "صلصة حمراء حارة", p: "٤٠ ر.س", img: "https://picsum.photos/id/495/100"},
+                {n: "سباغيتي", d: "بولونیز كلاسيكي", p: "٤٢ ر.س", img: "https://picsum.photos/id/496/100"},
+                {n: "باستا روبيان", d: "بصوص وردي", p: "٦٠ ر.س", img: "https://picsum.photos/id/497/100"}
+            ]},
+            { t: "البحريات", items: [
+                {n: "سلمون مشوي", d: "مع خضار سوتيه", p: "٩٠ ر.س", img: "https://picsum.photos/id/429/100"},
+                {n: "روبيان مشوي", d: "بصلصة الليمون", p: "٧٥ ر.س", img: "https://picsum.photos/id/430/100"},
+                {n: "سمك هامور", d: "فيليه مقلي مقرمش", p: "٦٥ ر.س", img: "https://picsum.photos/id/431/100"},
+                {n: "شوربة بحرية", d: "كريمة ثمار البحر", p: "٣٥ ر.س", img: "https://picsum.photos/id/432/100"},
+                {n: "سمكة حرة", d: "بصلصة حارة", p: "١١٠ ر.س", img: "https://picsum.photos/id/433/100"}
+            ]},
+            { t: "السلطات", items: [
+                {n: "سيزر دجاج", d: "خس وجبن بارميزان", p: "٣٥ ر.س", img: "https://picsum.photos/id/102/100"},
+                {n: "سلطة يونانية", d: "خيار وطماطم وفيتا", p: "٢٨ ر.س", img: "https://picsum.photos/id/103/100"},
+                {n: "فتوش", d: "خضار وخبز محمص", p: "٢٠ ر.س", img: "https://picsum.photos/id/104/100"},
+                {n: "كينوا بالرمان", d: "كينوا وخضار صحية", p: "٣٨ ر.س", img: "https://picsum.photos/id/105/100"},
+                {n: "سلطة جرجير", d: "دبس رمان وجوز", p: "٢٥ ر.س", img: "https://picsum.photos/id/106/100"}
+            ]},
+            { t: "الحلويات", items: [
+                {n: "كنافة نابلسية", d: "بالجبن ساخنة", p: "٢٥ ر.س", img: "https://picsum.photos/id/312/100"},
+                {n: "أم علي", d: "بالحليب والمكسرات", p: "٢٨ ر.س", img: "https://picsum.photos/id/313/100"},
+                {n: "تشيز كيك", d: "بالتوت البري", p: "٣٠ ر.س", img: "https://picsum.photos/id/314/100"},
+                {n: "مولتن كيك", d: "شوكولاتة ذائبة", p: "٣٢ ر.س", img: "https://picsum.photos/id/315/100"},
+                {n: "سلطة فواكه", d: "فواكه الموسم", p: "٢٠ ر.س", img: "https://picsum.photos/id/316/100"}
+            ]},
+            { t: "العصائر", items: [
+                {n: "برتقال طازج", d: "عصر يدوي يومي", p: "١٥ ر.س", img: "https://picsum.photos/id/453/100"},
+                {n: "ليمون نعناع", d: "منعش وبارد", p: "١٨ ر.س", img: "https://picsum.photos/id/454/100"},
+                {n: "مانجو طبيعي", d: "ثقيل ومنعش", p: "٢٠ ر.س", img: "https://picsum.photos/id/455/100"},
+                {n: "موهيتو توت", d: "توت ومنعش", p: "٢٢ ر.س", img: "https://picsum.photos/id/456/100"},
+                {n: "عصير رمان", d: "رمان طازج بارد", p: "٢٥ ر.س", img: "https://picsum.photos/id/457/100"}
+            ]},
+            { t: "ساخنة", items: [
+                {n: "قهوة عربية", d: "دلة مع تمر", p: "٢٥ ر.س", img: "https://picsum.photos/id/431/100"},
+                {n: "كابتشينو", d: "رغوة حليب غنية", p: "١٨ ر.س", img: "https://picsum.photos/id/432/100"},
+                {n: "لاتيه زعفران", d: "نكهة ملكية", p: "٢٢ ر.س", img: "https://picsum.photos/id/433/100"},
+                {n: "إسبريسو", d: "مركز وقوي", p: "١٢ ر.س", img: "https://picsum.photos/id/434/100"},
+                {n: "شاي مغربي", d: "بالنعناع المنعش", p: "١٥ ر.س", img: "https://picsum.photos/id/435/100"}
+            ]}
+        ];
+
+        const grid = document.getElementById('menuGrid');
+        categories.forEach((c, index) => {
+            let dishes = c.items.map(d => `
+                <div class="dish">
+                    <img src="${d.img}" class="dish-img">
+                    <div class="dish-info">
+                        <h4>${d.n}</h4>
+                        <p>${d.d}</p>
+                    </div>
+                    <div class="price">${d.p}</div>
+                </div>`).join('');
+            
+            grid.innerHTML += `
+                <div class="cat-card" id="card-${index}">
+                    <div class="cat-main" onclick="toggleMenu(${index})">
+                        <div class="cat-info">
+                            <h2>${stretchTitle(c.t)}</h2>
+                        </div>
+                    </div>
+                    <div class="items-box">${dishes}</div>
+                </div>`;
+        });
+
+        function toggleMenu(index) {
+            const allCards = document.querySelectorAll('.cat-card');
+            const targetCard = document.getElementById(`card-${index}`);
+            const isActive = targetCard.classList.contains('active');
+            allCards.forEach(card => card.classList.remove('active'));
+            if (!isActive) {
+                targetCard.classList.add('active');
+                setTimeout(() => { targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 300);
+            }
+        }
+
+        function controlAll(isOpen) {
+            document.querySelectorAll('.cat-card').forEach(card => {
+                if (isOpen) card.classList.add('active');
+                else card.classList.remove('active');
+            });
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            body.setAttribute('data-theme', body.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        }
+    </script>
+</body>
+</html>

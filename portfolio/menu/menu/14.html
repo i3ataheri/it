@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منيو الـ 100 صنف الذكي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --اللون-الرئيسي: #00f3ff; 
+            --خلفية-الهالة: #0a1a1f;
+            --الأبيض: #ffffff;
+            --الخلفية-العميقة: #050508;
+            --زجاج: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: radial-gradient(circle at center, var(--خلفية-الهالة) 0%, var(--الخلفية-العميقة) 100%);
+            background-attachment: fixed;
+            color: var(--الأبيض);
+            margin: 0;
+            padding: 10px;
+            transition: 0.5s ease;
+        }
+
+        /* دکمه شناور تنظیمات برای موبایل و دسکتاپ */
+        .settings-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--اللون-الرئيسي);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 0 20px var(--اللون-الرئيسي);
+            border: none;
+            font-size: 24px;
+        }
+
+        /* پنل تنظیمات مخفی */
+        .settings-panel {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid var(--اللون-الرئيسي);
+            z-index: 1000;
+            width: 220px;
+            display: none; /* در ابتدا مخفی است */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+
+        .settings-panel.active { display: block; animation: slideUp 0.3s ease; }
+
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .setting-section { margin-bottom: 20px; }
+        .setting-label { font-size: 0.85rem; margin-bottom: 10px; display: block; color: var(--اللون-الرئيسي); text-align: center; font-weight: bold; }
+
+        .color-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+        .dot { width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: 2px solid #fff; transition: 0.2s; }
+
+        /* استایل منو */
+        .container { max-width: 1400px; margin: 0 auto; padding-top: 20px; }
+        .title { font-size: 2.8rem; text-align: center; color: var(--اللون-الرئيسي); text-shadow: 0 0 15px var(--اللون-الرئيسي); font-weight: 900; margin-bottom: 40px; }
+
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; }
+        
+        .card { background: var(--زجاج); border-radius: 20px; border: 1px solid var(--اللون-الرئيسي); display: flex; padding: 15px; gap: 15px; transition: 0.3s; }
+        .card-img { width: 140px; height: 260px; border-radius: 12px; object-fit: cover; border: 1px solid var(--اللون-الرئيسي); }
+        .card-content { flex-grow: 1; }
+        .category-title { font-size: 1.5rem; color: var(--اللون-الرئيسي); border-bottom: 2px solid var(--اللون-الرئيسي); margin-bottom: 15px; text-align: center; }
+
+        .item { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px; font-size: 0.9rem; }
+        .item-price { font-weight: 700; }
+
+        @media (max-width: 600px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            .card { flex-direction: column; align-items: center; }
+            .card-img { width: 100%; height: 180px; }
+            .title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="settings-toggle" onclick="toggleSettings()">🎨</button>
+
+    <div class="settings-panel" id="settingsPanel">
+        <div class="setting-section">
+            <span class="setting-label">لون الخط والتصميم</span>
+            <div class="color-grid">
+                <div class="dot" style="background:#00f3ff" onclick="setMainColor('#00f3ff')"></div>
+                <div class="dot" style="background:#ffcc00" onclick="setMainColor('#ffcc00')"></div>
+                <div class="dot" style="background:#00ff88" onclick="setMainColor('#00ff88')"></div>
+                <div class="dot" style="background:#ff0077" onclick="setMainColor('#ff0077')"></div>
+                <div class="dot" style="background:#ffffff" onclick="setMainColor('#ffffff')"></div>
+                <div class="dot" style="background:#a855f7" onclick="setMainColor('#a855f7')"></div>
+                <div class="dot" style="background:#f97316" onclick="setMainColor('#f97316')"></div>
+                <div class="dot" style="background:#ef4444" onclick="setMainColor('#ef4444')"></div>
+                <div class="dot" style="background:#ec4899" onclick="setMainColor('#ec4899')"></div>
+                <div class="dot" style="background:#3b82f6" onclick="setMainColor('#3b82f6')"></div>
+            </div>
+        </div>
+        <div class="setting-section">
+            <span class="setting-label">لون الخلفية والجو</span>
+            <div class="color-grid">
+                <div class="dot" style="background:#0a1a1f" onclick="setBgColor('#0a1a1f')"></div>
+                <div class="dot" style="background:#1a1600" onclick="setBgColor('#1a1600')"></div>
+                <div class="dot" style="background:#001a0d" onclick="setBgColor('#001a0d')"></div>
+                <div class="dot" style="background:#1a000c" onclick="setBgColor('#1a000c')"></div>
+                <div class="dot" style="background:#111111" onclick="setBgColor('#111111')"></div>
+                <div class="dot" style="background:#1e1b4b" onclick="setBgColor('#1e1b4b')"></div>
+                <div class="dot" style="background:#312e81" onclick="setBgColor('#312e81')"></div>
+                <div class="dot" style="background:#4c1d95" onclick="setBgColor('#4c1d95')"></div>
+                <div class="dot" style="background:#451a03" onclick="setBgColor('#451a03')"></div>
+                <div class="dot" style="background:#064e3b" onclick="setBgColor('#064e3b')"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">قائمة الطعام الفاخرة</h1>
+        <div class="menu-grid">
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1541529086526-db283c563270?w=300" class="card-img">
+                <div class="card-content">
+                    <h2 class="category-title">المقبلات الباردة</h2>
+                    <div class="item"><span>حمص بيروتي</span><span>25 SR</span></div>
+                    <div class="item"><span>متبل باذنجان</span><span>28 SR</span></div>
+                    <div class="item"><span>بابا غنوج</span><span>28 SR</span></div>
+                    <div class="item"><span>تبولة لبنانية</span><span>30 SR</span></div>
+                    <div class="item"><span>فتوش دبس رمان</span><span>30 SR</span></div>
+                    <div class="item"><span>ورق عنب</span><span>35 SR</span></div>
+                    <div class="item"><span>سلطة جرجير</span><span>25 SR</span></div>
+                    <div class="item"><span>لوبيا بالزيت</span><span>22 SR</span></div>
+                    <div class="item"><span>لبنة بالثوم</span><span>20 SR</span></div>
+                    <div class="item"><span>زيتون مشكل</span><span>15 SR</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1605908580297-f3e1c02e64ff?w=300" class="card-img">
+                <div class="card-content">
+                    <h2 class="category-title">المقبلات الساخنة</h2>
+                    <div class="item"><span>كبة مقلية</span><span>35 SR</span></div>
+                    <div class="item"><span>سمبوسة لحم</span><span>25 SR</span></div>
+                    <div class="item"><span>سمبوسة جبن</span><span>22 SR</span></div>
+                    <div class="item"><span>جوانح دجاج</span><span>40 SR</span></div>
+                    <div class="item"><span>بطاطا حرة</span><span>28 SR</span></div>
+                    <div class="item"><span>سجق بالرمان</span><span>45 SR</span></div>
+                    <div class="item"><span>فطر بالثوم</span><span>35 SR</span></div>
+                    <div class="item"><span>روبيان بروفنسال</span><span>60 SR</span></div>
+                    <div class="item"><span>حلوم مشوي</span><span>32 SR</span></div>
+                    <div class="item"><span>رقاقات جبنة</span><span>25 SR</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=300" class="card-img">
+                <div class="card-content">
+                    <h2 class="category-title">الشوربات</h2>
+                    <div class="item"><span>شوربة العدس</span><span>25 SR</span></div>
+                    <div class="item"><span>شوربة الفطر</span><span>30 SR</span></div>
+                    <div class="item"><span>شوربة الطماطم</span><span>28 SR</span></div>
+                    <div class="item"><span>شوربة الدجاج</span><span>30 SR</span></div>
+                    <div class="item"><span>شوربة بحريات</span><span>55 SR</span></div>
+                    <div class="item"><span>شوربة البصل</span><span>32 SR</span></div>
+                    <div class="item"><span>شوربة الحريرة</span><span>35 SR</span></div>
+                    <div class="item"><span>شوربة الذرة</span><span>28 SR</span></div>
+                    <div class="item"><span>شوربة البروكلي</span><span>30 SR</span></div>
+                    <div class="item"><span>شوربة اليقطين</span><span>32 SR</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=300" class="card-img">
+                <div class="card-content">
+                    <h2 class="category-title">أطباق اللحوم</h2>
+                    <div class="item"><span>ستيك تندرلوين</span><span>185 SR</span></div>
+                    <div class="item"><span>ريش غنم</span><span>140 SR</span></div>
+                    <div class="item"><span>موزات غنم</span><span>120 SR</span></div>
+                    <div class="item"><span>أوزي لحم</span><span>95 SR</span></div>
+                    <div class="item"><span>لحم بالبرقوق</span><span>110 SR</span></div>
+                    <div class="item"><span>كفتة بندورة</span><span>85 SR</span></div>
+                    <div class="item"><span>ستيك فلفل</span><span>175 SR</span></div>
+                    <div class="item"><span>مقلوبة لحم</span><span>90 SR</span></div>
+                    <div class="item"><span>بيف ستروغانوف</span><span>130 SR</span></div>
+                    <div class="item"><span>كباب خشخاش</span><span>95 SR</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=300" class="card-img">
+                <div class="card-content">
+                    <h2 class="category-title">أطباق الدجاج</h2>
+                    <div class="item"><span>دجاج مشوي</span><span>65 SR</span></div>
+                    <div class="item"><span>شيش طاووق</span><span>70 SR</span></div>
+                    <div class="item"><span>دجاج بالزبدة</span><span>75 SR</span></div>
+                    <div class="item"><span>كوردون بلو</span><span>85 SR</span></div>
+                    <div class="item"><span>دجاج بالثوم</span><span>60 SR</span></div>
+                    <div class="item"><span>مجبوس دجاج</span><span>75 SR</span></div>
+                    <div class="item"><span>برياني دجاج</span><span>70 SR</span></div>
+                    <div class="item"><span>دجاج صيني</span><span>68 SR</span></div>
+                    <div class="item"><span>ستيك دجاج</span><span>72 SR</span></div>
+                    <div class="item"><span>دجاج ليمون</span><span>75 SR</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=300" class="card-img">
+                <div class="card-content">
+                    <h2 class="category-title">البحريات</h2>
+                    <div class="item"><span>سلمون مشوي</span><span>130 SR</span></div>
+                    <div class="item"><span>روبيان جامبو</span><span>150 SR</span></div>
+                    <div class="item"><span>فيليه هامور</span><span>110 SR</span></div>
+                    <div class="item"><span>سمكة حرة</span><span>120 SR</span></div>
+                    <div class="item"><span>لوبستر مشوي</span><span>220 SR</span></div>
+                    <div class="item"><span>باستا بحريات</span><span>95 SR</span></div>
+                    <div class="item"><span>كلماري مقلي</span><span>75 SR</span></div>
+                    <div class="item"><span>روبيان ديناميت</span><span>65 SR</span></div>
+                    <div class="item"><span>فيليه مقلي</span><span>85 SR</span></div>
+                    <div class="item"><span>مجبوس سمك</span><span>95 SR</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?w=300" class="card-img">
+                <div class="card-content">
+                    <h2 class="category-title">الباستا والبيتزا</h2>
+                    <div class="item"><span>لازانيا بولونيز</span><span>75 SR</span></div>
+                    <div class="item"><span>فيتوتشيني</span><span>70 SR</span></div>
+                    <div class="item"><span>سباغيتي</span><span>68 SR</span></div>
+                    <div class="item"><span>بيتزا مارغريتا</span><span>55 SR</span></div>
+                    <div class="item"><span>بيتزا بيبروني</span><span>65 SR</span></div>
+                    <div class="item"><span>بيتزا خضار</span><span>60 SR</span></div>
+                    <div class="item"><span>بيتزا سي فود</span><span>85 SR</span></div>
+                    <div class="item"><span>بيني ارابياتا</span><span>60 SR</span></div>
+                    <div class="item"><span>بيتزا باربيكيو</span><span>70 SR</span></div>
+                    <div class="item"><span>رافيولي فطر</span><span>75 SR</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=300" class="card-img">
+                <div class="card-content">
+                    <h2 class="category-title">الحلويات</h2>
+                    <div class="item"><span>تيراميسو</span><span>45 SR</span></div>
+                    <div class="item"><span>کنافة جبن</span><span>35 SR</span></div>
+                    <div class="item"><span>أم علي</span><span>38 SR</span></div>
+                    <div class="item"><span>تشيز كيك</span><span>40 SR</span></div>
+                    <div class="item"><span>براونیز</span><span>35 SR</span></div>
+                    <div class="item"><span>فوندو شوكلت</span><span>50 SR</span></div>
+                    <div class="item"><span>بودينغ تمر</span><span>42 SR</span></div>
+                    <div class="item"><span>سلطة فواكه</span><span>30 SR</span></div>
+                    <div class="item"><span>آيس كريم</span><span>25 SR</span></div>
+                    <div class="item"><span>كريم كراميل</span><span>28 SR</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=300" class="card-img">
+                <div class="card-content">
+                    <h2 class="category-title">المشروبات</h2>
+                    <div class="item"><span>عصير برتقال</span><span>25 SR</span></div>
+                    <div class="item"><span>ليمون نعناع</span><span>22 SR</span></div>
+                    <div class="item"><span>موهيتو فراولة</span><span>28 SR</span></div>
+                    <div class="item"><span>ميلك شيك</span><span>30 SR</span></div>
+                    <div class="item"><span>بيبسي / كولا</span><span>10 SR</span></div>
+                    <div class="item"><span>عصير بطيخ</span><span>25 SR</span></div>
+                    <div class="item"><span>آيس تي</span><span>18 SR</span></div>
+                    <div class="item"><span>مياه معدنية</span><span>12 SR</span></div>
+                    <div class="item"><span>موهيتو أزرق</span><span>28 SR</span></div>
+                    <div class="item"><span>كوكتيل طازج</span><span>35 SR</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=300" class="card-img">
+                <div class="card-content">
+                    <h2 class="category-title">ركن القهوة</h2>
+                    <div class="item"><span>قهوة عربية</span><span>45 SR</span></div>
+                    <div class="item"><span>اسبريسو</span><span>18 SR</span></div>
+                    <div class="item"><span>كابتشينو</span><span>22 SR</span></div>
+                    <div class="item"><span>كافيه لاتيه</span><span>22 SR</span></div>
+                    <div class="item"><span>ميكاتو</span><span>20 SR</span></div>
+                    <div class="item"><span>قهوة تركية</span><span>20 SR</span></div>
+                    <div class="item"><span>هوت شوكلت</span><span>25 SR</span></div>
+                    <div class="item"><span>شاي مغربي</span><span>30 SR</span></div>
+                    <div class="item"><span>شاي أحمر</span><span>12 SR</span></div>
+                    <div class="item"><span>فلات وايت</span><span>24 SR</span></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleSettings() {
+            const panel = document.getElementById('settingsPanel');
+            panel.classList.toggle('active');
+        }
+
+        function setMainColor(color) {
+            document.documentElement.style.setProperty('--اللون-الرئيسي', color);
+        }
+
+        function setBgColor(color) {
+            document.documentElement.style.setProperty('--خلفية-الهالة', color);
+        }
+    </script>
+</body>
+</html>

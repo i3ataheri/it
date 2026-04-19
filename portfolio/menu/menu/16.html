@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة السفير الملكي - Full Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --خلفية_عامة: #fdfdfd;
+            --خلفية_بطاقة: rgba(255, 255, 255, 0.85);
+            --نص_رئيسي: #1a1a1a;
+            --نص_فرعي: #636e72;
+            --لون_التميز: #8e1b1e; 
+            --لون_الذهب: #c5a059;
+            --حدود: rgba(0, 0, 0, 0.05);
+            --تأثير_الزجاج: blur(12px);
+        }
+
+        [data-theme="dark"] {
+            --خلفية_عامة: #0d0d0d;
+            --خلفية_بطاقة: rgba(26, 26, 26, 0.85);
+            --نص_رئيسي: #f5f5f5;
+            --نص_فرعي: #a0a0a0;
+            --لون_التميز: #e74c3c;
+            --لون_الذهب: #ffcc33;
+            --حدود: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--خلفية_عامة);
+            color: var(--نص_رئيسي);
+            margin: 0; padding: 0; transition: background 0.3s ease;
+        }
+
+        /* حاوية الأزرار في الزاوية */
+        .top-controls {
+            position: fixed; top: 20px; left: 20px;
+            display: flex; flex-direction: column; gap: 10px; z-index: 1000;
+        }
+
+        .action-btn {
+            width: 45px; height: 45px;
+            border-radius: 50%; background: var(--لون_التميز);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; border: none; color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .action-btn:active { transform: scale(0.8); }
+
+        .sun-icon { display: none; }
+        [data-theme="dark"] .moon-icon { display: none; }
+        [data-theme="dark"] .sun-icon { display: block; }
+
+        .header-area { text-align: center; padding: 40px 20px; }
+        .logo-img {
+            width: 110px; height: 110px; border-radius: 50%;
+            border: 3px solid var(--لون_التميز); padding: 3px; margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
+
+        .cat-card {
+            background: var(--خلفية_بطاقة);
+            backdrop-filter: var(--تأثير_الزجاج);
+            -webkit-backdrop-filter: var(--تأثير_الزجاج);
+            border-radius: 22px;
+            margin-bottom: 15px;
+            border: 1px solid var(--حدود);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .cat-main { display: flex; align-items: center; padding: 12px; cursor: pointer; }
+        .cat-info { flex: 1; padding-right: 12px; }
+        .cat-info h2 { margin: 0; font-family: 'Cairo'; font-size: 1.1rem; color: var(--لون_التميز); }
+        .cat-info p { margin: 3px 0 0; font-size: 0.75rem; color: var(--نص_فرعي); }
+        .cat-img { width: 65px; height: 65px; border-radius: 15px; object-fit: cover; }
+
+        .items-box {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: scale(0.95) translateY(-10px);
+            transition: 
+                max-height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.4s ease,
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .cat-card.active .items-box {
+            max-height: 1500px; 
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            padding-bottom: 10px;
+        }
+
+        .dish { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--حدود); }
+        .dish:last-child { border-bottom: none; }
+        .dish h4 { margin: 0; font-size: 0.95rem; }
+        .dish p { margin: 2px 0 0; font-size: 0.75rem; color: var(--نص_فرعي); }
+        .price { color: var(--لون_الذهب); font-family: 'Cairo'; font-weight: bold; font-size: 0.95rem; }
+
+        .footer { text-align: center; padding: 30px 0; color: var(--نص_فرعي); }
+        .contact-info { margin-bottom: 15px; font-size: 0.85rem; line-height: 1.6; }
+        .contact-info i { color: var(--لون_التميز); margin-left: 5px; }
+        .social-icons { display: flex; justify-content: center; gap: 20px; margin: 15px 0; font-size: 1.6rem; }
+        .social-icons a { color: var(--لون_التميز); transition: 0.3s; }
+        .social-icons a:hover { transform: scale(1.2); }
+        .copyright { font-size: 0.7rem; margin-top: 15px; opacity: 0.7; border-top: 1px solid var(--حدود); padding-top: 10px; }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <div class="top-controls">
+        <button class="action-btn" onclick="toggleTheme()" title="تبديل الوضع">
+            <i class="fas fa-moon moon-icon"></i>
+            <i class="fas fa-sun sun-icon"></i>
+        </button>
+        <button class="action-btn" onclick="controlAll(true)" title="فتح الكل">
+            <i class="fas fa-folder-open"></i>
+        </button>
+        <button class="action-btn" onclick="controlAll(false)" title="إغلاق الكل">
+            <i class="fas fa-folder"></i>
+        </button>
+    </div>
+
+    <div class="header-area">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200&h=200&fit=crop" alt="Logo" class="logo-img">
+        <h1 style="font-family: 'Cairo'; color: var(--لون_التميز); margin: 0;">مطعم السفير الملكي</h1>
+        <p>فخامة المذاق العربي بأناقة عصرية</p>
+    </div>
+
+    <div class="container" id="menuGrid"></div>
+
+    <div class="container">
+        <footer class="footer">
+            <div class="contact-info">
+                <div><i class="fas fa-map-marker-alt"></i> الرياض، شارع التحلية</div>
+                <div><i class="fab fa-whatsapp"></i> واتساب: ٩٦٦٥٠٠٠٠٠٠٠٠+</div>
+            </div>
+            <div class="social-icons">
+                <a href="https://wa.me/966500000000"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; ٢٠٢٦ جميع الحقوق محفوظة لمطعم السفير الملكي
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const categories = [
+            { t: "المقبلات الباردة", d: "مقبلات شامية طازجة يومياً", i: "https://picsum.photos/id/488/100", items: [
+                {n: "حمص بالصنوبر", d: "حمص ناعم وزيت زيتون", p: "٢٢ ر.س"},
+                {n: "متبل باذنجان", d: "مشوي مع طحينة", p: "١٨ ر.س"},
+                {n: "تبولة ملكية", d: "بقدونس ورمان", p: "١٥ ر.س"},
+                {n: "ورق عنب", d: "محشو بالأرز والليمون", p: "٢٥ ر.س"},
+                {n: "بابا غنوج", d: "باذنجان وخضار", p: "١٩ ر.س"}
+            ]},
+            { t: "المشويات", d: "لحوم نعيمي مشوية على الفحم", i: "https://picsum.photos/id/635/100", items: [
+                {n: "كباب لحم", d: "سيخان لحم بلدي", p: "٦٠ ر.س"},
+                {n: "شيش طاووق", d: "دجاج متبل بالزعفران", p: "٥٠ ر.س"},
+                {n: "ریش غنم", d: "٤ قطع فاخرة", p: "٨٥ ر.س"},
+                {n: "مشوي مشكل", d: "كباب، طاووق، أوصال", p: "٩٥ ر.س"},
+                {n: "عرايس لحم", d: "خبز محشو باللحم", p: "٣٥ ر.س"}
+            ]},
+            { t: "الأطباق الرئيسية", d: "أطباقنا الشعبية الأصيلة", i: "https://picsum.photos/id/292/100", items: [
+                {n: "كبسة سعودية", d: "دجاج مع أرز بسمتي", p: "٤٥ ر.س"},
+                {n: "مندي غنم", d: "لحم مطهو في الحفرة", p: "٨٠ ر.س"},
+                {n: "جريش", d: "بالسمن والليمون الأسود", p: "٣٠ ر.س"},
+                {n: "سليق طايفي", d: "أرز بالحليب مع الدجاج", p: "٤٠ ر.س"},
+                {n: "بخاري دجاج", d: "أرز بخاري بالجزر", p: "٣٨ ر.س"}
+            ]},
+            { t: "البيتزا", d: "عجينة إيطالية فرن حطب", i: "https://picsum.photos/id/193/100", items: [
+                {n: "مارغريتا", d: "صوص وجبن موزاريلا", p: "٣٥ ر.س"},
+                {n: "بيبروني", d: "بقر وجبن وشيدر", p: "٤٥ ر.س"},
+                {n: "بيتزا خضار", d: "فلفل، فطر، زيتون", p: "٤٠ ر.س"},
+                {n: "بيتزا دجاج", d: "دجاج مع صوص خاص", p: "٥٠ ر.س"},
+                {n: "بيتزا أجبان", d: "٤ أنواع أجبان", p: "٤٨ ر.س"}
+            ]},
+            { t: "الباستا", d: "مكرونة بصوصات غنية", i: "https://picsum.photos/id/493/100", items: [
+                {n: "فیتوتشیني", d: "دجاج وكريمة وفطر", p: "٤٨ ر.س"},
+                {n: "لازانيا", d: "طبقات مكرونة باللحم", p: "٥٢ ر.س"},
+                {n: "بينى أرابياتا", d: "صلصة حمراء حارة", p: "٤٠ ر.س"},
+                {n: "سباغيتي", d: "بولونیز كلاسيكي", p: "٤٢ ر.س"},
+                {n: "باستا روبيان", d: "بصوص الكريمة الوردي", p: "٦٠ ر.س"}
+            ]},
+            { t: "المأكولات البحرية", d: "ثمار البحر الطازجة", i: "https://picsum.photos/id/429/100", items: [
+                {n: "سلمون مشوي", d: "مع خضار سوتيه", p: "٩٠ ر.س"},
+                {n: "روبيان مشوي", d: "بصلصة الليمون", p: "٧٥ ر.س"},
+                {n: "سمك هامور", d: "فيليه مقلي مقرمش", p: "٦٥ ر.س"},
+                {n: "شوربة بحرية", d: "كريمة ثمار البحر", p: "٣٥ ر.س"},
+                {n: "سمكة حرة", d: "بصلصة حارة وصنوبر", p: "١١٠ ر.س"}
+            ]},
+            { t: "السلطات", d: "خضروات عضوية طازجة", i: "https://picsum.photos/id/102/100", items: [
+                {n: "سيزر دجاج", d: "خس وجبن وبارميزان", p: "٣٥ ر.س"},
+                {n: "سلطة يونانية", d: "خيار وطماطم وفيتا", p: "٢٨ ر.س"},
+                {n: "فتوش", d: "خضار وخبز محمص", p: "٢٠ ر.س"},
+                {n: "كينوا بالرمان", d: "كينوا وخضار صحية", p: "٣٨ ر.س"},
+                {n: "سلطة جرجير", d: "دبس رمان وجوز", p: "٢٥ ر.س"}
+            ]},
+            { t: "الحلويات", d: "نكهات حلوة للختام", i: "https://picsum.photos/id/312/100", items: [
+                {n: "كنافة نابلسية", d: "بالجبن ساخنة", p: "٢٥ ر.س"},
+                {n: "أم علي", d: "بالحليب والمكسرات", p: "٢٨ ر.س"},
+                {n: "تشيز كيك", d: "بالتوت البري", p: "٣٠ ر.س"},
+                {n: "مولتن كيك", d: "قلب شوكولاتة ذائب", p: "٣٢ ر.س"},
+                {n: "سلطة فواكه", d: "فواكه الموسم", p: "٢٠ ر.س"}
+            ]},
+            { t: "عصائر طبيعية", d: "طبیعیة ١٠٠٪ بدون إضافات", i: "https://picsum.photos/id/453/100", items: [
+                {n: "برتقال طازج", d: "عصر يدوي يومي", p: "١٥ ر.س"},
+                {n: "ليمون نعناع", d: "منعش وبارد", p: "١٨ ر.س"},
+                {n: "مانجو طبيعي", d: "ثقيل ومنعش", p: "٢٠ ر.س"},
+                {n: "موهيتو توت", d: "توت منعش مع غاز", p: "٢٢ ر.س"},
+                {n: "عصير رمان", d: "رمان طازج بارد", p: "٢٥ ر.س"}
+            ]},
+            { t: "مشروبات ساخنة", d: "أجود أنواع البن", i: "https://picsum.photos/id/431/100", items: [
+                {n: "قهوة عربية", d: "دلة مع تمر", p: "٢٥ ر.س"},
+                {n: "كابتشينو", d: "رغوة حليب غنية", p: "١٨ ر.س"},
+                {n: "لاتيه زعفران", d: "نكهة ملكية", p: "٢٢ ر.س"},
+                {n: "إسبريسو", d: "مركز وقوي", p: "١٢ ر.س"},
+                {n: "شاي مغربي", d: "بالنعناع المنعش", p: "١٥ ر.س"}
+            ]}
+        ];
+
+        const grid = document.getElementById('menuGrid');
+        
+        categories.forEach((c, index) => {
+            let dishes = c.items.map(d => `<div class="dish"><div><h4>${d.n}</h4><p>${d.d}</p></div><div class="price">${d.p}</div></div>`).join('');
+            
+            grid.innerHTML += `
+                <div class="cat-card" id="card-${index}">
+                    <div class="cat-main" onclick="toggleMenu(${index})">
+                        <div class="cat-info">
+                            <h2>${c.t}</h2>
+                            <p>${c.d}</p>
+                        </div>
+                        <img src="${c.i}" class="cat-img">
+                    </div>
+                    <div class="items-box">${dishes}</div>
+                </div>`;
+        });
+
+        function toggleMenu(index) {
+            const allCards = document.querySelectorAll('.cat-card');
+            const targetCard = document.getElementById(`card-${index}`);
+            const isActive = targetCard.classList.contains('active');
+
+            allCards.forEach(card => card.classList.remove('active'));
+
+            if (!isActive) {
+                targetCard.classList.add('active');
+                setTimeout(() => {
+                    targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
+            }
+        }
+
+        // التحكم بفتح وإغلاق الكل
+        function controlAll(isOpen) {
+            const allCards = document.querySelectorAll('.cat-card');
+            allCards.forEach(card => {
+                if (isOpen) card.classList.add('active');
+                else card.classList.remove('active');
+            });
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            body.setAttribute('data-theme', body.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        }
+    </script>
+</body>
+</html>

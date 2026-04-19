@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أطياف العشق | Designed by Al-Balushi</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+:root {
+    --dark-bg: #1a0208;
+    --burgundy: #800020; 
+    --accent: #e6b8a2;   
+    --white-glass: rgba(255, 255, 255, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--dark-bg);
+    background-image: radial-gradient(circle at top right, #4a0012, transparent), 
+                      radial-gradient(circle at bottom left, #2d000a, transparent);
+    color: #fff;
+    min-height: 100vh;
+    padding: 15px;
+    direction: rtl;
+}
+
+/* ظرف اصلی */
+.main-wrapper {
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+/* هدر */
+.header { 
+    text-align: center; 
+    margin-bottom: 40px; 
+    padding: 20px;
+}
+
+.header h1 {
+    font-size: clamp(35px, 9vw, 55px);
+    font-weight: 800;
+    background: linear-gradient(to bottom, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.header p { 
+    color: var(--accent); 
+    font-weight: 400; 
+    letter-spacing: 2px; 
+    font-size: 14px; 
+    text-transform: uppercase;
+    border-top: 1px solid rgba(230, 184, 162, 0.2);
+    display: inline-block;
+    padding-top: 8px;
+    font-family: sans-serif;
+}
+
+/* بهینه blur + shadow */
+.category-section {
+    background: var(--white-glass);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 35px;
+    padding: 25px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.category-title {
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 12px;
+}
+
+.category-title i { color: var(--accent); font-size: 18px; }
+
+.items-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+/* آیتم‌ها */
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    border: 1px solid transparent;
+
+    /* بهینه‌سازی */
+    transition: transform 0.25s ease, background 0.25s ease, border 0.25s ease;
+    will-change: transform;
+    contain: layout paint;
+}
+
+/* hover فقط برای دستگاه‌های واقعی */
+@media (hover: hover) {
+    .menu-item:hover { 
+        background: rgba(255, 255, 255, 0.1); 
+        border-color: var(--accent); 
+        transform: scale(1.015);
+    }
+}
+
+.item-text h3 { font-size: 18px; margin-bottom: 4px; font-weight: 500; }
+.item-text p { font-size: 12px; color: rgba(255, 255, 255, 0.6); font-weight: 300; }
+
+.price {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--accent);
+}
+
+/* فوتر */
+.footer { 
+    text-align: center; 
+    margin-top: 50px; 
+    padding: 40px 20px; 
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.social-icons {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 26px;
+    transition: 0.3s;
+    opacity: 0.7;
+}
+
+.social-icons a:hover {
+    transform: translateY(-5px);
+    opacity: 1;
+    color: var(--accent);
+}
+
+.address-box {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    margin-bottom: 25px;
+    line-height: 1.8;
+}
+
+.address-box i {
+    color: var(--accent);
+    margin-left: 8px;
+}
+
+.copyright {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@media (min-width: 768px) {
+    .items-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+    .category-section { padding: 40px; }
+}
+</style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <header class="header">
+            <h1>الرومانسية</h1>
+            <p>Designed by Al-Balushi</p>
+        </header>
+
+        <section class="category-section">
+            <div class="category-title"><i class="fa-solid fa-snowflake"></i> المقبلات الباردة</div>
+            <div class="items-grid">
+                <div class="menu-item"><div class="item-text"><h3>حمّص بالشمندر</h3><p>حمّص كريمي بنكهة الشمندر العضوية</p></div><div class="price">35 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>متبّل الأفوكادو</h3><p>باذنجان مشوي مع قطع الأفوكادو</p></div><div class="price">38 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>تبولة الرمان</h3><p>بقدونس طازج مع حبيبات الرمان اللامعة</p></div><div class="price">32 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>ورق عنب بالليمون</h3><p>محشي بالأرز والأعشاب الشرقية</p></div><div class="price">40 SR</div></div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <div class="category-title"><i class="fa-solid fa-fire"></i> المقبلات الساخنة</div>
+            <div class="items-grid">
+                <div class="menu-item"><div class="item-text"><h3>كبة العشق</h3><p>كبة مقلية محشوة باللحم والمكسرات</p></div><div class="price">42 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>سمبوسة الأجبان</h3><p>مزيج من أربع أجبان فرنسية</p></div><div class="price">30 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>جمبري بالثوم</h3><p>جمبري مشوي بزبدة الثوم والليمون</p></div><div class="price">65 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>بطاطا حارة</h3><p>مكعبات بطاطس بالكزبرة والفلفل</p></div><div class="price">28 SR</div></div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <div class="category-title"><i class="fa-solid fa-bowl-food"></i> الشوربات الاستثنائية</div>
+            <div class="items-grid">
+                <div class="menu-item"><div class="item-text"><h3>شوربة الفطر</h3><p>كريمة الفطر مع زيت الترافل الأسود</p></div><div class="price">45 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>شوربة العدس</h3><p>تقدم مع خبز محمص وليمون طازج</p></div><div class="price">35 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>شوربة المأكولات البحرية</h3><p>مزيج غني بمرق الكريمة والزعفران</p></div><div class="price">60 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>شوربة القرع</h3><p>قرع مشوي بلمسة من الزنجبيل والقرفة</p></div><div class="price">38 SR</div></div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <div class="category-title"><i class="fa-solid fa-utensils"></i> الأطباق الرئيسية</div>
+            <div class="items-grid">
+                <div class="menu-item"><div class="item-text"><h3>ستيك واغيو</h3><p>قطعة فاخرة مع صوص الفلفل والبطاطس</p></div><div class="price">210 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>ريش غنم ملكية</h3><p>مشوية على الفحم مع خضار موسمية</p></div><div class="price">155 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>دجاج الزعفران</h3><p>صدر دجاج بصوص الكريمة والزعفران الأصلي</p></div><div class="price">95 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>سلمون نرويجي</h3><p>مشوي بصوص الزبدة والليمون والشبت</p></div><div class="price">130 SR</div></div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <div class="category-title"><i class="fa-solid fa-plate-wheat"></i> الباستا الإيطالية</div>
+            <div class="items-grid">
+                <div class="menu-item"><div class="item-text"><h3>فيتوتشيني ألفريدو</h3><p>باستا بالكريمة البيضاء والفطر الطازج</p></div><div class="price">85 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>لازانيا كلاسيك</h3><p>طبقات اللحم والباشاميل والجبن الذائب</p></div><div class="price">90 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>بيني أرابياتا</h3><p>باستا بصوص الطماطم الحار والريحان</p></div><div class="price">75 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>ريزوتو الكمأة</h3><p>أرز إيطالي بزيت الترافل والبارميزان</p></div><div class="price">110 SR</div></div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <div class="category-title"><i class="fa-solid fa-fire-burner"></i> مشويات أطياف</div>
+            <div class="items-grid">
+                <div class="menu-item"><div class="item-text"><h3>مشوي مشكل</h3><p>تشكيلة من كباب اللحم والدجاج والريش</p></div><div class="price">120 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>کباب بالكرز</h3><p>كباب لحم مغطى بصوص الكرز الحامض</p></div><div class="price">105 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>شيش طاووق</h3><p>قطع دجاج متبلة بالزبادي والبهارات</p></div><div class="price">85 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>عرايس باللحم</h3><p>خبز محمص محشي باللحم المفروم والرمان</p></div><div class="price">60 SR</div></div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <div class="category-title"><i class="fa-solid fa-leaf"></i> السلطات الطازجة</div>
+            <div class="items-grid">
+                <div class="menu-item"><div class="item-text"><h3>سيزر الدجاج</h3><p>خس روماني، دجاج، وصوص السيزر الأصلي</p></div><div class="price">55 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>كينوا بالرمان</h3><p>كينوا عضوية مع نعناع وحبيبات الرمان</p></div><div class="price">50 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>جرجير بالفراولة</h3><p>أوراق الجرجير مع جوز وجبن وماعز</p></div><div class="price">48 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>فتوش أطياف</h3><p>خضار مشكلة مع خبز مقرمش ودبس رمان</p></div><div class="price">35 SR</div></div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <div class="category-title"><i class="fa-solid fa-cake-candles"></i> حلويات العشق</div>
+            <div class="items-grid">
+                <div class="menu-item"><div class="item-text"><h3>فوندان الشوكولاتة</h3><p>كيك ساخن بقلب ذائب وآيس كريم فانيلا</p></div><div class="price">55 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>تشيز كيك التوت</h3><p>قاعدة بسكويت مقرمشة مع صوص التوت</p></div><div class="price">48 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>کنافة ملكية</h3><p>تقدم ساخنة بالقشطة والفستق الحلبي</p></div><div class="price">40 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>تيرامیسو</h3><p>طبقات البسكويت المشرب بالقهوة الإيطالية</p></div><div class="price">50 SR</div></div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <div class="category-title"><i class="fa-solid fa-glass-water"></i> بارد ومنعش</div>
+            <div class="items-grid">
+                <div class="menu-item"><div class="item-text"><h3>موهيتو الفراولة</h3><p>فراولة طازجة، نعناع، وليمون صودا</p></div><div class="price">28 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>كوكتيل أطياف</h3><p>مزيج فواكه استوائية منعش</p></div><div class="price">32 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>آيس سبانش لاتيه</h3><p>قهوة مختصة مع حليب مكثف وثلج</p></div><div class="price">30 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>سموذي المانجو</h3><p>قطع المانجو الطبيعية المثلجة</p></div><div class="price">25 SR</div></div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <div class="category-title"><i class="fa-solid fa-mug-hot"></i> القهوة والدفء</div>
+            <div class="items-grid">
+                <div class="menu-item"><div class="item-text"><h3>قهوة عربية</h3><p>دلة أصيلة تقدم مع تمر سكري فاخر</p></div><div class="price">45 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>كابتشينو</h3><p>قهوة إيطالية برغوة كثيفة وكاكاو</p></div><div class="price">24 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>شای مغربی</h3><p>شاي أخضر بالنعناع يُحضر على الأصول</p></div><div class="price">22 SR</div></div>
+                <div class="menu-item"><div class="item-text"><h3>لاتيه الفانيلا</h3><p>اسبريسو مع حليب مبخر ونكهة الفانيلا</p></div><div class="price">26 SR</div></div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-snapchat"></i></a>
+            </div>
+            
+            <div class="address-box">
+                <p><i class="fa-solid fa-location-dot"></i> المملكة العربية السعودية - المدينة المنورة</p>
+                <p>حي الخالدية - طريق الأمير محمد بن عبد العزيز</p>
+            </div>
+
+            <p class="copyright">© 2026 ALL RIGHTS RESERVED | DESIGNED BY AL-BALUSHI</p>
+        </footer>
+    </div>
+
+
+
+
+
+
+    <div id="payment-lock-overlay" class="lock-overlay">
+    <div class="lock-content">
+        <i class="fa-solid fa-lock" style="font-size: 50px; color: #e6b8a2; margin-bottom: 20px;"></i>
+        <h2>انتهت الفترة التجريبية</h2>
+        <p>عزيزي العميل، انتهت مدة العرض المجاني. للاستمرار في استخدام المنية والحصول على <b>أسبوع إضافي مجاناً</b> عند الاشتراك، يرجى تفعيل الحساب.</p>
+        
+        <div class="promo-box">
+            <span>عرض خاص: 13 شهر بسعر 12 شهر!</span>
+        </div>
+
+        <a href="https://wa.me/966XXXXXXXXX" class="action-btn">تواصل لتفعيل الحساب</a>
+        
+        <p style="margin-top: 15px; font-size: 12px; opacity: 0.7;">Designed by Al-Balushi</p>
+    </div>
+</div>
+
+<style>
+    /* استایل قفل کننده */
+    .lock-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(18, 1, 5, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 999999;
+        display: none; /* در حالت پیش‌فرض مخفی است و با JS کنترل می‌شود */
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        pointer-events: all; 
+    }
+
+    .lock-content {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 40px 30px;
+        border-radius: 30px;
+        text-align: center;
+        max-width: 400px;
+        color: #fff;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .lock-content h2 { margin-bottom: 15px; color: #fff; }
+    .lock-content p { font-size: 14px; line-height: 1.6; margin-bottom: 20px; color: #ccc; }
+
+    .promo-box {
+        background: #800020;
+        padding: 10px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        border: 1px dashed #e6b8a2;
+    }
+
+    .action-btn {
+        display: inline-block;
+        background: #e6b8a2;
+        color: #120105;
+        padding: 12px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .action-btn:hover { transform: scale(1.05); background: #fff; }
+
+    /* کلاس کمکی برای قفل کردن اسکرول */
+    .no-scroll {
+        overflow: hidden !important;
+        height: 100vh;
+    }
+</style>
+
+<script>
+    /* ----------------------------------------------------
+       کلید مدیریت دسترسی توسط البلوشی
+       true  = منو قفل است (پاپ آپ ظاهر می‌شود)
+       false = منو باز است (همه چیز عادی است)
+    ------------------------------------------------------- */
+    const IS_LOCKED = true; 
+
+    // اجرای منطق قفل
+    (function() {
+        const overlay = document.getElementById('payment-lock-overlay');
+        
+        if (IS_LOCKED) {
+            overlay.style.display = 'flex'; // نمایش لایه قفل
+            document.body.classList.add('no-scroll'); // غیرفعال کردن اسکرول
+        } else {
+            overlay.style.display = 'none'; // مخفی کردن لایه قفل
+            document.body.classList.remove('no-scroll'); // فعال کردن اسکرول
+        }
+    })();
+</script>
+
+
+
+    
+    
+</body>
+</html>

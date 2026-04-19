@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --خلفية-القائمة: rgba(26, 26, 26, 0.95);
+            --لون-التوهج: #FFD700;
+            --لون-النص: #FFFFFF;
+            --عرض-مغلق: 75px;
+        }
+
+        body { 
+            margin: 0; background-color: #121212; font-family: 'Cairo', sans-serif;
+            color: white; display: flex; flex-direction: column; min-height: 100vh;
+        }
+
+        header {
+            position: relative; height: 250px; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            background: linear-gradient(to bottom, rgba(18, 18, 18, 0) 0%, rgba(18, 18, 18, 0.8) 70%, rgba(18, 18, 18, 1) 100%), 
+                        url('https://images.unsplash.com/photo-1549541412-71e57c4b9857?q=80&w=735&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+        }
+        header h1 { margin: 0; font-size: 38px; color: var(--لون-التوهج); text-shadow: 0 2px 10px #000; }
+        header p { margin: 5px 0 0; font-family: 'Tajawal', sans-serif; font-size: 16px; color: #ccc; }
+
+        .wrapper { display: flex; flex: 1; position: relative; }
+
+        .edge-panel-fixed {
+            position: fixed; right: 10px; top: 50%; transform: translateY(-50%);
+            width: var(--عرض-مغلق); height: 70vh; max-height: 550px;
+            background: var(--خلفية-القائمة); backdrop-filter: blur(15px);
+            border-radius: 40px; z-index: 10000; border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+
+        .scrollable-icons {
+            height: 100%; overflow-y: scroll; display: flex; flex-direction: column;
+            align-items: center; padding: 15px 0;
+            scroll-behavior: smooth; scrollbar-width: none;
+        }
+        .scrollable-icons::-webkit-scrollbar { display: none; }
+
+        .menu-item {
+            display: flex; flex-direction: column; align-items: center; width: 100%;
+            padding: 12px 0; cursor: pointer; flex-shrink: 0; transition: 0.3s;
+        }
+
+        /* فاصله اصلاح شده برای آخرین گزینه */
+        .menu-item:last-child {
+            margin-bottom: 35px !important;
+        }
+
+        .menu-item span {
+            font-size: 14px; font-family: 'Tajawal', sans-serif;
+            color: #888; margin-top: 6px; font-weight: bold;
+        }
+
+        .menu-item.active span { color: var(--لون-التوهج); }
+
+        .icon-circle {
+            min-width: 48px; height: 48px; background: rgba(255,255,255,0.08);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 22px; border: 2px solid transparent; transition: 0.3s;
+        }
+        .menu-item.active .icon-circle {
+            background: rgba(255, 215, 0, 0.15); border-color: var(--لون-التوهج);
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.35); transform: scale(1.1);
+        }
+
+        /* بخش اصلی با حفظ ساختار چند ستونه */
+        .main-container { flex-grow: 1; margin-right: 90px; padding: 40px; }
+        
+        .food-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 25px; 
+            margin-top: 30px; 
+        }
+
+        .food-card { background: #1e1e1e; border-radius: 20px; overflow: hidden; border: 1px solid #333; transition: 0.3s; }
+        .food-card:hover { transform: translateY(-5px); border-color: var(--لون-التوهج); }
+        .food-card img { width: 100%; height: 220px; object-fit: cover; }
+        .food-info { padding: 20px; text-align: right; }
+        .food-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .food-info h3 { margin: 0; font-size: 20px; color: white; }
+        .price { color: var(--لون-التوهج); font-weight: bold; font-size: 18px; }
+        .food-info p { margin: 0; font-size: 14px; color: #aaa; line-height: 1.6; }
+
+        footer {
+            background: #1a1a1a; padding: 50px 20px; border-top: 1px solid #333;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+        .footer-socials { display: flex; gap: 20px; margin-bottom: 20px; }
+        .footer-socials a { color: white; font-size: 28px; text-decoration: none; }
+        .footer-address { color: #888; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+
+        @media (max-width: 768px) {
+            .main-container { margin-right: 80px; padding: 20px; }
+            .food-grid { grid-template-columns: 1fr !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>رويا ديزاين</h1>
+        <p>نكهة النار والأصالة</p>
+    </header>
+
+    <div class="wrapper">
+        <div class="edge-panel-fixed">
+            <div class="scrollable-icons" id="menuContainer">
+                <div class="menu-item active" onclick="updateUI('مشاوي', this)"><div class="icon-circle">🍖</div><span>مشاوي</span></div>
+                <div class="menu-item" onclick="updateUI('بيتزا', this)"><div class="icon-circle">🍕</div><span>بيتزا</span></div>
+                <div class="menu-item" onclick="updateUI('برجر', this)"><div class="icon-circle">🍔</div><span>برجر</span></div>
+                <div class="menu-item" onclick="updateUI('سلطات', this)"><div class="icon-circle">🥗</div><span>سلطات</span></div>
+                <div class="menu-item" onclick="updateUI('باستا', this)"><div class="icon-circle">🍝</div><span>باستا</span></div>
+                <div class="menu-item" onclick="updateUI('سوشي', this)"><div class="icon-circle">🍣</div><span>سوشي</span></div>
+                <div class="menu-item" onclick="updateUI('عصائر', this)"><div class="icon-circle">🥤</div><span>عصائر</span></div>
+                <div class="menu-item" onclick="updateUI('حلى', this)"><div class="icon-circle">🍰</div><span>حلى</span></div>
+                <div class="menu-item" onclick="updateUI('قهوة', this)"><div class="icon-circle">☕</div><span>قهوة</span></div>
+                <div class="menu-item" onclick="updateUI('مقبلات', this)"><div class="icon-circle">🍟</div><span>مقبلات</span></div>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <h2 id="catName" style="color: var(--لون-التوهج); border-right: 4px solid var(--لون-التوهج); padding-right: 15px;">مشاوي</h2>
+            <div class="food-grid" id="foodGrid"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <div class="footer-address">
+            <i class="fas fa-map-marker-alt"></i> الرياض - حي العليا - المملكة العربية السعودية
+        </div>
+        <p style="color: #444; margin-top: 15px;">&copy; 2026 جميع الحقوق محفوظة لرويا ديزاين</p>
+    </footer>
+
+    <script>
+        const fullData = {
+            "مشاوي": [
+                {n: "كباب لحم", p: "45", d: "لحم بقري طازج مشوي على السيخ."},
+                {n: "شيش طاووق", p: "35", d: "دجاج متبل بخلطة الثوم والليمون."},
+                {n: "ريش غنم", p: "65", d: "ريش مشوية ببطء تقدم مع البطاطس."},
+                {n: "اوصال لحم", p: "40", d: "قطع لحم مشوية مع بصل وفلفل."},
+                {n: "مشكل مشاوي", p: "80", d: "طبق عائلي يجمع بين اللحم والدجاج."}
+            ],
+            "بيتزا": [
+                {n: "مارغريتا", p: "30", d: "جبن موزاريلا وصوص طماطم ريحان طازج."},
+                {n: "بيبروني", p: "40", d: "شرائح بيبروني بقرية مع طبقة جبن دبل."},
+                {n: "خضار", p: "35", d: "مزيج من الفلفل والزیتون والفطر والبصل."}
+            ],
+            "برجر": [
+                {n: "كلاسيك برجر", p: "32", d: "لحم 150 جرام مع خس وبندورة."},
+                {n: "تشیز برجر", p: "38", d: "لحم مشوي مغطى بطبقتين جبن شيدر."},
+                {n: "برجر دجاج", p: "30", d: "صدر دجاج مقرمش بخبز البطاطس."}
+            ]
+        };
+
+        function updateUI(cat, element) {
+            const container = document.getElementById('menuContainer');
+            document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+            element.classList.add('active');
+            
+            container.scrollTo({ 
+                top: element.offsetTop - (container.clientHeight / 2) + (element.offsetHeight / 2), 
+                behavior: 'smooth' 
+            });
+
+            document.getElementById('catName').innerText = cat;
+            const grid = document.getElementById('foodGrid');
+            grid.innerHTML = "";
+
+            const items = fullData[cat] || fullData["مشاوي"]; 
+            items.forEach((item, i) => {
+                grid.innerHTML += `
+                    <div class="food-card">
+                        <img src="https://picsum.photos/500/350?random=${cat}${i}" alt="food">
+                        <div class="food-info">
+                            <div class="food-header">
+                                <h3>${item.n}</h3>
+                                <span class="price">${item.p} ر.س</span>
+                            </div>
+                            <p>${item.d}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        window.onload = () => updateUI('مشاوي', document.querySelector('.menu-item'));
+    </script>
+</body>
+</html>

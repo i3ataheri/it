@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لاونج المذاق الملكي - نيون</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --الأسود-العميق: #0a0a0a;
+            --الرمادي-الناعم: #161616;
+            --النيون-الأخضر: #ccff00;
+            --الأبيض-الثلجي: #f5f5f5;
+            --خط-العناوين: 'Cairo', sans-serif;
+            --خط-النصوص: 'Tajawal', sans-serif;
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+            overflow-x: hidden; /* جلوگیری از اسکرول افقی در سطح کل سند */
+        }
+
+        body { 
+            font-family: var(--خط-النصوص); 
+            margin: 0; 
+            background: var(--الأسود-العميق);
+            color: var(--الأبيض-الثلجي);
+            padding-bottom: 120px; 
+            overflow-x: hidden; /* اطمینان از عدم خروج محتوا */
+            width: 100%;
+            position: relative;
+        }
+
+        header {
+            padding: 60px 25px 40px;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+            border-bottom: 1px solid rgba(204, 255, 0, 0.1);
+            text-align: center;
+        }
+
+        .brand-name { 
+            font-family: var(--خط-العناوين);
+            font-size: 2.5rem; 
+            font-weight: 900; 
+            color: var(--النيون-الأخضر); 
+            margin: 0; 
+            text-shadow: 0 0 15px rgba(204, 255, 0, 0.3);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 92%; /* کمی کوچک‌تر برای جلوگیری از برخورد با لبه گوشی */
+            max-width: 650px;
+            background: rgba(22, 22, 22, 0.98);
+            backdrop-filter: blur(25px);
+            display: flex;
+            overflow-x: auto;
+            padding: 18px 10px;
+            border-radius: 35px;
+            border: 1.5px solid var(--النيون-الأخضر);
+            z-index: 2000;
+            gap: 22px;
+            scrollbar-width: none;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+        }
+        .bottom-nav::-webkit-scrollbar { display: none; }
+
+        .nav-item {
+            cursor: pointer;
+            transition: 0.4s;
+            text-align: center;
+            opacity: 0.4;
+            min-width: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-item.active { opacity: 1; transform: scale(1.1); color: var(--النيون-الأخضر); }
+        .nav-item i { font-size: 1.8rem; margin-bottom: 6px; font-style: normal; }
+        .nav-item span { font-family: var(--خط-العناوين); font-size: 0.7rem; font-weight: 700; }
+
+        .menu-container { 
+            padding: 30px 20px; 
+            max-width: 900px; 
+            margin: 0 auto;
+            overflow: hidden; /* جلوگیری از خروج سایه تصاویر کارت‌ها */
+        }
+        .section { display: none; }
+        .section.active { display: block; }
+
+        .section-title {
+            font-family: var(--خط-العناوين);
+            color: var(--النيون-الأخضر);
+            font-size: 2rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .food-card {
+            background: var(--الرمادي-الناعم);
+            border-radius: 40px;
+            margin-bottom: 55px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .food-img-wrapper {
+            position: absolute;
+            right: -20px;
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--النيون-الأخضر);
+            box-shadow: 0 0 15px rgba(204, 255, 0, 0.4);
+        }
+
+        .food-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+
+        .food-details { margin-right: 120px; flex-grow: 1; }
+        .food-title { font-family: var(--خط-العناوين); font-size: 1.25rem; color: white; margin: 0 0 8px 0; }
+        .food-desc { font-size: 0.85rem; color: #aaa; line-height: 1.5; margin-bottom: 15px; min-height: 3em; }
+        .food-price { font-family: var(--خط-العناوين); background: var(--النيون-الأخضر); color: black; padding: 5px 18px; border-radius: 15px; font-weight: 900; font-size: 1.1rem; display: inline-block; }
+
+        .back-home {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--النيون-الأخضر);
+            color: var(--الأسود-العميق);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+            z-index: 9999;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid var(--الأسود-العميق);
+        }
+
+        .back-home:hover {
+            transform: translateY(-10px) scale(1.1);
+            background-color: var(--الأبيض-الثلجي);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+        }
+
+        .back-home svg { width: 30px; height: 30px; fill: currentColor; }
+
+        @media (max-width: 600px) {
+            .food-img-wrapper { width: 105px; height: 105px; right: -10px; }
+            .food-details { margin-right: 105px; }
+            .brand-name { font-size: 2rem; }
+            .back-home { bottom: 120px; width: 55px; height: 55px; right: 15px; }
+            .bottom-nav { width: 90%; padding: 15px 5px; gap: 15px; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <header>
+        <h1 class="brand-name">لاونج المذاق الملكي</h1>
+    </header>
+
+    <div class="menu-container" id="menuContent"></div>
+    <nav class="bottom-nav" id="bottomNav"></nav>
+
+    <a href="/" class="back-home" title="العودة للأعلى">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 2.09l-11 7.7 1.17 1.63 1.83-1.28v11.86h16v-11.86l1.83 1.28 1.17-1.63-11-7.7zm4 17.91h-8v-7h8v7z"/>
+        </svg>
+    </a>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        const data = {
+            pizza: { n: "بيتزا", i: "🍕", items: [
+                {t:"مارجريتا الملكية", d:"صلصة طماطم إيطالية، موزاريلا فاخرة، ريحان طازج", p:"٣٩", img:"https://images.unsplash.com/photo-1702716059239-385baacdabdc?w=400"},
+                {t:"بيبروني هالو", d:"شرائح بيبيروني بقري مقرمشة مع جبن مضاعف", p:"٤٥", img:"https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400"},
+                {t:"بستان الخضار", d:"فلفل ملون، فطر طازج، زيتون أسود، ذرة", p:"٤٢", img:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400"},
+                {t:"دجاج رانش المميز", d:"قطع دجاج مشوية، صوص رانش، بصل أخضر", p:"٤٩", img:"https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400"},
+                {t:"بيتزا فور تشيز", d:"مزيج من أربع أنواع أجبان عالمية فاخرة", p:"٥٥", img:"https://images.unsplash.com/photo-1566843971939-1fe9e277a0c0?w=400"}
+            ]},
+            burger: { n: "برجر", i: "🍔", items: [
+                {t:"كلاسيك برجر", d:"لحم أنجوس مشوي، خس، طماطم، صوص أصلي", p:"٣٥", img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400"},
+                {t:"ترافل تشيز", d:"جبنة سويسرية، صوص الترافل، فطر مشوي", p:"٤٨", img:"https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400"},
+                {t:"كرسبي تشيكن", d:"صدر دجاج مقرمش، سلطة ملفوف، صوص حار", p:"٣٨", img:"https://images.unsplash.com/photo-1562967914-608f82629710?w=400"},
+                {t:"برجر الحاشي", d:"لحم حاشي طازج يومياً، خبز بريوش، نكهة نجدية", p:"٥٢", img:"https://images.unsplash.com/photo-1550547660-d9450f859349?w=400"},
+                {t:"برجر سموكي BBQ", d:"لحم مشوي، حلقات بصل، صوص باربيكيو مدخن", p:"٤٦", img:"https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400"}
+            ]},
+            steak: { n: "ستيك", i: "🥩", items: [
+                {t:"ريب آي ستيك", d:"لحم مشوي فاخر بصوص الفلفل الأسود", p:"١٢٠", img:"https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=400"},
+                {t:"تندرلوين مدخن", d:"قطعة لحم طرية مع خضار سوتيه", p:"١٤٥", img:"https://plus.unsplash.com/premium_photo-1726826532692-120208647946?w=400"},
+                {t:"ستيك دجاج", d:"صدر دجاج مشوي متبل بالأعشاب البرية", p:"٥٥", img:"https://images.unsplash.com/photo-1632778149975-420e0e75ee08?w=400"},
+                {t:"فيلمينيون", d:"أطرى قطعة لحم بصوص الفطر الأبيض", p:"١٦٠", img:"https://images.unsplash.com/photo-1546241072-48010ad28c2c?w=400"},
+                {t:"تي بون ستيك", d:"ستيك عملاق يقدم مع البطاطس المهروسة", p:"١٨٠", img:"https://images.unsplash.com/photo-1544025162-d76694265947?w=400"}
+            ]},
+            sea: { n: "بحري", i: "🐟", items: [
+                {t:"روبيان جامبو", d:"روبيان مشوي بالثوم والزبدة والليمون", p:"٧٥", img:"https://images.unsplash.com/photo-1762631934591-8a9bf09e5dfe?w=400"},
+                {t:"رز صيادية", d:"رز صيادية مع قطعة سمك كنعد مشوي", p:"٦٠", img:"https://images.unsplash.com/photo-1626238328324-d55282264212?w=400"},
+                {t:"سلمون مشوي", d:"فيليه سلمون بصوص الليمون والشبث", p:"٩٥", img:"https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400"},
+                {t:"مشكل بحري", d:"روبيان، كالماري، سمك فيليه مقلي", p:"١١٠", img:"https://images.unsplash.com/photo-1551489186-cf8726f514f8?w=400"},
+                {t:"استاكوزا مشوية", d:"استاكوزا طازجة بخلطة المذاق الملكي", p:"٢١٠", img:"https://images.unsplash.com/photo-1559742811-822873691df0?w=400"}
+            ]},
+            pasta: { n: "باستا", i: "🍝", items: [
+                {t:"فيتوتشيني ألفريدو", d:"باستا إيطالية، دجاج، فطر، كريمة غنية", p:"٤٢", img:"https://images.unsplash.com/photo-1693609929783-f6a1cfd35b41?w=400"},
+                {t:"بيني أرابياتا", d:"صوص طماطم حار، ريحان، زيت زيتون بكر", p:"٣٨", img:"https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400"},
+                {t:"لازانيا بقر", d:"طبقات باستا، بولونيز، أجبان إيطالية", p:"٤٩", img:"https://images.unsplash.com/photo-1619895092538-128341789043?w=400"},
+                {t:"باستا الروبيان", d:"روبيان طازج، صصوص ليمون وثوم ناعم", p:"٥٥", img:"https://images.unsplash.com/photo-1736381734211-5d525872e356?w=400"},
+                {t:"سباغيتي بولونيز", d:"لحم مفروم بصلصة الطماطم التقليدية", p:"٤٠", img:"https://images.unsplash.com/photo-1598866594230-a7c12756260f?w=400"}
+            ]},
+            app: { n: "مقبلات", i: "🍟", items: [
+                {t:"ديناميت روبيان", d:"روبيان مقلي مقرمش، صوص حار وحلو", p:"٤٥", img:"https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400"},
+                {t:"أصابع موزاريلا", d:"٦ قطع ذهبية مع صوص مارينارا", p:"٢٨", img:"https://images.unsplash.com/photo-1734774924912-dcbb467f8599?w=400"},
+                {t:"أجنحة دجاج", d:"أجنحة بصوص الباربيكيو المدخن", p:"٣٢", img:"https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=400"},
+                {t:"نوجيت دجاج", d:"قطع دجاج مقلية تقدم مع صوص الخردل", p:"٢٥", img:"https://images.unsplash.com/photo-1562967914-608f82629710?w=400"},
+                {t:"بطاطس نيون", d:"بطاطس مقلية بالبهارات الحارة والجبن", p:"١٨", img:"https://images.unsplash.com/photo-1518013041072-651dcaad16e5?w=400"}
+            ]},
+            sal: { n: "سلطات", i: "🥗", items: [
+                {t:"سلطة سيزر", d:"خس روماني، دجاج مشوي، كروتون", p:"٣٤", img:"https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=400"},
+                {t:"فتوش نضير", d:"خضار طازجة، خبز محمص، دبس رمان", p:"٢٦", img:"https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400"},
+                {t:"سلطة يونانية", d:"خيار، طماطم، زيتون، جبنة فيتا", p:"٢٨", img:"https://images.unsplash.com/photo-1523428096881-5bd79d043006?w=400"},
+                {t:"تبولة لبنانية", d:"بقدونس مفروم، برغل، حامض وزيت", p:"٢٤", img:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400"},
+                {t:"سلطة الجرجير", d:"جرجير، رمان، عين جمل، صوص بالسميك", p:"٢٥", img:"https://images.unsplash.com/photo-1515516969-d4008cc6241a?w=400"}
+            ]},
+            brk: { n: "فطور", i: "🍳", items: [
+                {t:"شكشوكة عدنية", d:"بيض بطماطم وتوابل عربية طازجة", p:"٢٤", img:"https://images.unsplash.com/photo-1590412200988-a436970781fa?w=400"},
+                {t:"فول مدمس", d:"فول بالزيت الحار، طحينة، تميس", p:"١٨", img:"https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=400"},
+                {t:"كبدة طازجة", d:"كبدة غنم مشوحة مع البصل والفلفل", p:"٣٥", img:"https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400"},
+                {t:"بيض عيون", d:"٣ بيضات عيون مع هاش براون وزيتون", p:"٢٢", img:"https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400"},
+                {t:"فطور المذاق", d:"مشكل أجبان، مربى، عسل، زيتون، خبز", p:"٤٥", img:"https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400"}
+            ]},
+            des: { n: "حلى", i: "🍰", items: [
+                {t:"كريب نوتيلا", d:"كريب فرنسي بالفراولة والموز ونوتيلا", p:"٢٨", img:"https://images.unsplash.com/photo-1519676867240-f03562e64548?w=400"},
+                {t:"وافل بلجيكي", d:"وافل ساخن مع آيس كريم فانيليا", p:"٣٢", img:"https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400"},
+                {t:"سوفليه الشوكولا", d:"كيك شوكولاتة ذائب مع صوص دافئ", p:"٢٥", img:"https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400"},
+                {t:"بان كيك رويال", d:"٥ قطع بان كيك بصوص التوت البري", p:"٣٠", img:"https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=400"},
+                {t:"تشيز كيك", d:"تشيز كيك نيويورك الأصلي بالتوت", p:"٣٥", img:"https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400"}
+            ]},
+            drk: { n: "مشروبات", i: "🥤", items: [
+                {t:"قهوة سعودية", d:"دلة قهوة عربية بالهيل والزعفران الفاخر", p:"٢٥", img:"https://plus.unsplash.com/premium_photo-1670684184188-bd6ce82fd366?w=400"},
+                {t:"آيس سبانش لاتيه", d:"قهوة مختصة باردة مع حليب مكثف وثلج", p:"٢٠", img:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400"},
+                {t:"موهيتو ليمون", d:"نعناع، ليمون، سودا منعشة بروح الصيف", p:"١٨", img:"https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400"},
+                {t:"عصير أصفهاني", d:"مانجو طازج مع طبقة من الآيس كريم", p:"٢٥", img:"https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400"},
+                {t:"ميلك شيك رويال", d:"كريمة مخفوقة مع شوكولاتة بلجيكية", p:"٢٢", img:"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400"}
+            ]}
+        };
+
+        function init() {
+            const content = document.getElementById('menuContent');
+            const nav = document.getElementById('bottomNav');
+            let isFirst = true;
+
+            for (let key in data) {
+                const navItem = document.createElement('div');
+                navItem.className = `nav-item ${isFirst ? 'active' : ''}`;
+                navItem.onclick = () => showSection(key, navItem);
+                navItem.innerHTML = `<i>${data[key].i}</i><span>${data[key].n}</span>`;
+                nav.appendChild(navItem);
+
+                const section = document.createElement('div');
+                section.id = 'sec-' + key;
+                section.className = `section ${isFirst ? 'active' : ''}`;
+                section.innerHTML = `<h2 class="section-title" data-aos="zoom-in">${data[key].n}</h2>`;
+                
+                data[key].items.forEach((item, index) => {
+                    section.innerHTML += `
+                        <div class="food-card" data-aos="fade-right" data-aos-delay="${index * 50}">
+                            <div class="food-img-wrapper">
+                                <img src="${item.img}" alt="${item.t}" loading="lazy">
+                            </div>
+                            <div class="food-details">
+                                <h3 class="food-title">${item.t}</h3>
+                                <p class="food-desc">${item.d}</p>
+                                <div class="food-price">${item.p} ريال</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                content.appendChild(section);
+                isFirst = false;
+            }
+            AOS.init({ duration: 600, once: true });
+        }
+
+        function showSection(key, el) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById('sec-' + key).classList.add('active');
+            el.classList.add('active');
+            el.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            AOS.refresh();
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>

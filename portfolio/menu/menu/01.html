@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>منيو ليالي العنابي - Glass Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --brand-main: #630d16;
+            --gold: #c5a059;
+            --glass-bg: rgba(255, 255, 255, 0.55); /* کمی غلیظ‌تر برای خوانایی بهتر */
+            --glass-border: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #fcfaf7 0%, #e8e2d9 100%);
+            margin: 0; padding: 0; color: #1a1a1a;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .hero {
+            height: 280px;
+            background: linear-gradient(rgba(99, 13, 22, 0.8), rgba(99, 13, 22, 0.8)), 
+                        url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: white; text-align: center; border-bottom: 4px solid var(--gold);
+        }
+
+        .hero h1 { font-size: 2.5rem; margin: 0; font-weight: 900; }
+        .hero p { color: var(--gold); font-size: 0.9rem; letter-spacing: 5px; margin-top: 10px; }
+
+        .container { padding: 15px; margin-top: -50px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        .category-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
+            border-radius: 25px; margin-bottom: 18px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: auto 0fr; /* پایه برای انیمیشن نرم */
+            transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-card.is-open {
+            grid-template-rows: auto 1fr;
+        }
+
+        .category-trigger { padding: 22px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; z-index: 10; }
+        .category-trigger h2 { margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--brand-main); }
+        
+        .arrow { font-size: 0.8rem; color: var(--brand-main); transition: 0.5s ease; }
+        .is-open .arrow { transform: rotate(180deg); }
+
+        .content-wrapper { 
+            overflow: hidden;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s ease;
+        }
+
+        .is-open .content-wrapper { 
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .dish-item { 
+            display: flex; padding: 18px; align-items: center; gap: 15px; 
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .dish-img { 
+            width: 75px; height: 75px; border-radius: 15px; object-fit: cover; 
+            flex-shrink: 0; border: 2px solid rgba(255,255,255,0.5);
+        }
+
+        .dish-info { flex-grow: 1; min-width: 0; }
+        .dish-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+        .dish-info h3 { margin: 0; font-size: 1.05rem; font-weight: 700; color: #000; }
+        .price { color: var(--brand-main); font-weight: 900; font-size: 1.1rem; white-space: nowrap; }
+        
+        /* اصلاح خوانایی متن توضیح */
+        .desc { 
+            margin: 0; 
+            font-size: 0.85rem; 
+            color: #2d2d2d; /* تیره تر برای خوانایی */
+            line-height: 1.6; 
+            font-weight: 600; /* افزایش وزن فونت */
+        }
+
+        .main-footer {
+            background: var(--brand-main);
+            color: #fff; padding: 50px 20px; text-align: center;
+            border-top: 5px solid var(--gold); margin-top: 50px;
+        }
+
+        .footer-address { font-size: 1rem; margin-bottom: 25px; opacity: 0.9; }
+
+        .whatsapp-btn {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white; padding: 14px 30px;
+            border-radius: 50px; text-decoration: none; font-weight: 700;
+            font-size: 1.2rem; border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .whatsapp-btn:hover {
+            background: #25D366;
+            border-color: #25D366;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn i { font-size: 1.5rem; }
+        .copy { margin-top: 35px; font-size: 0.75rem; opacity: 0.4; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>ليالي العنابي</h1>
+        <p>ELEGANCE IN EVERY BITE</p>
+    </section>
+
+    <div class="container" id="menu-box"></div>
+
+    <footer class="main-footer">
+        <div class="footer-address">
+            <i class="fas fa-map-marker-alt" style="color: var(--gold); margin-left: 8px;"></i> 
+            المملكة العربية السعودية، الرياض
+        </div>
+        
+        <a href="https://wa.me/966500000000" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+            <span>966500000000+</span>
+        </a>
+
+        <div class="copy">© 2026 جميع الحقوق محفوظة لمطعم ليالي العنابي</div>
+    </footer>
+
+    <script>
+        const menuData = [
+            {
+                name: "المقبلات والشوربة",
+                items: [
+                    { n: "حمص ملكي", d: "أجود أنواع الحمص مع زيت الزيتون البكر والكمون", p: "35", img: "https://images.unsplash.com/photo-1577906030559-60497f59425e?w=200" },
+                    { n: "سلطة الشيف", d: "خضروات موسمية طازجة مع جبن الفيتا وصلصة الليمون", p: "40", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200" },
+                    { n: "كبة رمان", d: "كبة مقلية محشوة باللحم والجوز ودبس الرمان", p: "45", img: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=200" },
+                    { n: "ورق عنب يلانجی", d: "مطبوخ ببطء بزیت الزیتون واللیمون الحامض", p: "35", img: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=200" },
+                    { n: "شوربة العدس", d: "تقدم ساخنة مع الخبز المحمص والليمون الطازج", p: "30", img: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=200" }
+                ]
+            },
+            {
+                name: "الأطباق الرئيسية",
+                items: [
+                    { n: "كبسة لحم نعيمي", d: "لحم نعيمي طازج مع أرز بسمتي فاخر والبهارات العربية", p: "135", img: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=200" },
+                    { n: "مندي دجاج مدخن", d: "دجاج متبل بخلطة المندي الأصلية مطهو ببطء", p: "70", img: "https://images.unsplash.com/photo-1567333327698-35800ffecf17?w=200" },
+                    { n: "مشاوي العنابي", d: "تشكيلة من الكباب والشيش طاووق وريش الغنم المشوية", p: "190", img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=200" },
+                    { n: "جريش أبيض ملكي", d: "مطبوخ باللبن والسمن البري مع كشنة البصل الخاصة", p: "50", img: "https://images.unsplash.com/photo-1541529086526-db283c563270?w=200" },
+                    { n: "ستیک تندرلوین", d: "قطعة لحم فاخرة مشوية مع صوص الفطر الطازج", p: "160", img: "https://images.unsplash.com/photo-1546241072-48010ad28c2c?w=200" }
+                ]
+            },
+            {
+                name: "أطباق البحر",
+                items: [
+                    { n: "جامبو جمبري", d: "مشوي متبل بالثوم والليمون والأعشاب العطرية", p: "110", img: "https://images.unsplash.com/photo-1559739511-e130c20ea42a?w=200" },
+                    { n: "سمك كنعد طازج", d: "سمك كنعد مشوي يقدم مع أرز الصيادية البني", p: "95", img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200" },
+                    { n: "سلمون بالليمون", d: "فيليه سلمون مشوي يقدم مع خضار سوتيه وصوص الزبدة", p: "120", img: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=200" },
+                    { n: "صيادية بحرية", d: "تشكيلة بحرية فاخرة مطهوة مع أرز الصيادية المتبل", p: "140", img: "https://images.unsplash.com/photo-1534939561122-3950b4da99bf?w=200" },
+                    { n: "قباقب بالكريمة", d: "طازجة مطهوة بالكريمة والجبن الفرنسي الفاخر", p: "98", img: "https://images.unsplash.com/photo-1590759223965-d40bf324bc89?w=200" }
+                ]
+            },
+            {
+                name: "الحلويات",
+                items: [
+                    { n: "كنافة بين نارين", d: "بالجبنة النابلسية الساخنة والقطر الخفيف والفستق", p: "45", img: "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=200" },
+                    { n: "بودينغ التمر الدافئ", d: "يقدم مع مغرفة آيس كريم فانیلیا وصوص التوفي", p: "52", img: "https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?w=200" },
+                    { n: "تشيز كيك زعفران", d: "تشيز كيك كريمي غني بنكهة الزعفران والورد", p: "48", img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=200" },
+                    { n: "أم علي فاخرة", d: "رقائق العجين بالحليب والقشطة والمكسرات المحمصة", p: "40", img: "https://images.unsplash.com/photo-1579954115545-a95591f28abb?w=200" },
+                    { n: "تارت الفستق", d: "تارت هشة غنية بكریمة الفستق والورد الطبیعی", p: "55", img: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?w=200" }
+                ]
+            },
+            {
+                name: "المشروبات",
+                items: [
+                    { n: "قهوة سعودية (دلة)", d: "تقدم مع التمر السكري الفاخر والطحينة", p: "45", img: "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=200" },
+                    { n: "موخيتو العنابي", d: "مزيج منعش من التوت البري والنعناع والليمون", p: "35", img: "https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=200" },
+                    { n: "عصير إمبراطوري", d: "طبقات من المانجو والفراولة والأفوكادو الطازج", p: "38", img: "https://images.unsplash.com/photo-1541344999736-83eca872977a?w=200" },
+                    { n: "شاي مغربي أصيل", d: "يُحضر على الطريقة التقليدية بالنعناع الفريش", p: "28", img: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=200" },
+                    { n: "لاتيه الزعفران", d: "إسبريسو مع حليب مبخر وخیوط الزعفران الأصلي", p: "32", img: "https://images.unsplash.com/photo-1570968015849-0447e1785566?w=200" }
+                ]
+            }
+        ];
+
+        const container = document.getElementById('menu-box');
+        menuData.forEach(section => {
+            const card = document.createElement('div');
+            card.className = 'category-card';
+            card.innerHTML = `
+                <div class="category-trigger" onclick="this.parentElement.classList.toggle('is-open')">
+                    <h2>${section.name}</h2>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="content-wrapper">
+                    <div class="content">
+                        ${section.items.map(i => `
+                            <div class="dish-item">
+                                <img src="${i.img}" class="dish-img" loading="lazy">
+                                <div class="dish-info">
+                                    <div class="dish-header">
+                                        <h3>${i.n}</h3>
+                                        <span class="price">${i.p} <small style="font-size:0.6rem">ر.س</small></span>
+                                    </div>
+                                    <p class="desc">${i.d}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>

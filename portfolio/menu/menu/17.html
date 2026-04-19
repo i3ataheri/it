@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منيو مطعم استراحة النخبة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --p1: #FFB7B2; --p2: #B2E2F2; --p3: #B2F2BB; --p4: #FDFD96; --p5: #E0BBE4;
+            --p6: #FFDAC1; --p7: #C7CEEA; --p8: #BFFCC6; --p9: #FFFFD1; --p10: #AFCBFF;
+            --main-dark: #2c3e50;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #fdfdfd;
+            margin: 0;
+            padding: 0;
+        }
+
+        .restaurant-brand {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+        }
+
+        .restaurant-brand h1 {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            color: var(--main-dark);
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .restaurant-brand p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 15px auto 0;
+            line-height: 1.6;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 0 40px 60px;
+        }
+
+        .menu-card {
+            background: #fff;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            border: 1px solid #f1f1f1;
+            transition: 0.3s ease;
+        }
+
+        .menu-card:hover { transform: translateY(-10px); }
+
+        .header { padding: 35px 15px; text-align: center; }
+        .header h2 { font-family: 'Cairo', sans-serif; margin: 0; font-size: 1.6rem; color: #444; }
+
+        .content { padding: 20px; }
+        .item { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px dashed #eee; }
+        .item:last-child { border-bottom: none; }
+        
+        .food-img {
+            width: 65px; height: 65px; border-radius: 18px;
+            object-fit: cover; background: #f0f0f0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info { flex-grow: 1; }
+        .name { font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 700; color: #333; display: block; }
+        .desc { font-size: 0.8rem; color: #999; margin-top: 2px; }
+
+        .bg-1 { background-color: var(--p1); } .bg-2 { background-color: var(--p2); }
+        .bg-3 { background-color: var(--p3); } .bg-4 { background-color: var(--p4); }
+        .bg-5 { background-color: var(--p5); } .bg-6 { background-color: var(--p6); }
+        .bg-7 { background-color: var(--p7); } .bg-8 { background-color: var(--p8); }
+        .bg-9 { background-color: var(--p9); } .bg-10 { background-color: var(--p10); }
+    </style>
+</head>
+<body>
+
+    <header class="restaurant-brand">
+        <h1>مطعم استراحة النخبة</h1>
+        <p>نقدم لكم أجود المأكولات العربية والعالمية المحضرة بكل حب.</p>
+    </header>
+
+    <div class="menu-grid">
+
+        <div class="menu-card">
+            <div class="header bg-1"><h2>ركن المشويات</h2></div>
+            <div class="content">
+                <div class="item"><img src="https://picsum.photos/100/100?random=1" class="food-img"><div class="info"><span class="name">كباب لحم فاخر</span><span class="desc">لحم بلدي مشوي على الجمر</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=2" class="food-img"><div class="info"><span class="name">شيش طاووق</span><span class="desc">قطع دجاج متبلة بالزبادي والليمون</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=3" class="food-img"><div class="info"><span class="name">ريش غنم</span><span class="desc">مطبوخة بخلطة الأعشاب الجبلية</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=4" class="food-img"><div class="info"><span class="name">كفتة حلبي</span><span class="desc">بالفستق والبهارات العربية</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=5" class="food-img"><div class="info"><span class="name">أجنحة مشوية</span><span class="desc">بصلصة البافلو الحريفة</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=6" class="food-img"><div class="info"><span class="name">عرايس لحم</span><span class="desc">خبز محمص ومحشي باللحم المفروم</span></div></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="header bg-2"><h2>ركن الأرز</h2></div>
+            <div class="content">
+                <div class="item"><img src="https://picsum.photos/100/100?random=7" class="food-img"><div class="info"><span class="name">أرز بسمتي أبيض</span><span class="desc">أرز طويل الحبة مطهو بعناية</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=8" class="food-img"><div class="info"><span class="name">أرز بالزعفران</span><span class="desc">نكهة الزعفران الأصيل واللون الذهبي</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=9" class="food-img"><div class="info"><span class="name">أرز بالهيل</span><span class="desc">رائحة زكية وتوابل هادئة</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=10" class="food-img"><div class="info"><span class="name">أرز بخاري</span><span class="desc">بالجزر والزبيب والبهارات الخاصة</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=11" class="food-img"><div class="info"><span class="name">أرز الشعيرية</span><span class="desc">الرفيق المثالي لجميع اليخنات</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=12" class="food-img"><div class="info"><span class="name">أرز بالياسمين</span><span class="desc">قوام ناعم ومذاق صحي خفيف</span></div></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="header bg-3"><h2>أطباق الاستراحة</h2></div>
+            <div class="content">
+                <div class="item"><img src="https://picsum.photos/100/100?random=13" class="food-img"><div class="info"><span class="name">مندي دجاج</span><span class="desc">مدخن ومطهو في حفرة المندي التقليدية</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=14" class="food-img"><div class="info"><span class="name">برياني لحم</span><span class="desc">بالبهارات الهندية العطرية والمكسرات</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=15" class="food-img"><div class="info"><span class="name">مضغوط دجاج</span><span class="desc">طهي مضغوط سريع يحافظ على النكهة</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=16" class="food-img"><div class="info"><span class="name">مكبوس سمك</span><span class="desc">بالليمون المجفف والبهارات الخليجية</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=17" class="food-img"><div class="info"><span class="name">بخاري لحم</span><span class="desc">قطع لحم غنم طرية مع أرز بخاري</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=18" class="food-img"><div class="info"><span class="name">مندي لحم بلدي</span><span class="desc">لحم صغير طازج مطهو على البخار</span></div></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="header bg-4"><h2>ركن السلطات</h2></div>
+            <div class="content">
+                <div class="item"><img src="https://picsum.photos/100/100?random=19" class="food-img"><div class="info"><span class="name">تبولة لبنانية</span><span class="desc">بقدونس طازج مع برغل ناعم وليمون</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=20" class="food-img"><div class="info"><span class="name">فتوش ملكي</span><span class="desc">بدبس الرمان والخبز المحمص المقرمش</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=21" class="food-img"><div class="info"><span class="name">سلطة سيزر</span><span class="desc">شرائح دجاج مشوية مع جبن البارميزان</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=22" class="food-img"><div class="info"><span class="name">سلطة جرجير</span><span class="desc">بالرمان والجوز وصلصة الليمون</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=23" class="food-img"><div class="info"><span class="name">سلطة خضراء</span><span class="desc">مزيج يومي من الخضروات الموسمية</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=24" class="food-img"><div class="info"><span class="name">سلطة يونانية</span><span class="desc">بالجبنة البيضاء والزيتون الأسود والزعتر</span></div></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="header bg-5"><h2>المقبلات الشهية</h2></div>
+            <div class="content">
+                <div class="item"><img src="https://picsum.photos/100/100?random=25" class="food-img"><div class="info"><span class="name">حمص بالطحينة</span><span class="desc">قوام كريمي ناعم مع زيت زيتون أصيل</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=26" class="food-img"><div class="info"><span class="name">متبل باذنجان</span><span class="desc">باذنجان مشوي بالزبادي والطحينة</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=27" class="food-img"><div class="info"><span class="name">سمبوسة مشكلة</span><span class="desc">محشوة بالجبن، اللحم، أو الخضار</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=28" class="food-img"><div class="info"><span class="name">كبة مقلية</span><span class="desc">كرات برغل محشوة باللحم والصنوبر</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=29" class="food-img"><div class="info"><span class="name">ورق عنب</span><span class="desc">مطبوخ بزيت الزيتون والليمون المنعش</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=30" class="food-img"><div class="info"><span class="name">بطاطس حارة</span><span class="desc">بالثوم والكزبرة والبهارات الحريفة</span></div></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="header bg-6"><h2>فرن الاستراحة</h2></div>
+            <div class="content">
+                <div class="item"><img src="https://picsum.photos/100/100?random=31" class="food-img"><div class="info"><span class="name">مناقيش زعتر</span><span class="desc">زعتر بري مع زيت زيتون بكر</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=32" class="food-img"><div class="info"><span class="name">بيتزا مرغريتا</span><span class="desc">صلصة طماطم وجبن موزاريلا طازج</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=33" class="info food-img"><div class="info"><span class="name">فطائر جبنة</span><span class="desc">عجينة منزلية هشة محشوة بالجبن</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=34" class="food-img"><div class="info"><span class="name">صفيحة لحم</span><span class="desc">لحم مفروم مع دبس الرمان والبندورة</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=35" class="food-img"><div class="info"><span class="name">فطائر سبانخ</span><span class="desc">بالبصل والسماق والليمون الحامض</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=36" class="food-img"><div class="info"><span class="name">لحم بعجين</span><span class="desc">رقيق ومحمص على الطريقة التقليدية</span></div></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="header bg-7"><h2>ركن الحساء</h2></div>
+            <div class="content">
+                <div class="item"><img src="https://picsum.photos/100/100?random=37" class="food-img"><div class="info"><span class="name">شوربة عدس</span><span class="desc">مطبوخة مع الكمون والليمون الساخن</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=38" class="food-img"><div class="info"><span class="name">شوربة فطر</span><span class="desc">كريمة غنية مع قطع الفطر البري</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=39" class="food-img"><div class="info"><span class="name">شوربة دجاج</span><span class="desc">بالذرة الحلوة والكريمة الطازجة</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=40" class="food-img"><div class="info"><span class="name">شوربة طماطم</span><span class="desc">بالأعشاب الإيطالية والريحان الأخضر</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=41" class="food-img"><div class="info"><span class="name">شوربة شوفان</span><span class="desc">شوربة صحية ومغذية بمرق اللحم</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=42" class="food-img"><div class="info"><span class="name">شوربة بحريات</span><span class="desc">مزيج من الروبيان والسمك والبهارات</span></div></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="header bg-8"><h2>المأكولات البحرية</h2></div>
+            <div class="content">
+                <div class="item"><img src="https://picsum.photos/100/100?random=43" class="food-img"><div class="info"><span class="name">سلمون مشوي</span><span class="desc">بصلصة الزبدة والليمون والأعشاب</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=44" class="food-img"><div class="info"><span class="name">روبيان مقلي</span><span class="desc">مقرمش بالبقسماط مع صوص خاص</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=45" class="food-img"><div class="info"><span class="name">سمك هامور</span><span class="desc">مشوي في الفرن مع تتبيلة خليجية</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=46" class="food-img"><div class="info"><span class="name">ثمار البحر</span><span class="desc">طبق متنوع من المحار والروبيان والسمك</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=47" class="food-img"><div class="info"><span class="name">حلقات كالاماري</span><span class="desc">مقلية وتقدم مع صوص الترتار البارد</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=48" class="food-img"><div class="info"><span class="name">سمك دنيس</span><span class="desc">مشوي بخلطة الثوم والكزبرة والليمون</span></div></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="header bg-9"><h2>ركن الحلويات</h2></div>
+            <div class="content">
+                <div class="item"><img src="https://picsum.photos/100/100?random=49" class="food-img"><div class="info"><span class="name">تشيز كيك</span><span class="desc">بصوص الفراولة أو التوت البري</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=50" class="food-img"><div class="info"><span class="name">كنافة نابلسية</span><span class="desc">ساخنة بالجبنة والفستق الحلبي</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=51" class="food-img"><div class="info"><span class="name">أم علي</span><span class="desc">بودينغ الخبز بالحليب والمكسرات والقشطة</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=52" class="food-img"><div class="info"><span class="name">شوكولاتة فوندان</span><span class="desc">كيكة ساخنة بحشوة الشوكولاتة الذائبة</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=53" class="food-img"><div class="info"><span class="name">كب كيك متنوع</span><span class="desc">مجموعة من الألوان والنكهات الرائعة</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=54" class="food-img"><div class="info"><span class="name">لقيمات بالعسل</span><span class="desc">كرات عجين مقلية ومغطاة بالعسل والسمسم</span></div></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="header bg-10"><h2>المشروبات الباردة</h2></div>
+            <div class="content">
+                <div class="item"><img src="https://picsum.photos/100/100?random=55" class="food-img"><div class="info"><span class="name">عصير برتقال</span><span class="desc">طبيعي طازج بدون أي إضافات</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=56" class="food-img"><div class="info"><span class="name">ليمون بالنعناع</span><span class="desc">مشروب منعش بارد للترطيب</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=57" class="food-img"><div class="info"><span class="name">قهوة عربية</span><span class="desc">بالهيل والزعفران الفاخر وتقدم مع تمر</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=58" class="food-img"><div class="info"><span class="name">آيس لاتيه</span><span class="desc">قهوة مثلجة مع حليب بارد ونكهة الكراميل</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=59" class="food-img"><div class="info"><span class="name">عصير رمان</span><span class="desc">عصير رمان طبيعي غني بمضادات الأكسدة</span></div></div>
+                <div class="item"><img src="https://picsum.photos/100/100?random=60" class="food-img"><div class="info"><span class="name">شاي منعش</span><span class="desc">شاي أحمر أو أخضر بالنعناع الطازج</span></div></div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

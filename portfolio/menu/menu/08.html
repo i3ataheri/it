@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* تعریف متغیرها برای سوئیچ کردن راحت */
+        :root {
+            --خلفية-الجسم: #f4f4f4;
+            --خلفية-القائمة: rgba(255, 255, 255, 0.9);
+            --خلفية-الكارت: #ffffff;
+            --لون-النص-الرئيسي: #222222;
+            --لون-النص-الوصف: #666666;
+            --لون-التوهج: #D4AF37;
+            --حدود-الكارت: #eeeeee;
+            --عرض-مغلق: 75px;
+        }
+
+        /* استایل‌های حالت تیره */
+        [data-theme="dark"] {
+            --خلفية-الجسم: #121212;
+            --خلفية-القائمة: rgba(26, 26, 26, 0.95);
+            --خلفية-الكارت: #1e1e1e;
+            --لون-النص-الرئيسي: #ffffff;
+            --لون-النص-الوصف: #aaaaaa;
+            --لون-التوهج: #FFD700;
+            --حدود-الكارت: #333333;
+        }
+
+        body { 
+            margin: 0; background-color: var(--خلفية-الجسم); font-family: 'Cairo', sans-serif;
+            color: var(--لون-النص-الرئيسي); display: flex; flex-direction: column; min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* دکمه تغییر تم */
+        .theme-switch {
+            position: fixed; left: 20px; bottom: 20px;
+            width: 50px; height: 50px; background: var(--لون-التوهج);
+            border-radius: 50%; display: flex; justify-content: center;
+            align-items: center; cursor: pointer; z-index: 10001;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); color: #000; font-size: 20px;
+        }
+
+        header {
+            position: relative; height: 250px; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--خلفية-الجسم) 100%), 
+                        url('https://images.unsplash.com/photo-1549541412-71e57c4b9857?q=80&w=735&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+        }
+
+        .edge-panel-fixed {
+            position: fixed; right: 10px; top: 50%; transform: translateY(-50%);
+            width: var(--عرض-مغلق); height: 70vh; max-height: 550px;
+            background: var(--خلفية-القائمة); backdrop-filter: blur(15px);
+            border-radius: 40px; z-index: 10000; border: 1px solid rgba(128,128,128,0.2);
+            overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .scrollable-icons {
+            height: 100%; overflow-y: scroll; display: flex; flex-direction: column;
+            align-items: center; padding: 15px 0; scrollbar-width: none;
+        }
+        .scrollable-icons::-webkit-scrollbar { display: none; }
+
+        .menu-item {
+            display: flex; flex-direction: column; align-items: center; width: 100%;
+            padding: 12px 0; cursor: pointer; flex-shrink: 0; transition: 0.3s;
+        }
+        .menu-item:last-child { margin-bottom: 35px !important; }
+
+        .menu-item span {
+            font-size: 13px; font-family: 'Tajawal', sans-serif;
+            color: var(--لون-النص-الوصف); margin-top: 6px; font-weight: bold;
+        }
+        .menu-item.active span { color: var(--لون-التوهج); }
+
+        .icon-circle {
+            min-width: 48px; height: 48px; background: rgba(128,128,128,0.1);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 22px; transition: 0.3s;
+        }
+        .menu-item.active .icon-circle {
+            background: rgba(212, 175, 55, 0.2); border: 2px solid var(--لون-التوهج);
+        }
+
+        .main-container { flex-grow: 1; margin-right: 90px; padding: 40px; }
+        .food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin-top: 30px; }
+
+        .food-card { 
+            background: var(--خلفية-الكارت); border-radius: 20px; overflow: hidden; 
+            border: 1px solid var(--حدود-الكارت); transition: 0.3s; 
+        }
+        .food-card img { width: 100%; height: 220px; object-fit: cover; }
+        .food-info { padding: 20px; text-align: right; }
+        .food-info h3 { margin: 0; color: var(--لون-النص-الرئيسي); }
+        .price { color: var(--لون-التوهج); font-weight: bold; }
+        .food-info p { color: var(--لون-النص-الوصف); font-size: 14px; margin-top: 8px; }
+
+        footer {
+            background: var(--خلفية-الكارت); padding: 50px 20px; border-top: 1px solid var(--حدود-الكارت);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .main-container { margin-right: 80px; padding: 20px; }
+            .food-grid { grid-template-columns: 1fr !important; }
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <div class="theme-switch" onclick="toggleTheme()">
+        <i id="theme-icon" class="fas fa-moon"></i>
+    </div>
+
+    <header>
+        <h1 id="header-title">رويا ديزاين</h1>
+        <p>نكهة النار والأصالة</p>
+    </header>
+
+    <div class="wrapper">
+        <div class="edge-panel-fixed">
+            <div class="scrollable-icons" id="menuContainer">
+                <div class="menu-item active" onclick="updateUI('مشاوي', this)"><div class="icon-circle">🍖</div><span>مشاوي</span></div>
+                <div class="menu-item" onclick="updateUI('بيتزا', this)"><div class="icon-circle">🍕</div><span>بيتزا</span></div>
+                <div class="menu-item" onclick="updateUI('برجر', this)"><div class="icon-circle">🍔</div><span>برجر</span></div>
+                <div class="menu-item" onclick="updateUI('سلطات', this)"><div class="icon-circle">🥗</div><span>سلطات</span></div>
+                <div class="menu-item" onclick="updateUI('باستا', this)"><div class="icon-circle">🍝</div><span>باستا</span></div>
+                <div class="menu-item" onclick="updateUI('سوشي', this)"><div class="icon-circle">🍣</div><span>سوشي</span></div>
+                <div class="menu-item" onclick="updateUI('عصائر', this)"><div class="icon-circle">🥤</div><span>عصائر</span></div>
+                <div class="menu-item" onclick="updateUI('حلى', this)"><div class="icon-circle">🍰</div><span>حلى</span></div>
+                <div class="menu-item" onclick="updateUI('قهوة', this)"><div class="icon-circle">☕</div><span>قهوة</span></div>
+                <div class="menu-item" onclick="updateUI('مقبلات', this)"><div class="icon-circle">🍟</div><span>مقبلات</span></div>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <h2 id="catName" style="color: var(--لون-التوهج); border-right: 4px solid var(--لون-التوهج); padding-right: 15px;">مشاوي</h2>
+            <div class="food-grid" id="foodGrid"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-address" style="margin-bottom: 15px;">
+            <i class="fas fa-map-marker-alt"></i> الرياض - حي العليا - المملكة العربية السعودية
+        </div>
+        <p style="color: var(--لون-النص-الوصف);">&copy; 2026 جميع الحقوق محفوظة لرويا ديزاين</p>
+    </footer>
+
+    <script>
+        // تابع تغییر تم
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            if (body.getAttribute('data-theme') === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+
+        const fullData = {
+            "مشاوي": [
+                {n: "كباب لحم", p: "45", d: "لحم بقري طازج مشوي على السيخ."},
+                {n: "شيش طاووق", p: "35", d: "دجاج متبل بخلطة الثوم والليمون."},
+                {n: "ريش غنم", p: "65", d: "ريش مشوية ببطء تقدم مع البطاطس."},
+                {n: "اوصال لحم", p: "40", d: "قطع لحم مشوية مع بصل وفلفل."},
+                {n: "مشكل مشاوي", p: "80", d: "طبق عائلي يجمع بين اللحم والدجاج."}
+            ],
+            "بيتزا": [
+                {n: "مارغريتا", p: "30", d: "جبن موزاريلا وصوص طماطم ريحان طازج."},
+                {n: "بيبروني", p: "40", d: "شرائح بيبروني بقرية مع طبقة جبن دبل."}
+            ],
+            "برجر": [
+                {n: "تشیز برجر", p: "38", d: "لحم مشوي مغطى بطبقتين جبن شيدر ذائب."}
+            ]
+        };
+
+        function updateUI(cat, element) {
+            const container = document.getElementById('menuContainer');
+            document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+            element.classList.add('active');
+            
+            container.scrollTo({ 
+                top: element.offsetTop - (container.clientHeight / 2) + (element.offsetHeight / 2), 
+                behavior: 'smooth' 
+            });
+
+            document.getElementById('catName').innerText = cat;
+            const grid = document.getElementById('foodGrid');
+            grid.innerHTML = "";
+
+            const items = fullData[cat] || fullData["مشاوي"]; 
+            items.forEach((item, i) => {
+                grid.innerHTML += `
+                    <div class="food-card">
+                        <img src="https://picsum.photos/500/350?random=${cat}${i}" alt="food">
+                        <div class="food-info">
+                            <div class="food-header" style="display:flex; justify-content:space-between;">
+                                <h3>${item.n}</h3>
+                                <span class="price">${item.p} ر.س</span>
+                            </div>
+                            <p>${item.d}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        window.onload = () => updateUI('مشاوي', document.querySelector('.menu-item'));
+    </script>
+</body>
+</html>

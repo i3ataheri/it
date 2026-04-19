@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>القائمة الملكية | المظهر الراقي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --الأسود: #fdfaf5;       /* پس‌زمینه کرم */
+            --الذهبي: #4a3728;       /* رنگ قیمت و عناوین (قهوه‌ای سوخته) */
+            --الأبيض: #1a1a1a;       /* رنگ نام غذاها (تیره برای تضاد بیشتر) */
+            --خلفية-الكارت: #ffffff;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--الأسود);
+            background-image: radial-gradient(circle, #ffffff 0%, #f1e9db 100%);
+            color: var(--الأبيض);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .main-title {
+            text-align: center;
+            color: var(--الذهبي);
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+            font-weight: 900;
+            border-bottom: 2px solid var(--الذهبي);
+            display: table;
+            margin: 0 auto 40px auto;
+            padding-bottom: 10px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            background-color: var(--خلفية-الكارت);
+            border: 1px solid #e2d1b9;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            padding: 25px 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--الذهبي);
+            box-shadow: 0 12px 25px rgba(74, 55, 40, 0.1);
+        }
+
+        .card-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15; 
+            z-index: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .category-title {
+            color: var(--الذهبي);
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(74, 55, 40, 0.2);
+            padding-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .food-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            border-bottom: 1px dotted rgba(0,0,0,0.1);
+            padding-bottom: 5px;
+        }
+
+        /* نام غذا با رنگ تیره و ضخامت کمتر */
+        .food-name {
+            color: var(--الأبيض);
+            font-weight: 700;
+        }
+
+        /* قیمت با رنگ شاخص و ضخامت بیشتر */
+        .food-price {
+            color: var(--الذهبي);
+            font-weight: 900;
+            font-family: sans-serif;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 600px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            .main-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="main-title">قائمة الطعام الملكية</h1>
+
+    <div class="menu-grid">
+        <div class="menu-card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1541529086526-db283c563270?w=400')"></div>
+            <div class="card-content">
+                <h2 class="category-title">المقبلات</h2>
+                <div class="food-item"><span class="food-name">سلطة كينوا</span><span class="food-price">45 SR</span></div>
+                <div class="food-item"><span class="food-name">حمص بالكمأة</span><span class="food-price">35 SR</span></div>
+                <div class="food-item"><span class="food-name">متبل شمندر</span><span class="food-price">30 SR</span></div>
+                <div class="food-item"><span class="food-name">بابا غنوج</span><span class="food-price">28 SR</span></div>
+                <div class="food-item"><span class="food-name">ورق عنب</span><span class="food-price">40 SR</span></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400')"></div>
+            <div class="card-content">
+                <h2 class="category-title">الشوربات</h2>
+                <div class="food-item"><span class="food-name">شوربة فطر</span><span class="food-price">38 SR</span></div>
+                <div class="food-item"><span class="food-name">عدس بالليمون</span><span class="food-price">30 SR</span></div>
+                <div class="food-item"><span class="food-name">شوربة بصل</span><span class="food-price">35 SR</span></div>
+                <div class="food-item"><span class="food-name">شوربة ذرة</span><span class="food-price">32 SR</span></div>
+                <div class="food-item"><span class="food-name">شوربة بحرية</span><span class="food-price">55 SR</span></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400')"></div>
+            <div class="card-content">
+                <h2 class="category-title">الرئيسية</h2>
+                <div class="food-item"><span class="food-name">ستيك مشوي</span><span class="food-price">180 SR</span></div>
+                <div class="food-item"><span class="food-name">دجاج بالزبدة</span><span class="food-price">85 SR</span></div>
+                <div class="food-item"><span class="food-name">برياني ملكي</span><span class="food-price">75 SR</span></div>
+                <div class="food-item"><span class="food-name">موزات لحم</span><span class="food-price">145 SR</span></div>
+                <div class="food-item"><span class="food-name">منسف بلدي</span><span class="food-price">130 SR</span></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400')"></div>
+            <div class="card-content">
+                <h2 class="category-title">البحريات</h2>
+                <div class="food-item"><span class="food-name">سلمون مشوي</span><span class="food-price">120 SR</span></div>
+                <div class="food-item"><span class="food-name">روبیان ثوم</span><span class="food-price">110 SR</span></div>
+                <div class="food-item"><span class="food-name">هامور مقلي</span><span class="food-price">95 SR</span></div>
+                <div class="food-item"><span class="food-name">لوبستر مشوي</span><span class="food-price">290 SR</span></div>
+                <div class="food-item"><span class="food-name">فواكه بحر</span><span class="food-price">160 SR</span></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400')"></div>
+            <div class="card-content">
+                <h2 class="category-title">المشويات</h2>
+                <div class="food-item"><span class="food-name">مشوي مشكل</span><span class="food-price">110 SR</span></div>
+                <div class="food-item"><span class="food-name">ريش غنم</span><span class="food-price">130 SR</span></div>
+                <div class="food-item"><span class="food-name">كباب دجاج</span><span class="food-price">70 SR</span></div>
+                <div class="food-item"><span class="food-name">أوصال لحم</span><span class="food-price">90 SR</span></div>
+                <div class="food-item"><span class="food-name">عرايس لحم</span><span class="food-price">65 SR</span></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=400')"></div>
+            <div class="card-content">
+                <h2 class="category-title">الباستا</h2>
+                <div class="food-item"><span class="food-name">فيتوتشيني</span><span class="food-price">65 SR</span></div>
+                <div class="food-item"><span class="food-name">لازانیا</span><span class="food-price">70 SR</span></div>
+                <div class="food-item"><span class="food-name">بيني أرابياتا</span><span class="food-price">55 SR</span></div>
+                <div class="food-item"><span class="food-name">نودلز صينية</span><span class="food-price">60 SR</span></div>
+                <div class="food-item"><span class="food-name">باستا فود</span><span class="food-price">85 SR</span></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400')"></div>
+            <div class="card-content">
+                <h2 class="category-title">البيتزا</h2>
+                <div class="food-item"><span class="food-name">مارجريتا</span><span class="food-price">50 SR</span></div>
+                <div class="food-item"><span class="food-name">بيبروني</span><span class="food-price">65 SR</span></div>
+                <div class="food-item"><span class="food-name">بيتزا خضار</span><span class="food-price">55 SR</span></div>
+                <div class="food-item"><span class="food-name">بيتزا أجبان</span><span class="food-price">60 SR</span></div>
+                <div class="food-item"><span class="food-name">بيتزا رويال</span><span class="food-price">80 SR</span></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400')"></div>
+            <div class="card-content">
+                <h2 class="category-title">الحلويات</h2>
+                <div class="food-item"><span class="food-name">تيراميسو</span><span class="food-price">45 SR</span></div>
+                <div class="food-item"><span class="food-name">تشيز كيك</span><span class="food-price">40 SR</span></div>
+                <div class="food-item"><span class="food-name">كيك عسل</span><span class="food-price">35 SR</span></div>
+                <div class="food-item"><span class="food-name">أم علي</span><span class="food-price">30 SR</span></div>
+                <div class="food-item"><span class="food-name">فواكه موسم</span><span class="food-price">35 SR</span></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400')"></div>
+            <div class="card-content">
+                <h2 class="category-title">المشروبات</h2>
+                <div class="food-item"><span class="food-name">عصير طازج</span><span class="food-price">25 SR</span></div>
+                <div class="food-item"><span class="food-name">موهيتو ليمون</span><span class="food-price">28 SR</span></div>
+                <div class="food-item"><span class="food-name">آيس كوفي</span><span class="food-price">22 SR</span></div>
+                <div class="food-item"><span class="food-name">ميلك شيك</span><span class="food-price">30 SR</span></div>
+                <div class="food-item"><span class="food-name">مشروب غازي</span><span class="food-price">10 SR</span></div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400')"></div>
+            <div class="card-content">
+                <h2 class="category-title">القهوة</h2>
+                <div class="food-item"><span class="food-name">اسبريسو</span><span class="food-price">18 SR</span></div>
+                <div class="food-item"><span class="food-name">كابتشينو</span><span class="food-price">25 SR</span></div>
+                <div class="food-item"><span class="food-name">لاتيه فانيلا</span><span class="food-price">28 SR</span></div>
+                <div class="food-item"><span class="food-name">قهوة عربية</span><span class="food-price">45 SR</span></div>
+                <div class="food-item"><span class="food-name">شاي مغربي</span><span class="food-price">20 SR</span></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

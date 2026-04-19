@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رويال سيجنتشر | القائمة الكاملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --الذهبي: #d4af37;
+            --الأسود-المطفي: #0d0d0d;
+            --الأبيض: #ffffff;
+            --الرمادي-الغامق: #1a1a1a;
+            --شفافية-الصورة: 0.15;
+        }
+
+        html { scroll-behavior: smooth; } /* تنقل ناعم عند الضغط على الزر */
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #000;
+            color: var(--الأبيض);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* الهيدر الملكي */
+        .main-header {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1500');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 3px solid var(--الذهبي);
+            margin-bottom: 50px;
+        }
+
+        .main-header h1 {
+            font-family: 'Cairo', sans-serif;
+            color: var(--الذهبي);
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin: 0;
+            text-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .main-header p {
+            font-size: 1.2rem;
+            color: var(--الأبيض);
+            opacity: 0.8;
+            margin-top: 15px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+        /* تنسيق الصفحات */
+        .menu-page {
+            position: relative;
+            background-color: var(--الرمادي-الغامق);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 45px;
+            margin-bottom: 60px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+        }
+
+        .watermark {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: var(--شفافية-الصورة);
+            z-index: 1;
+            filter: grayscale(100%);
+        }
+
+        .content { position: relative; z-index: 2; }
+
+        h2 {
+            font-family: 'Cairo', sans-serif;
+            color: var(--الذهبي);
+            text-align: center;
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        h2::before, h2::after {
+            content: "";
+            height: 1px;
+            width: 40px;
+            background-color: var(--الذهبي);
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 18px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 12px;
+        }
+
+        .item-name { font-size: 1.2rem; font-weight: 500; }
+        .item-price { color: var(--الذهبي); font-weight: 700; font-size: 1.3rem; }
+
+        /* زر العودة للرئيسية */
+        .back-home {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background-color: var(--الذهبي);
+            color: var(--الأسود-المطفي);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+            z-index: 9999;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid var(--الأسود-المطفي);
+        }
+
+        .back-home:hover {
+            transform: translateY(-10px) scale(1.1);
+            background-color: var(--الأبيض);
+        }
+
+        .back-home svg { width: 32px; height: 32px; fill: currentColor; }
+
+        /* صور الخلفيات */
+        .bg-1 { background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000'); }
+        .bg-2 { background-image: url('https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000'); }
+        .bg-3 { background-image: url('https://images.unsplash.com/photo-1603073163308-9654c3fb70b5?q=80&w=1000'); }
+        .bg-4 { background-image: url('https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=1000'); }
+        .bg-5 { background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1000'); }
+        .bg-6 { background-image: url('https://images.unsplash.com/photo-1563379091339-03b21bc4a4f8?q=80&w=1000'); }
+        .bg-7 { background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1000'); }
+        .bg-8 { background-image: url('https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=1000'); }
+        .bg-9 { background-image: url('https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=1000'); }
+        .bg-10 { background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=1000'); }
+
+    </style>
+</head>
+<body id="top">
+
+<header class="main-header">
+    <h1>رويال سيجنتشر</h1>
+    <p>تجربة طعام استثنائية تجمع بين التقاليد العريقة واللمسة العصرية الفاخرة</p>
+</header>
+
+<div class="container">
+
+    <div class="menu-page">
+        <div class="watermark bg-1"></div>
+        <div class="content">
+            <h2>المشروبات المنعشة</h2>
+            <div class="item"><span>موهيتو توت بري</span><span class="item-price">٣٠ ر.س</span></div>
+            <div class="item"><span>ليمون ونعناع مثلج</span><span class="item-price">٢٥ ر.س</span></div>
+            <div class="item"><span>عصير رمان طازج</span><span class="item-price">٣٥ ر.س</span></div>
+            <div class="item"><span>سعودي شامبين فاخر</span><span class="item-price">٤٥ ر.س</span></div>
+            <div class="item"><span>آيس كراميل ماكياتو</span><span class="item-price">٢٨ ر.س</span></div>
+            <div class="item"><span>ميلك شيك لوتس</span><span class="item-price">٣٢ ر.س</span></div>
+            <div class="item"><span>باشن فروت صودا</span><span class="item-price">٣٠ ر.س</span></div>
+            <div class="item"><span>برتقال طبيعي ١٠٠٪</span><span class="item-price">٢٥ ر.س</span></div>
+            <div class="item"><span>آيس وايت موكا</span><span class="item-price">٣٥ ر.س</span></div>
+            <div class="item"><span>كوكتيل رويال الخاص</span><span class="item-price">٤٠ ر.س</span></div>
+        </div>
+    </div>
+
+    <div class="menu-page">
+        <div class="watermark bg-2"></div>
+        <div class="content">
+            <h2>البرجر المشوي</h2>
+            <div class="item"><span>برجر أنجوس كلاسيك</span><span class="item-price">٥٥ ر.س</span></div>
+            <div class="item"><span>دجاج كريسبي حار</span><span class="item-price">٤٥ ر.س</span></div>
+            <div class="item"><span>برجر ترافل رويال</span><span class="item-price">٧٠ ر.س</span></div>
+            <div class="item"><span>سلايدرز مشكل</span><span class="item-price">٦٥ ر.س</span></div>
+            <div class="item"><span>برجر دبل تشيز</span><span class="item-price">٦٠ ر.س</span></div>
+            <div class="item"><span>برجر مشروم سويسري</span><span class="item-price">٥٨ ر.س</span></div>
+            <div class="item"><span>واغيو برجر فاخر</span><span class="item-price">١١٠ ر.س</span></div>
+            <div class="item"><span>برجر دجاج مدخن</span><span class="item-price">٤٨ ر.س</span></div>
+            <div class="item"><span>برجر باربيكيو رانش</span><span class="item-price">٥٢ ر.س</span></div>
+            <div class="item"><span>تشيكن فيليه رويال</span><span class="item-price">٤٥ ر.س</span></div>
+        </div>
+    </div>
+
+    <div class="menu-page">
+        <div class="watermark bg-3"></div>
+        <div class="content">
+            <h2>المشويات العربية</h2>
+            <div class="item"><span>كباب لحم بالزعفران</span><span class="item-price">٨٠ ر.س</span></div>
+            <div class="item"><span>شيش طاووق رويال</span><span class="item-price">٦٥ ر.س</span></div>
+            <div class="item"><span>ريش غنم طازجة</span><span class="item-price">١٢٠ ر.س</span></div>
+            <div class="item"><span>أوصال لحم متبلة</span><span class="item-price">٨٥ ر.س</span></div>
+            <div class="item"><span>كباب دجاج بالثوم</span><span class="item-price">٦٠ ر.س</span></div>
+            <div class="item"><span>مشويات مشكلة (كبير)</span><span class="item-price">١٦٠ ر.س</span></div>
+            <div class="item"><span>عرايس لحم بالجبن</span><span class="item-price">٥٥ ر.س</span></div>
+            <div class="item"><span>كباب خشخاش حار</span><span class="item-price">٨٢ ر.س</span></div>
+            <div class="item"><span>كبدة مشوية طازجة</span><span class="item-price">٤٥ ر.س</span></div>
+            <div class="item"><span>ريش ضأن بالعسل</span><span class="item-price">١٣٠ ر.س</span></div>
+        </div>
+    </div>
+
+    <div class="menu-page">
+        <div class="watermark bg-4"></div>
+        <div class="content">
+            <h2>الحلويات الفاخرة</h2>
+            <div class="item"><span>تيراميسو إيطالي</span><span class="item-price">٤٥ ر.س</span></div>
+            <div class="item"><span>مولتن كيك شكولاتة</span><span class="item-price">٥٠ ر.س</span></div>
+            <div class="item"><span>تشيز كيك التوت</span><span class="item-price">٤٢ ر.س</span></div>
+            <div class="item"><span>بودينج التمر والكراميل</span><span class="item-price">٤٨ ر.س</span></div>
+            <div class="item"><span>كريم بروليه فانيليا</span><span class="item-price">٤٠ ر.س</span></div>
+            <div class="item"><span>كنافة رويال بالقشطة</span><span class="item-price">٣٨ ر.س</span></div>
+            <div class="item"><span>سوفليه الشوكولاتة</span><span class="item-price">٤٥ ر.س</span></div>
+            <div class="item"><span>كيكة الزعفران</span><span class="item-price">٤٥ ر.س</span></div>
+            <div class="item"><span>آيس كريم مشكل</span><span class="item-price">٣٥ ر.س</span></div>
+            <div class="item"><span>براونيز بالجوز</span><span class="item-price">٤٢ ر.س</span></div>
+        </div>
+    </div>
+
+    <div class="menu-page">
+        <div class="watermark bg-5"></div>
+        <div class="content">
+            <h2>البيتزا والباستا</h2>
+            <div class="item"><span>بيتزا ترافل</span><span class="item-price">٨٥ ر.س</span></div>
+            <div class="item"><span>باستا ألفريدو دجاج</span><span class="item-price">٦٥ ر.س</span></div>
+            <div class="item"><span>بيتزا بيبيروني</span><span class="item-price">٦٠ ر.س</span></div>
+            <div class="item"><span>لازانيا بولونيز</span><span class="item-price">٧٠ ر.س</span></div>
+            <div class="item"><span>بيتزا مارغريتا</span><span class="item-price">٥٥ ر.س</span></div>
+            <div class="item"><span>فوتشيني بحريات</span><span class="item-price">٩٥ ر.س</span></div>
+            <div class="item"><span>بيتزا رانش دجاج</span><span class="item-price">٧٠ ر.س</span></div>
+            <div class="item"><span>بينيه أرابيتا</span><span class="item-price">٥٥ ر.س</span></div>
+            <div class="item"><span>بيتزا الخضار</span><span class="item-price">٥٥ ر.س</span></div>
+            <div class="item"><span>سباغيتي كرات اللحم</span><span class="item-price">٦٥ ر.س</span></div>
+        </div>
+    </div>
+
+    <div class="menu-page">
+        <div class="watermark bg-6"></div>
+        <div class="content">
+            <h2>المأكولات البحرية</h2>
+            <div class="item"><span>سلمون مشوي</span><span class="item-price">١١٠ ر.س</span></div>
+            <div class="item"><span>روبيان جامبو مشوي</span><span class="item-price">١٤٠ ر.س</span></div>
+            <div class="item"><span>سيباس مشوي</span><span class="item-price">١٥٠ ر.س</span></div>
+            <div class="item"><span>طبق بحريات مشكل</span><span class="item-price">١٩٠ ر.س</span></div>
+            <div class="item"><span>روبيان كريسبي</span><span class="item-price">٩٥ ر.س</span></div>
+            <div class="item"><span>فيليه سمك مقلي</span><span class="item-price">٨٥ ر.س</span></div>
+            <div class="item"><span>كالاماري مقلي</span><span class="item-price">٦٥ ر.س</span></div>
+            <div class="item"><span>شوربة كريمة البحريات</span><span class="item-price">٥٥ ر.س</span></div>
+            <div class="item"><span>طاجن روبيان بالحمر</span><span class="item-price">١٢٠ ر.س</span></div>
+            <div class="item"><span>استاكوزا مشوية</span><span class="item-price">٢٨٠ ر.س</span></div>
+        </div>
+    </div>
+
+    <div class="menu-page">
+        <div class="watermark bg-7"></div>
+        <div class="content">
+            <h2>السلطات الطازجة</h2>
+            <div class="item"><span>سلطة كينوا</span><span class="item-price">٤٥ ر.س</span></div>
+            <div class="item"><span>سيزر دجاج</span><span class="item-price">٥٠ ر.س</span></div>
+            <div class="item"><span>فتوش ملكي</span><span class="item-price">٣٥ ر.س</span></div>
+            <div class="item"><span>سلطة جرجير ورمان</span><span class="item-price">٣٨ ر.س</span></div>
+            <div class="item"><span>تبولة لبنانية</span><span class="item-price">٣٥ ر.س</span></div>
+            <div class="item"><span>سلطة يونانية</span><span class="item-price">٤٢ ر.س</span></div>
+            <div class="item"><span>سلطة أفوكادو</span><span class="item-price">٦٥ ر.س</span></div>
+            <div class="item"><span>سلطة بنجر</span><span class="item-price">٤٠ ر.س</span></div>
+            <div class="item"><span>سلطة مكرونة باردة</span><span class="item-price">٤٥ ر.س</span></div>
+            <div class="item"><span>سلطة حلوم</span><span class="item-price">٥٢ ر.س</span></div>
+        </div>
+    </div>
+
+    <div class="menu-page">
+        <div class="watermark bg-8"></div>
+        <div class="content">
+            <h2>المأكولات الآسيوية</h2>
+            <div class="item"><span>دجاج كونغ باو</span><span class="item-price">٧٥ ر.س</span></div>
+            <div class="item"><span>نودلز باللحم</span><span class="item-price">٦٥ ر.س</span></div>
+            <div class="item"><span>أرز مقلي بالخضار</span><span class="item-price">٤٥ ر.س</span></div>
+            <div class="item"><span>داينمايت شريمب</span><span class="item-price">٨٥ ر.س</span></div>
+            <div class="item"><span>دجاج بالعسل</span><span class="item-price">٧٨ ر.س</span></div>
+            <div class="item"><span>سبرينغ رولز</span><span class="item-price">٣٥ ر.س</span></div>
+            <div class="item"><span>لحم بالبروكلي</span><span class="item-price">٨٥ ر.س</span></div>
+            <div class="item"><span>نودلز صينية</span><span class="item-price">٦٠ ر.س</span></div>
+            <div class="item"><span>شوربة ذرة بالدجاج</span><span class="item-price">٤٠ ر.س</span></div>
+            <div class="item"><span>دجاج ترياكي</span><span class="item-price">٧٠ ر.س</span></div>
+        </div>
+    </div>
+
+    <div class="menu-page">
+        <div class="watermark bg-9"></div>
+        <div class="content">
+            <h2>الإفطار الملكي</h2>
+            <div class="item"><span>شكشوكة رويال</span><span class="item-price">٣٥ ر.س</span></div>
+            <div class="item"><span>فطور مشكل (لشخصين)</span><span class="item-price">٩٥ ر.س</span></div>
+            <div class="item"><span>أومليت بالأجبان</span><span class="item-price">٤٠ ر.س</span></div>
+            <div class="item"><span>فول بالسمن البري</span><span class="item-price">٣٠ ر.س</span></div>
+            <div class="item"><span>كلوب ساندوتش</span><span class="item-price">٥٥ ر.س</span></div>
+            <div class="item"><span>وافل بالعسل</span><span class="item-price">٤٥ ر.س</span></div>
+            <div class="item"><span>طبق أجبان</span><span class="item-price">٨٠ ر.س</span></div>
+            <div class="item"><span>بان كيك كلاسيك</span><span class="item-price">٤٢ ر.س</span></div>
+            <div class="item"><span>فطيرة لبنة</span><span class="item-price">٢٥ ر.س</span></div>
+            <div class="item"><span>كبدة غنم طازجة</span><span class="item-price">٥٠ ر.س</span></div>
+        </div>
+    </div>
+
+    <div class="menu-page">
+        <div class="watermark bg-10"></div>
+        <div class="content">
+            <h2>الستيك الفاخر</h2>
+            <div class="item"><span>تندرلوين مشوي</span><span class="item-price">١٩٠ ر.س</span></div>
+            <div class="item"><span>ريب آي أنجوس</span><span class="item-price">٢١٠ ر.س</span></div>
+            <div class="item"><span>تي بون ستيك</span><span class="item-price">٢٤٠ ر.س</span></div>
+            <div class="item"><span>ستيك بصوص الفلفل</span><span class="item-price">١٩٥ ر.س</span></div>
+            <div class="item"><span>ستيك بصوص الفطر</span><span class="item-price">١٩٥ ر.س</span></div>
+            <div class="item"><span>تراي تيب ستيك</span><span class="item-price">١٨٠ ر.س</span></div>
+            <div class="item"><span>ستيك مغطى بالذهب</span><span class="item-price">٤٥٠ ر.س</span></div>
+            <div class="item"><span>واغيو ياباني</span><span class="item-price">٦٠٠ ر.س</span></div>
+            <div class="item"><span>ستيك مع بطاطس</span><span class="item-price">٢٠٥ ر.س</span></div>
+            <div class="item"><span>أضلاع مطهوة ببطء</span><span class="item-price">١٧٠ ر.س</span></div>
+        </div>
+    </div>
+
+</div>
+
+<a href="/" class="back-home">
+    <svg viewBox="0 0 24 24">
+        <path d="M12 2.09l-11 7.7 1.17 1.63 1.83-1.28v11.86h16v-11.86l1.83 1.28 1.17-1.63-11-7.7zm4 17.91h-8v-7h8v7z"/>
+    </svg>
+</a>
+
+</body>
+</html>

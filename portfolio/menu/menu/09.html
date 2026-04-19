@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منيو استراحة النخبة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --لون-فولدر: #c29d0b; 
+            --لون-نص: #2c3e50;
+            --خلفية: #f5f5f7;
+            --ورق: #ffffff;
+            --اوپاسیتی: rgba(0, 0, 0, 0.7);
+        }
+
+        [data-theme="dark"] {
+            --خلفية: #121212;
+            --ورق: #1e1e1e;
+            --اوپاسیتی: rgba(0, 0, 0, 0.85);
+            --لون-نص: #ffffff !important;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Cairo', sans-serif;
+            background: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            transition: 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--اوپاسیتی); z-index: -1;
+        }
+
+        .controls {
+            display: flex; justify-content: center; gap: 6px; padding: 10px;
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+        }
+
+        .control-btn {
+            background: var(--لون-فولدر); border: none; padding: 8px 14px;
+            border-radius: 12px; cursor: pointer; color: #fff;
+            font-family: inherit; font-weight: 700; font-size: 0.8rem;
+        }
+
+        .main-header { text-align: center; padding: 20px 20px 5px; color: white; }
+        .main-header h1 { margin: 0; font-size: 1.8rem; color: var(--لون-فولدر); font-weight: 900; }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            padding: 15px;
+            margin-bottom: 20px; /* جلوگیری از فضای خالی بزرگ انتهای صفحه */
+            align-content: start;
+        }
+
+        .folder-wrapper {
+            position: relative; width: 100%; height: 65px;
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .folder-wrapper.open { height: auto; margin-bottom: 10px; }
+
+        .folder-tab {
+            position: absolute; top: 0; right: 10px; width: 100px; height: 30px;
+            background: var(--لون-فولدر); filter: brightness(0.9);
+            border-radius: 10px 10px 0 0; display: flex; align-items: center;
+            justify-content: center; color: #fff; font-weight: 700; font-size: 0.8rem; z-index: 5;
+        }
+
+        .folder-body {
+            position: absolute; top: 15px; left: 0; right: 0; height: 50px;
+            background: var(--لون-فولدر); border-radius: 12px 0 12px 12px;
+            padding: 8px; box-sizing: border-box; transition: height 0.4s;
+        }
+
+        .folder-wrapper.open .folder-body { position: relative; height: auto; padding-bottom: 15px; }
+
+        .folder-paper { 
+            background: var(--ورق); border-radius: 8px; padding: 15px; 
+            opacity: 0; transition: 0.3s; display: none; 
+        }
+
+        .folder-wrapper.open .folder-paper { opacity: 1; display: block; }
+
+        .food-item {
+            display: flex; justify-content: space-between; padding: 10px 0;
+            border-bottom: 1px solid rgba(128,128,128,0.2); color: var(--لون-نص);
+        }
+        .food-price { color: #d35400; font-weight: 900; }
+
+        .settings-overlay {
+            position: fixed; bottom: -100%; left: 0; width: 100%;
+            background: var(--ورق); z-index: 2000; transition: 0.4s ease;
+            padding: 20px; border-radius: 25px 25px 0 0; box-sizing: border-box;
+        }
+        .settings-overlay.active { bottom: 0; }
+        .color-dots { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .dot { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #ddd; cursor: pointer; }
+    </style>
+</head>
+<body data-theme="light">
+
+    <div class="controls">
+        <button class="control-btn" onclick="toggleTheme()">🌓</button>
+        <button class="control-btn" onclick="toggleSettings()">🎨 الألوان</button>
+        <button class="control-btn" onclick="controlAll(true)">فتح الكل</button>
+        <button class="control-btn" onclick="controlAll(false)">إغلاق</button>
+    </div>
+
+    <div id="settingsPanel" class="settings-overlay">
+        <h4 style="margin:0; color: var(--لون-نص)">لون المجلد:</h4>
+        <div class="color-dots" id="folderColors"></div>
+        <h4 style="margin:20px 0 10px; color: var(--لون-نص)">لون الخط:</h4>
+        <div class="color-dots" id="textColors"></div>
+    </div>
+
+    <header class="main-header">
+        <h1>استراحة النخبة</h1>
+        <p style="opacity: 0.8; font-size: 0.9rem;">قائمة الطعام الفاخرة</p>
+    </header>
+
+    <div class="menu-grid" id="menu"></div>
+
+    <script>
+        const root = document.documentElement;
+        const fColors = ["#c29d0b", "#5d6d7e", "#7e5109", "#1e8449", "#943126", "#21618c", "#6c3483", "#117a65", "#a04000", "#34495e"];
+        const tColors = ["#1a1a1a", "#2c3e50", "#4a235a", "#145a32", "#641e16", "#0e2f44", "#3e2723", "#1b2631", "#512e5f", "#000000"];
+
+        function toggleTheme() {
+            const body = document.body;
+            body.setAttribute('data-theme', body.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        }
+
+        function toggleSettings() { document.getElementById('settingsPanel').classList.toggle('active'); }
+
+        const createDots = (containerId, colors, variable) => {
+            const container = document.getElementById(containerId);
+            colors.forEach(c => {
+                let d = document.createElement('div');
+                d.className = 'dot'; d.style.backgroundColor = c;
+                d.onclick = () => root.style.setProperty(variable, c);
+                container.appendChild(d);
+            });
+        };
+        createDots('folderColors', fColors, '--لون-فولدر');
+        createDots('textColors', tColors, '--لون-نص');
+
+        function controlAll(isOpen) {
+            document.querySelectorAll('.folder-wrapper').forEach(f => isOpen ? f.classList.add('open') : f.classList.remove('open'));
+        }
+
+        const categories = [
+            { name: "المقبلات", items: ["حمص", "متبل", "ورق عنب", "بابا غنوج", "سمبوسة", "سمبوسه 1", "سمبوسة 2", "سمبوسة3"] },
+            { name: "المشويات", items: ["كباب لحم", "شيش طاووق", "ريش", "أوصال", "کفتة"] },
+            { name: "الأرز", items: ["مندي", "بريانی", "بخاري", "كابلي", "سليق"] },
+            { name: "البحريات", items: ["سلمون", "روبيان", "هامور", "قاروص", "فيلييه"] },
+            { name: "البيتزا", items: ["مارغريتا", "بيبروني", "خضار", "دجاج", "أجبان"] },
+            { name: "السلطات", items: ["سيزر", "يونانية", "جرجير", "کینوا", "فتوش"] },
+            { name: "الشوربات", items: ["عدس", "فطر", "دجاج", "طماطم", "بحرية"] },
+            { name: "الحلويات", items: ["كنافة", "أم علي", "بقلاوة", "تشيز كيك", "لقیمات"] },
+            { name: "المشروبات", items: ["برتقال", "ليمون نعناع", "رمان", "موهیتو", "بيبسي"] },
+            { name: "ركن القهوة", items: ["عربية", "اسبريسو", "كابتشينو", "لاتيه", "تركية"] }
+        ];
+
+        const menuGrid = document.getElementById('menu');
+        categories.forEach(cat => {
+            let itemsHtml = cat.items.map(item => `<div class="food-item"><span>${item}</span><span class="food-price">${Math.floor(Math.random()*25)+20} SR</span></div>`).join('');
+            const folder = document.createElement('div');
+            folder.className = 'folder-wrapper';
+            folder.innerHTML = `<div class="folder-tab">${cat.name}</div><div class="folder-body"><div class="folder-paper">${itemsHtml}</div></div>`;
+            
+            folder.onclick = function() {
+                const isOpen = this.classList.contains('open');
+                // قابلیت اتومات: بستن سایر فولدرها قبل از باز کردن فولدر جدید
+                if (!isOpen) {
+                    document.querySelectorAll('.folder-wrapper').forEach(f => f.classList.remove('open'));
+                    this.classList.add('open');
+                    setTimeout(() => {
+                        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 350);
+                } else {
+                    this.classList.remove('open');
+                }
+            };
+            menuGrid.appendChild(folder);
+        });
+    </script>
+</body>
+</html>

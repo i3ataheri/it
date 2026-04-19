@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منيو مذاق الرفاهية الكامل</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Lalezar&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --الأخضر: #1B5E20;
+            --الذهبي: #C5A059;
+            --الرملي: #F9F7F2;
+            --الخط_الرئيسي: 'Cairo', sans-serif;
+            --الخط_العناوين: 'Lalezar', cursive;
+        }
+
+        body { 
+            font-family: var(--الخط_الرئيسي); 
+            background-color: var(--الرملي); 
+            margin: 0; 
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        /* الهيدر */
+        .header-canvas {
+            height: 220px;
+            background: var(--الأخضر);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0 0 50% 50% / 0 0 20% 20%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header-canvas h1 {
+            font-family: var(--الخط_العناوين);
+            font-size: 3.5rem;
+            color: var(--الذهبي);
+            margin: 0;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+        }
+
+        /* المنيو العلوي المنزلق */
+        .orbit-nav {
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 20px 10px;
+            scrollbar-width: none;
+            margin-top: -45px;
+            position: relative;
+            z-index: 100;
+        }
+        
+        @media (max-width: 900px) { .orbit-nav { justify-content: flex-start; } }
+        .orbit-nav::-webkit-scrollbar { display: none; }
+
+        .orbit-item {
+            flex: 0 0 85px;
+            height: 85px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: 0.4s ease;
+        }
+
+        .orbit-item i { font-size: 1.6rem; color: var(--الأخضر); margin-bottom: 4px; }
+        .orbit-item span { font-size: 0.7rem; font-weight: 700; color: #666; }
+
+        .orbit-item.active {
+            background: var(--الذهبي);
+            transform: scale(1.1) translateY(-5px);
+            border: 2px solid white;
+        }
+        .orbit-item.active i, .orbit-item.active span { color: white; }
+
+        /* الجريد (الشبكة) */
+        .menu-grid {
+            max-width: 1100px;
+            margin: 30px auto 100px;
+            padding: 0 15px;
+        }
+
+        .category-view { 
+            display: none; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px; 
+        }
+
+        .category-view.active { display: grid; animation: fadeIn 0.5s ease-out; }
+
+        .neo-card {
+            background: white;
+            border-radius: 20px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: 0.3s;
+        }
+
+        .neo-card:hover { transform: translateY(-5px); }
+
+        .neo-img {
+            width: 100%;
+            height: 150px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 12px;
+        }
+
+        .neo-body h3 { margin: 0 0 5px; font-size: 1.1rem; color: var(--الأخضر); font-weight: 900; }
+        .neo-body p { margin: 0 0 12px; font-size: 0.75rem; color: #777; line-height: 1.4; height: 35px; overflow: hidden; }
+
+        .neo-price {
+            background: #f1f8e9;
+            color: var(--الأخضر);
+            padding: 5px 15px;
+            border-radius: 10px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            border: 1px dashed var(--الذهبي);
+            align-self: center;
+        }
+
+        @media (max-width: 992px) { .category-view { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .category-view { gap: 12px; } .neo-img { height: 120px; } }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .home-orbit {
+            position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px;
+            background: var(--الأخضر); border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: var(--الذهبي);
+            z-index: 1000; border: 2px solid var(--الذهبي);
+        }
+    </style>
+</head>
+<body>
+
+<header class="header-canvas">
+    <h1>مذاق الرفاهية</h1>
+</header>
+
+<nav class="orbit-nav">
+    <div class="orbit-item active" onclick="changeTab('fatair', this)"><i class="fas fa-bread-slice"></i><span>المعجنات</span></div>
+    <div class="orbit-item" onclick="changeTab('pizza', this)"><i class="fas fa-pizza-slice"></i><span>البيتزا</span></div>
+    <div class="orbit-item" onclick="changeTab('burger', this)"><i class="fas fa-burger"></i><span>البرجر</span></div>
+    <div class="orbit-item" onclick="changeTab('grill', this)"><i class="fas fa-fire-alt"></i><span>المشويات</span></div>
+    <div class="orbit-item" onclick="changeTab('apps', this)"><i class="fas fa-hotdog"></i><span>المقبلات</span></div>
+    <div class="orbit-item" onclick="changeTab('salads', this)"><i class="fas fa-leaf"></i><span>السلطات</span></div>
+    <div class="orbit-item" onclick="changeTab('desserts', this)"><i class="fas fa-cookie-bite"></i><span>الحلويات</span></div>
+    <div class="orbit-item" onclick="changeTab('drinks', this)"><i class="fas fa-glass-cheers"></i><span>المشروبات</span></div>
+    <div class="orbit-item" onclick="changeTab('breakfast', this)"><i class="fas fa-egg"></i><span>الفطور</span></div>
+    <div class="orbit-item" onclick="changeTab('seafood', this)"><i class="fas fa-fish"></i><span>البحري</span></div>
+</nav>
+
+<div class="menu-grid" id="menu-target"></div>
+
+<a href="/" class="home-orbit"><i class="fas fa-home fa-lg"></i></a>
+
+<script>
+    const menuData = {
+        fatair: [
+            {t:"فطيرة لبنة بالزعتر", d:"لبنة تركية مع زيت زيتون بكر", p:"١٢", img:"https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=400"},
+            {t:"عش البلبل", d:"عسل طبيعي وموزاريلا فاخرة", p:"١٨", img:"https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=400"},
+            {t:"جبن عكاوي", d:"جبنة ذائبة مخبوزة على الحجر", p:"١٤", img:"https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=400"},
+            {t:"لحم بالعجين", d:"لحم بلدي مع خلطة الخضار", p:"١٦", img:"https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80"},
+            {t:"سبانخ رويال", d:"سبانخ طازجة بالليمون والسماق", p:"١٠", img:"https://images.unsplash.com/photo-1619860860774-1e2e17343432?w=400"}
+        ],
+        pizza: [
+            {t:"مارجريتا إيطالية", d:"صلصة طماطم وريحان وموزاريلا", p:"٣٩", img:"https://images.unsplash.com/photo-1641840360785-c720744aa905?auto=format&fit=crop&w=600&q=80"},
+            {t:"بيبروني لاف", d:"شرائح بيبروني بقري وجبن مضاعف", p:"٤٥", img:"https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400"},
+            {t:"بيتزا الخضار", d:"فلفل ملون، فطر، زيتون أسود", p:"٤٢", img:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400"},
+            {t:"دجاج باربكيو", d:"دجاج مشوي بصوص الباربيكيو", p:"٤٩", img:"https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400"},
+            {t:"فور تشيز", d:"مزيج من أربع أجبان عالمية", p:"٥٥", img:"https://images.unsplash.com/photo-1566843971939-1fe9e277a0c0?w=400"}
+        ],
+        burger: [
+            {t:"كلاسيك أنجوس", d:"لحم أنجوس مع صوصنا الخاص", p:"٣٥", img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400"},
+            {t:"ترافل برجر", d:"فطر مشوي وصوص الترافل الأسود", p:"٤٨", img:"https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400"},
+            {t:"دجاج مقرمش", d:"صدر دجاج مقلي بخلطتنا السرية", p:"٣٨", img:"https://images.unsplash.com/photo-1562967914-608f82629710?w=400"},
+            {t:"برجر الحاشي", d:"لحم حاشي بلدي بتتبيلة عربية", p:"٥٢", img:"https://images.unsplash.com/photo-1550547660-d9450f859349?w=400"},
+            {t:"سموكي برجر", d:"لحم مشوي برائحة الحطب", p:"٤٦", img:"https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400"}
+        ],
+        grill: [
+            {t:"مشويات مشكلة", d:"كباب، شيش طاووق، وريش", p:"٨٥", img:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400"},
+            {t:"كباب لحم", d:"لحم غنم طازج مشوي عالفحم", p:"٤٥", img:"https://images.unsplash.com/photo-1529193591184-b1d58b34ecdf?w=400"},
+            {t:"شيش طاووق", d:"دجاج متبل بالزبادي والليمون", p:"٤٠", img:"https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400"},
+            {t:"ريش غنم", d:"ريش طرية مع خضار مشوية", p:"٩٥", img:"https://images.unsplash.com/photo-1603048297172-c92544798d5a?w=400"},
+            {t:"دجاج عالفحم", d:"دجاجة كاملة بتتبيلة نجدية", p:"٦٠", img:"https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400"}
+        ],
+        apps: [
+            {t:"ديناميت روبيان", d:"روبيان مقلي بصوص حار ومنعش", p:"٤٥", img:"https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400"},
+            {t:"موزاريلا ستيكس", d:"أصابع جبن مقرمشة", p:"٢٨", img:"https://images.unsplash.com/photo-1531336442461-7bf5ae608ebc?w=400"},
+            {t:"ورق عنب", d:"بدبس الرمان وزيت الزيتون", p:"٢٢", img:"https://images.unsplash.com/photo-1606041011872-596597976b25?w=400"},
+            {t:"بطاطس شيدر", d:"بطاطس مقلية بصوص الجبن", p:"٢٤", img:"https://images.unsplash.com/photo-1573225342350-16731dd9bf3d?w=400"},
+            {t:"كبة مقلية", d:"محشوة باللحم والمكسرات", p:"٢٥", img:"https://images.unsplash.com/photo-1601050690597-df056fb1d94a?w=400"}
+        ],
+        salads: [
+            {t:"سيزر بالدجاج", d:"خس روماني وقطع الدجاج المشوي", p:"٣٤", img:"https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=400"},
+            {t:"فتوش لبناني", d:"خضار طازجة مع خبز محمحص", p:"٢٦", img:"https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400"},
+            {t:"سلطة الجرجير", d:"جرجير، رمان وجبن بارميزان", p:"٢٩", img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400"},
+            {t:"تبولة المذاق", d:"بقدونس، برغل، وليمون", p:"٢٤", img:"https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=400"},
+            {t:"كينوا صحية", d:"كينوا عضوية بقطع المانجو", p:"٣٨", img:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400"}
+        ],
+        desserts: [
+            {t:"كريب نوتيلا", d:"كريب فرنسي بقطع الفراولة", p:"٢٨", img:"https://images.unsplash.com/photo-1519676867240-f03562e64548?w=400"},
+            {t:"وافل بلجيكي", d:"وافل دافئ مع آيس كريم فانيليا", p:"٣٢", img:"https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400"},
+            {t:"كيكة الزعفران", d:"كيكة غارقة في حليب الزعفران", p:"٣٠", img:"https://images.unsplash.com/photo-1506459225024-1428097a7e18?w=400"},
+            {t:"تشيز كيك التوت", d:"تشيز كيك مخبوز بصوص التوت", p:"٣٤", img:"https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400"},
+            {t:"براونيز دافئ", d:"شوكولاتة داكنة غنية", p:"٢٥", img:"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400"}
+        ],
+        drinks: [
+            {t:"موهيتو ليمون", d:"منعش بالنعناع والثلج", p:"١٨", img:"https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400"},
+            {t:"عصير أصفهاني", d:"مانجو، حليب، وآيس كريم", p:"٢٥", img:"https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400"},
+            {t:"قهوة سعودية", d:"أجود أنواع البن بالهال", p:"٢٥", img:"https://images.unsplash.com/photo-1580915411954-282cb1b0d780?w=400"},
+            {t:"سبانش لاتيه", d:"قهوة مختصة باردة", p:"٢٠", img:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400"},
+            {t:"عصير رمان", d:"رمان طازج معصور بارداً", p:"٢٢", img:"https://images.unsplash.com/photo-1530131272421-2ba028594f83?w=400"}
+        ],
+        breakfast: [
+            {t:"شكشوكة عدنية", d:"بيض بصلصة طماطم وبهارات", p:"٢٤", img:"https://images.unsplash.com/photo-1590412200988-a436970781fa?w=400"},
+            {t:"فول مدمس", d:"فول بالخلطة الحجازية الأصلية", p:"١٨", img:"https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=400"},
+            {t:"بان كيك", d:"طبقات البان كيك مع العسل", p:"٢٩", img:"https://images.unsplash.com/photo-1710533820700-dd6f6623cc97?w=400"},
+            {t:"أومليت بالجبن", d:"بيض مخفوق بجبنة الشيدر", p:"٢٦", img:"https://images.unsplash.com/photo-1659954868251-2396e28529b7?w=400"},
+            {t:"كرواسون زبدة", d:"مخبوز طازج يومياً", p:"١٢", img:"https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400"}
+        ],
+        seafood: [
+            {t:"روبيان مشوي", d:"روبيان جامبو بصوص الزبدة", p:"٧٥", img:"https://images.unsplash.com/photo-1762631934591-8a9bf09e5dfe?w=400"},
+            {t:"سلمون مشوي", d:"فيليه سلمون بصوص الليمون", p:"٩٥", img:"https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400"},
+            {t:"صيادية سمك", d:"أرز بني وقطعة سمك مقلية", p:"٦٠", img:"https://images.unsplash.com/photo-1626238328324-d55282264212?w=400"},
+            {t:"كالاماري", d:"حلقات مقرمشة بصوص تارتار", p:"٤٨", img:"https://images.unsplash.com/photo-1761314025807-34cfab3c18e6?w=400"},
+            {t:"قاروص مشوي", d:"سمكة كاملة بتتبيلة الأعشاب", p:"٨٥", img:"https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400"}
+        ]
+    };
+
+    function renderMenu() {
+        const grid = document.getElementById('menu-target');
+        for (let cat in menuData) {
+            let view = document.createElement('div');
+            view.id = cat;
+            view.className = `category-view ${cat === 'fatair' ? 'active' : ''}`;
+            menuData[cat].forEach(item => {
+                view.innerHTML += `
+                    <div class="neo-card">
+                        <img src="${item.img}" class="neo-img" alt="${item.t}">
+                        <div class="neo-body">
+                            <h3>${item.t}</h3>
+                            <p>${item.d}</p>
+                            <span class="neo-price">${item.p} ريال</span>
+                        </div>
+                    </div>
+                `;
+            });
+            grid.appendChild(view);
+        }
+    }
+
+    function changeTab(id, el) {
+        document.querySelectorAll('.category-view').forEach(v => v.classList.remove('active'));
+        document.querySelectorAll('.orbit-item').forEach(i => i.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        el.classList.add('active');
+        el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    renderMenu();
+</script>
+</body>
+</html>
