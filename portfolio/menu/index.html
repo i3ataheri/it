@@ -3,59 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نُخبة المنيو الرقمي | عالم من التصاميم الذكية</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>معرض القوالب الرقمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Almarai:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="sticky-header">
-        <div class="header-content">
-            <h1 class="header-title">نُخبة المنيو الرقمي</h1>
-            <p class="header-subtitle">حوّل قائمتك التقليدية إلى تجربة رقمية تفاعلية بلمسة فنية فريدة، اختر قالبك المفضل وابدأ التميز الآن.</p>
-            
-            <div class="header-nav-buttons">
-                <a href="https://ta.mnu.workers.dev/portfolio/" class="nav-btn">
-                    <i class="fas fa-briefcase"></i>
-                    معرض أعمالي
-                </a>
-                <a href="https://ta.mnu.workers.dev/" class="nav-btn profile-btn">
-                    <i class="fas fa-user-circle"></i>
-                     الملف الشخصي
-                </a>
-            </div>
+<section class="hero">
+    <div class="nav-bar">
+        <div class="top-btns">
+            <a href="https://ta.mnu.workers.dev/" class="btn-nav"><i class="fas fa-user-circle"></i> الملف الشخصي</a>
+            <a href="https://ta.mnu.workers.dev/portfolio/" class="btn-nav"><i class="fas fa-th-large"></i> معرض الأعمال</a>
         </div>
-        
-        <div class="search-container">
-            <i class="fa fa-search search-icon"></i>
-            <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن نمط، لون، أو نوع مطعمك...">
-        </div>
+    </div>
+    <h2 class="hero-title">معرض القوالب الرقمية</h2>
+    <p class="hero-desc">تصفح أحدث التصاميم العصرية لعملك التجاري</p>
+</section>
 
-        <div class="filter-wrapper">
-            <div class="filter-container" id="filterNav">
-                <button class="filter-btn active" data-cat="all"><i class="fa-solid fa-layer-group"></i> الكل</button>
-                <button class="filter-btn" data-cat="modern"><i class="fa-solid fa-wand-magic-sparkles"></i> مودرن</button>
-                <button class="filter-btn" data-cat="romantic"><i class="fa-solid fa-heart"></i> رومانسي</button>
-                <button class="filter-btn" data-cat="luxury"><i class="fa-solid fa-crown"></i> فخم</button>
-                <button class="filter-btn" data-cat="simple"><i class="fa-solid fa-leaf"></i> بسيط</button>
-            </div>
+<div class="container">
+    <div class="filter-box">
+        <div class="search-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="ابحث عن تصميم (مثلاً: مطعم، فخم)...">
+        </div>
+        <div class="filter-group" id="filterGroup">
+            <button class="f-btn active" data-cat="all"><i class="fas fa-border-all"></i> الكل</button>
+            <button class="f-btn" data-cat="luxury"><i class="fas fa-crown"></i> فخامة</button>
+            <button class="f-btn" data-cat="modern"><i class="fas fa-bolt"></i> مودرن</button>
+            <button class="f-btn" data-cat="romantic"><i class="fas fa-heart"></i> رومانسي</button>
         </div>
     </div>
 
-    <div class="grid" id="menuGrid" style="min-height: 100vh;"></div>
-
-    <div id="menuModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeMenu()">&times;</span>
-            <iframe id="menuFrame" src="" frameborder="0"></iframe>
+    <div class="grid" id="menuGrid">
         </div>
+</div>
+
+<div class="modal" id="menuModal">
+    <div class="modal-body">
+        <iframe src="" id="menuFrame"></iframe>
     </div>
+    <button class="close-btn" onclick="closeMenu()">
+        <i class="fas fa-times"></i>
+    </button>
+</div>
 
-    <div class="toast" id="toast">تم نسخ الرابط بنجاح</div>
-
-    <script src="data.js"></script>
-    <script src="script.js"></script>
+<script src="data.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
