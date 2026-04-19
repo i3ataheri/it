@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منيو سحر الوردي - المطور</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --soft-pink-bg: #fdf2f8;
+            --price-bg: #fce7f3; /* صورتی کمرنگ‌تر برای قیمت‌ها */
+            --border-pink: #f472b6;
+            --accent-pink: #db2777;
+            --dark-berry: #1e1b4b; 
+            --bg-body: #ffffff;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            background-color: var(--bg-body);
+            padding: 20px 15px 120px;
+        }
+
+        .header { text-align: center; padding: 20px 0 40px; }
+        .header h1 { color: var(--dark-berry); font-size: 30px; font-weight: 900; margin: 0; }
+        .header p { color: var(--accent-pink); font-size: 14px; font-weight: 700; opacity: 0.8; }
+
+        /* استایل جدید سرلیست (کادر صورتی) */
+        .category-section { margin-bottom: 45px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        
+        .category-header {
+            background-color: var(--soft-pink-bg);
+            border-right: 5px solid var(--accent-pink);
+            padding: 10px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .category-title {
+            color: var(--dark-berry);
+            font-weight: 900;
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .menu-grid { display: grid; gap: 25px; }
+
+        .menu-card {
+            background: white;
+            border: 1.5px dashed var(--border-pink); 
+            border-radius: 25px;
+            padding: 12px;
+            display: flex;
+            gap: 15px;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .card-img { width: 80px; height: 80px; border-radius: 18px; object-fit: cover; }
+        .card-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .card-name { font-size: 17px; font-weight: 800; color: var(--dark-berry); margin: 0; }
+        .card-desc { font-size: 12px; color: #64748b; margin-top: 4px; line-height: 1.4; }
+
+        /* استایل قیمت کمرنگ شده */
+        .card-price {
+            position: absolute; top: -10px; left: -10px;
+            background: var(--price-bg); /* رنگ ملایم‌تر */
+            color: var(--accent-pink); /* متن تیره برای خوانایی */
+            padding: 5px 12px; border-radius: 12px;
+            font-weight: 900; font-size: 14px;
+            border: 1.5px solid white; 
+            display: flex; align-items: center; gap: 3px; direction: ltr;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .whatsapp-fixed {
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 400px; background-color: var(--dark-berry);
+            color: white; text-decoration: none; padding: 16px; border-radius: 50px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            font-weight: 700; font-size: 17px; box-shadow: 0 10px 30px rgba(30, 27, 75, 0.3); z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>سحر الوردي</h1>
+        <p>مذاق الفخامة في كل تفصيلة</p>
+    </header>
+
+    <section class="category-section">
+        <div class="category-header">
+            <h2 class="category-title">القهوة الباردة</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="card-price"><span>22</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">آيس لاتيه ورد</h3>
+                    <p class="card-desc">قهوة مختصة باردة مع نكهة الورد المنعشة.</p>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-price"><span>25</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1553909489-cd47e0907980?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">سبانيش لاتيه</h3>
+                    <p class="card-desc">خليط الحليب المكثف مع القهوة الفاخرة.</p>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-price"><span>24</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">موكا باردة</h3>
+                    <p class="card-desc">شوكولاتة بلجيكية مع قهوة وحليب مبرد.</p>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-price"><span>20</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">كورتادو مثلج</h3>
+                    <p class="card-desc">توازن مثالي بين الإسبريسو وكمية قليلة من الحليب.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="category-section">
+        <div class="category-header">
+            <h2 class="category-title">ركن الحلويات</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="card-price"><span>30</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">كيكة الورد</h3>
+                    <p class="card-desc">كيكة هشة غنية بكريمة الورد الطازجة.</p>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-price"><span>18</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">تارت التوت</h3>
+                    <p class="card-desc">تارت مقرمش بحشوة التوت الطبيعي.</p>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-price"><span>28</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">دونات فاخرة</h3>
+                    <p class="card-desc">دونات مغطاة بالشوكولاتة الوردية والورد المجفف.</p>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-price"><span>35</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1514849302-984523450cf4?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">كوكيز وردي</h3>
+                    <p class="card-desc">قطع الكوكيز الطرية بقطع الشوكولاتة البيضاء.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="category-section">
+        <div class="category-header">
+            <h2 class="category-title">المشروبات الساخنة</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="card-price"><span>15</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">كابتشينو</h3>
+                    <p class="card-desc">قهوة غنية برغوة الحليب الكريمية.</p>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-price"><span>18</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1572286258217-400f0a14443a?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">فلات وايت</h3>
+                    <p class="card-desc">تناغم مثالي بين الإسبريسو والحليب المبخر.</p>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-price"><span>14</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">أمريكانو</h3>
+                    <p class="card-desc">إسبريسو غني مخفف بالماء الساخن.</p>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-price"><span>12</span> ﷼</div>
+                <img src="https://images.unsplash.com/photo-1510707577719-eaec8f395da2?w=200" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-name">إسبريسو</h3>
+                    <p class="card-desc">قهوة مركزة مستخلصة بعناية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <a href="https://wa.me/966500000000" class="whatsapp-fixed">
+        <i class="fab fa-whatsapp"></i>
+        <span>اطلب عبر واتساب</span>
+    </a>
+
+</body>
+</html>
