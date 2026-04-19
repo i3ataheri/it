@@ -2,6 +2,7 @@
     --accent: #6366f1;
     --accent-glow: rgba(99, 102, 241, 0.2);
     --bg-dark: #0f172a;
+    --bg-light: #f8fafc;
     --text-main: #1e293b;
     --text-sub: #64748b;
     --luxury: #d4af37;
@@ -9,37 +10,56 @@
     --romantic: #ff4d94;
 }
 
-* { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+* { 
+    box-sizing: border-box; 
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+}
 
 body {
     font-family: 'Almarai', sans-serif;
-    background: #f8fafc;
+    background: var(--bg-light);
     margin: 0;
     color: var(--text-main);
     overflow-x: hidden;
+    direction: rtl; /* جهت کلی سایت */
 }
 
+/* هدر و قهرمان سایت */
 .hero {
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    padding: 40px 0 100px;
+    padding: 60px 0 120px;
     color: white;
     text-align: center;
     border-radius: 0 0 50px 50px;
 }
 
+.hero-title { 
+    font-family: 'Cairo', sans-serif; 
+    font-size: 42px; 
+    font-weight: 900;
+    margin-bottom: 15px; 
+}
+
+.hero-desc {
+    font-size: clamp(14px, 3.5vw, 18px);
+    padding: 0 16px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* نوار دکمه‌های ناوبری بالا */
 .nav-bar { 
     display: flex; 
     justify-content: center; 
-    margin-bottom: 50px; 
+    margin-bottom: 40px; 
     padding: 0 15px;
 }
 
 .top-btns { 
     display: flex; 
-    flex-direction: row;
     gap: 12px;
     justify-content: center;
-    align-items: center;
     flex-wrap: nowrap;
 }
 
@@ -47,7 +67,7 @@ body {
     text-decoration: none; 
     color: white; 
     background: rgba(255,255,255,0.1);
-    padding: 10px 22px; 
+    padding: 12px 24px; 
     border-radius: 50px; 
     font-size: 14px;
     backdrop-filter: blur(10px); 
@@ -56,7 +76,6 @@ body {
     align-items: center; 
     gap: 8px; 
     font-weight: 700;
-    white-space: nowrap;
 }
 
 .btn-nav:hover {
@@ -65,82 +84,222 @@ body {
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-.hero-title { font-family: 'Cairo'; font-size: 40px; margin-bottom: 10px; }
-.hero-desc { opacity: 0.7; }
-
+/* باکس فیلتر و جستجو */
 .filter-box {
-    max-width: 900px; margin: -60px auto 40px;
-    background: white; border-radius: 30px; padding: 30px;
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.08);
+    max-width: 900px; 
+    margin: -70px auto 40px;
+    background: white; 
+    border-radius: 35px; 
+    padding: 35px;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1);
 }
 
-.search-wrapper { position: relative; margin-bottom: 25px; }
+.search-wrapper { position: relative; margin-bottom: 30px; }
 .search-wrapper input {
-    width: 100%; padding: 18px 60px 18px 25px; border-radius: 20px;
-    border: 2px solid #f1f5f9; background: #f8fafc; text-align: right;
+    width: 100%; 
+    padding: 20px 60px 20px 25px; 
+    border-radius: 22px;
+    border: 2px solid #f1f5f9; 
+    background: #f8fafc; 
+    text-align: right;
     font-family: 'Almarai';
+    font-size: 16px;
 }
-.search-wrapper i { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: var(--accent); }
 
-/* بخش اصلاح شده برای اسکرول افقی دسته‌بندی‌ها */
+.search-wrapper i { 
+    position: absolute; 
+    right: 25px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    color: var(--accent); 
+    font-size: 20px;
+}
+
+/* اسکرول افقی دسته‌بندی‌ها */
 .filter-group { 
     display: flex; 
-    gap: 10px; 
-    justify-content: center; /* در دسکتاپ وسط باشد */
-    flex-wrap: nowrap; /* جلوگیری از رفتن به سطر بعد */
-    overflow-x: auto; /* فعال کردن اسکرول */
-    padding: 5px 5px 15px 5px;
-    -webkit-overflow-scrolling: touch; /* اسکرول نرم در iOS */
+    gap: 12px; 
+    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 5px 5px 20px;
+    scrollbar-width: none; /* Firefox */
 }
 
-/* مخفی کردن اسکرول‌بار در تمامی مرورگرها */
-.filter-group::-webkit-scrollbar { display: none; }
-.filter-group { -ms-overflow-style: none; scrollbar-width: none; }
+.filter-group::-webkit-scrollbar { display: none; } /* Chrome, Safari */
 
 .f-btn {
-    flex: 0 0 auto; /* جلوگیری از جمع شدن دکمه‌ها */
-    border: none; background: #f1f5f9; padding: 12px 25px; border-radius: 15px;
-    cursor: pointer; font-weight: 700; color: var(--text-sub); display: flex; align-items: center; gap: 8px;
+    flex: 0 0 auto;
+    border: none; 
+    background: #f1f5f9; 
+    padding: 14px 28px; 
+    border-radius: 18px;
+    cursor: pointer; 
+    font-weight: 700; 
+    color: var(--text-sub); 
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
     font-family: 'Almarai';
-    white-space: nowrap;
+    font-size: 15px;
 }
 
-.f-btn.active { background: var(--accent); color: white; box-shadow: 0 10px 20px var(--accent-glow); }
+.f-btn.active { 
+    background: var(--accent); 
+    color: white; 
+    box-shadow: 0 10px 20px var(--accent-glow); 
+}
 
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; padding-bottom: 80px; }
+/* گرید و کارت‌های نمایش */
+.container { max-width: 1240px; margin: 0 auto; padding: 0 25px; }
+.grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    gap: 35px; 
+    padding-bottom: 100px; 
+}
 
-.card { background: white; border-radius: 30px; padding: 30px; border: 1px solid #f1f5f9; position: relative; overflow: hidden; text-align: right; }
-.card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
-.card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; }
+.card { 
+    background: white; 
+    border-radius: 35px; 
+    padding: 35px; 
+    border: 1px solid #f1f5f9; 
+    position: relative; 
+    overflow: hidden; 
+    text-align: right; 
+}
+
+.card:hover { 
+    transform: translateY(-12px); 
+    box-shadow: 0 40px 70px rgba(0,0,0,0.08); 
+}
+
+/* خط رنگی بالای کارت */
+.card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 8px; }
 .card.luxury::before { background: var(--luxury); }
 .card.modern::before { background: var(--modern); }
 .card.romantic::before { background: var(--romantic); }
 
-.mini-tag { font-size: 11px; background: #f8fafc; color: var(--accent); padding: 5px 12px; border-radius: 8px; font-weight: 700; margin-left: 5px; }
-.card-title { font-family: 'Cairo'; font-size: 22px; margin-bottom: 10px; }
-.card-desc { color: var(--text-sub); font-size: 14px; line-height: 1.6; min-height: 50px; }
-.card-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--text-main); color: white; text-decoration: none; padding: 15px; border-radius: 18px; font-weight: 700; margin-top: 25px; }
+/* المان جدید: شماره محصول کنار اسم */
+.card-header-flex {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 15px 0 10px;
+}
 
-.modal { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.9); backdrop-filter: blur(10px); z-index: 9999; }
-.modal-body { position: relative; width: 95%; max-width: 1000px; height: 85vh; margin: 2vh auto; background: white; border-radius: 40px; overflow: hidden; }
-.close-btn { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: none; font-size: 24px; color: #1e293b; }
-iframe { width: 100%; height: 100%; border: none; }
+.item-number {
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    min-width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.04);
+    flex-shrink: 0;
+}
 
-/* تنظیمات موبایل */
+/* رنگ شماره متناسب با دسته بندی */
+.card.luxury .item-number { color: var(--luxury); }
+.card.modern .item-number { color: var(--modern); }
+.card.romantic .item-number { color: var(--romantic); }
+
+.card-title { 
+    font-family: 'Cairo', sans-serif; 
+    font-size: 22px; 
+    font-weight: 800;
+    margin: 0;
+    color: var(--text-main);
+}
+
+.card-desc { 
+    color: var(--text-sub); 
+    font-size: 15px; 
+    line-height: 1.7; 
+    min-height: 60px;
+    margin-top: 10px;
+}
+
+.mini-tag { 
+    font-size: 12px; 
+    background: #f8fafc; 
+    color: var(--accent); 
+    padding: 6px 14px; 
+    border-radius: 10px; 
+    font-weight: 700; 
+    margin-left: 8px; 
+}
+
+.card-btn { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 12px; 
+    background: var(--text-main); 
+    color: white; 
+    text-decoration: none; 
+    padding: 18px; 
+    border-radius: 20px; 
+    font-weight: 700; 
+    margin-top: 30px; 
+    font-size: 16px;
+}
+
+.card-btn:hover { background: var(--accent); }
+
+/* مودال نمایش دمو */
+.modal { 
+    display: none; 
+    position: fixed; 
+    inset: 0; 
+    background: rgba(15,23,42,0.92); 
+    backdrop-filter: blur(12px); 
+    z-index: 9999; 
+}
+
+.modal-body { 
+    position: relative; 
+    width: 95%; 
+    max-width: 1100px; 
+    height: 88vh; 
+    margin: 2vh auto; 
+    background: white; 
+    border-radius: 45px; 
+    overflow: hidden; 
+}
+
+.close-btn { 
+    position: absolute; 
+    bottom: 35px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 65px; 
+    height: 65px; 
+    background: white; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3); 
+    border: none; 
+    font-size: 26px; 
+    color: var(--bg-dark); 
+}
+
+/* ریسپانسیو موبایل */
 @media (max-width: 768px) {
-    .filter-group { 
-        justify-content: flex-start; /* در موبایل از سمت راست شروع شود برای اسکرول بهتر */
+    .hero-title {
+        font-size: clamp(22px, 6vw, 32px);
+        padding: 0 16px;
+        white-space: nowrap;
     }
 }
 
 @media (max-width: 480px) {
-    .btn-nav {
-        padding: 8px 15px;
-        font-size: 12px;
-        gap: 5px;
-    }
-    .top-btns {
-        gap: 8px;
-    }
+    .top-btns { gap: 8px; }
+    .btn-nav { padding: 10px 16px; font-size: 12px; }
 }

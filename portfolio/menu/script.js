@@ -8,17 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const filterGroup = document.getElementById('filterGroup');
 
-    // ۱. تابع اصلی برای رندر کردن کارت‌ها (ساخت اتوماتیک بر اساس دیتای موجود در data.js)
+    // ۱. تابع اصلی برای رندر کردن کارت‌ها با نمایش شماره محصول
     function renderCards(data) {
         if (!grid) return;
         
-        grid.innerHTML = ''; // پاکسازی گرید برای نمایش نتایج جدید
+        grid.innerHTML = ''; // پاکسازی گرید
         
         if (data.length === 0) {
-            grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--text-sub);">
-                <i class="fas fa-search" style="font-size: 40px; margin-bottom: 15px; opacity: 0.3;"></i>
-                <p>لم يتم العثور على نتائج تطابق بحثك...</p>
-            </div>`;
+            grid.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--text-sub);">
+                    <i class="fas fa-search" style="font-size: 40px; margin-bottom: 15px; opacity: 0.3;"></i>
+                    <p>لم يتم العثور على نتائج تطابق بحثك...</p>
+                </div>`;
             return;
         }
 
@@ -26,12 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = `card ${item.category}`;
             
-            // تولید تگ‌ها به صورت داینامیک
+            // تولید تگ‌ها
             const tagsHTML = item.tags.map(t => `<span class="mini-tag">${t}</span>`).join('');
 
+            // ساختار جدید کارت شامل شماره (بدون هشتگ) کنار عنوان
             card.innerHTML = `
                 <div class="card-tag-row">${tagsHTML}</div>
-                <h3 class="card-title">${item.title}</h3>
+                <div class="card-header-flex">
+                    <span class="item-number">${item.id}</span>
+                    <h3 class="card-title">${item.title}</h3>
+                </div>
                 <p class="card-desc">${item.desc}</p>
                 <a href="javascript:void(0)" class="card-btn" onclick="openMenu('${item.id}')">
                     <i class="fas fa-eye"></i> معاينة التصميم
@@ -41,33 +46,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ۲. مدیریت فیلترها و قابلیت اسکرول دکمه به مرکز
+    // ۲. مدیریت فیلترها و اسکرول دکمه فعال
     if (filterGroup) {
         filterGroup.addEventListener('click', (e) => {
             const btn = e.target.closest('.f-btn');
             if (!btn) return;
 
-            // تغییر دکمه فعال
+            // تغییر حالت اکتیو دکمه‌ها
             document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
-            // --- قابلیت هوشمند: اسکرول دکمه کلیک شده به مرکز نوار اسکرول ---
+            // اسکرول هوشمند دکمه به وسط (بسیار مهم برای موبایل)
             btn.scrollIntoView({
                 behavior: 'smooth',
-                inline: 'center', // آوردن دکمه به وسط کادر در موبایل
+                inline: 'center',
                 block: 'nearest'
             });
 
-            // فیلتر کردن داده‌ها
+            // فیلتر کردن داده‌ها از آرایه پروژه‌ها
             const cat = btn.dataset.cat;
             const filtered = cat === 'all' ? projects : projects.filter(p => p.category === cat);
             
             renderCards(filtered);
 
-            // اسکرول نرم صفحه به ابتدای گرید منوها
+            // اسکرول نرم به بخش نمایش کارت‌ها
             setTimeout(() => {
                 const gridPos = grid.getBoundingClientRect().top + window.pageYOffset;
-                window.scrollTo({ top: gridPos - 150, behavior: 'smooth' });
+                window.scrollTo({ top: gridPos - 130, behavior: 'smooth' });
             }, 300);
         });
     }
@@ -80,33 +85,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const filtered = projects.filter(p => 
                 p.title.toLowerCase().includes(term) || 
                 p.desc.toLowerCase().includes(term) ||
-                p.tags.some(t => t.toLowerCase().includes(term))
+                p.tags.some(t => t.toLowerCase().includes(term)) ||
+                p.id.toString().includes(term) // قابلیت جستجو بر اساس شماره محصول
             );
             
             renderCards(filtered);
         });
     }
 
-    // ۴. اجرای اولیه (نمایش تمام پروژه‌ها هنگام لود سایت)
+    // ۴. اجرای اولیه
     if (typeof projects !== 'undefined') {
         renderCards(projects);
     } else {
-        console.error("Data file (data.js) not found or projects array is missing.");
+        console.error("فایل دیتا (data.js) بارگذاری نشده است.");
     }
 });
 
 /**
- * توابع مدیریت مودال (خارج از DOMContentLoaded برای دسترسی توسط onclick)
+ * مدیریت مودال نمایش منو
  */
 function openMenu(id) {
     const modal = document.getElementById('menuModal');
     const frame = document.getElementById('menuFrame');
     
     if (modal && frame) {
-        // تنظیم آدرس فایل منو (فرض بر این است که فایل‌ها در پوشه menu و با فرمت .html هستند)
         frame.src = `menu/${id}.html`;
         modal.style.display = 'block';
-        document.body.style.overflow = 'hidden'; // جلوگیری از اسکرول صفحه زیرین
+        document.body.style.overflow = 'hidden'; // قفل کردن اسکرول صفحه اصلی
     }
 }
 
@@ -116,7 +121,7 @@ function closeMenu() {
     
     if (modal && frame) {
         modal.style.display = 'none';
-        frame.src = ''; // تخلیه آی‌فریم برای سرعت بیشتر و توقف صدا/ویدیو احتمالی
-        document.body.style.overflow = 'auto'; // فعال‌سازی مجدد اسکرول صفحه
+        frame.src = ''; 
+        document.body.style.overflow = 'auto'; // باز کردن اسکرول
     }
 }
