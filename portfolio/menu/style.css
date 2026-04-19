@@ -1,0 +1,430 @@
+/* Project: Nokhba Digital Menu Gallery
+   Author: Abdullah Al-Balushi 
+   Description: Professional Grid Gallery with Modal Pop-up
+*/
+
+/* تنظیمات پایه و متغیرها */
+:root {
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --text-main: #1e293b;
+    --text-sub: #64748b;
+    --border: #e2e8f0;
+    
+    /* رنگ‌های اختصاصی دسته‌ها */
+    --modern-color: #8e44ad;
+    --luxury-color: #d4af37;
+    --romantic-color: #e91e63;
+    --simple-color: #2ecc71;
+}
+
+* { 
+    box-sizing: border-box; 
+    transition: all 0.3s ease; 
+}
+
+body {
+    font-family: 'Almarai', 'Cairo', sans-serif;
+    background: var(--bg);
+    margin: 0; padding: 0;
+    color: var(--text-main);
+    overflow-x: hidden;
+    direction: rtl; /* تنظیم جهت برای زبان عربی */
+}
+
+/* بخش هدر و جستجوی چسبنده (Sticky) */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    padding: 25px 0 10px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.04);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-content {
+    text-align: center;
+    padding: 0 20px;
+}
+
+.header-title {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 900;
+    font-size: 32px;
+    margin: 0;
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-subtitle {
+    font-family: 'Almarai', sans-serif;
+    font-size: 15px;
+    color: var(--text-sub);
+    margin: 8px auto 12px;
+    max-width: 550px;
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+/* استایل دکمه‌های ناوبری جدید در هدر */
+.header-nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.nav-btn {
+    text-decoration: none;
+    font-family: 'Almarai', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.nav-btn i {
+    font-size: 16px;
+    color: var(--primary);
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+    box-shadow: 0 6px 15px rgba(99, 102, 241, 0.1);
+}
+
+/* متمایز کردن دکمه پروفایل */
+.profile-btn {
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+}
+
+.profile-btn i { color: white; }
+
+.profile-btn:hover {
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    opacity: 0.95;
+}
+
+/* استایل فیلد جستجو */
+.search-container {
+    max-width: 500px;
+    margin: 0 auto 15px;
+    padding: 0 20px;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    border-radius: 50px;
+    border: 2px solid var(--border);
+    font-family: 'Almarai', sans-serif;
+    outline: none;
+    font-size: 14px;
+    text-align: right;
+}
+
+.search-input:focus { 
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-sub);
+}
+
+/* منوی اسکرولی دکمه‌ها */
+.filter-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.filter-container {
+    display: flex;
+    gap: 10px;
+    padding: 5px 25px 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+.filter-container::-webkit-scrollbar { display: none; }
+
+.filter-btn {
+    padding: 10px 22px;
+    border: none;
+    background: var(--white);
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-sub);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.filter-btn i { color: var(--primary); }
+
+.filter-btn.active {
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: 0 8px 15px rgba(99, 102, 241, 0.3);
+}
+.filter-btn.active i { color: white; }
+
+/* شبکه نمایش کارت‌ها */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 30px;
+    text-align: right;
+    border-top: 6px solid #eee;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+    position: relative;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.card.modern { border-top-color: var(--modern-color); }
+.card.luxury { border-top-color: var(--luxury-color); }
+.card.romantic { border-top-color: var(--romantic-color); }
+.card.simple { border-top-color: var(--simple-color); }
+
+.card-title {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 900;
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+.card-desc {
+    font-size: 14px;
+    color: var(--text-sub);
+    line-height: 1.8;
+    margin-bottom: 15px;
+    min-height: 60px;
+}
+
+/* --- استایل جدید تگ‌ها در کارت --- */
+.card-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.card-tag {
+    font-size: 11px;
+    background: #f1f5f9;
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.card-tag:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.btn-view {
+    text-decoration: none;
+    color: var(--white) !important;
+    font-weight: 700;
+    font-size: 13px;
+    background: var(--primary);
+    padding: 10px 20px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 15px rgba(99, 102, 241, 0.25);
+}
+
+.btn-view:hover {
+    background: var(--text-main);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+}
+
+.btn-share {
+    background: #f1f5f9;
+    border: none;
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--text-sub);
+}
+
+.btn-share:hover { 
+    background: var(--primary); 
+    color: white; 
+    transform: scale(1.1);
+}
+
+/* استایل پاپ‌آپ (Modal) */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 9999; 
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(15, 23, 42, 0.85); 
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--white);
+    margin: 5vh auto; 
+    width: 90%; 
+    max-width: 850px; 
+    height: 85vh; 
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+/* --- اصلاح دکمه بستن: قرارگیری در پایین، مرکز، تراز دقیق ضربدر و رنگ تیره --- */
+.close-modal {
+    position: absolute;
+    bottom: 25px; /* انتقال به پایین کادر */
+    left: 50%;
+    transform: translateX(-50%); /* مرکزیت افقی */
+    color: #1e293b; /* رنگ ضربدر تیره */
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10001;
+    background: var(--white);
+    width: 50px; 
+    height: 50px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; /* تراز کردن دقیق ضربدر در مرکز دایره */
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: none; /* حذف بوردر بنفش */
+    padding: 0;
+    line-height: 0;
+}
+
+.close-modal:hover {
+    background: #f1f5f9;
+    transform: translateX(-50%) scale(1.1);
+    color: #000;
+}
+
+/* برای اطمینان از تراز دقیق آیکون */
+.close-modal i {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+#menuFrame {
+    width: 100%; height: 100%; border: none;
+}
+
+/* سیستم اعلان (Toast) */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 2000;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+@keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* تنظیمات واکنش‌گرا (Responsive) */
+@media (max-width: 768px) {
+    .modal-content { 
+        margin: 2vh auto; 
+        width: 95%; 
+        height: 94vh; 
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content { 
+        margin: 0; 
+        width: 100%; 
+        height: 100%; 
+        border-radius: 0; 
+    }
+    .header-nav-buttons {
+        padding: 0 10px;
+    }
+    .nav-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 5px;
+        font-size: 11px;
+    }
+    .close-modal {
+        bottom: 20px;
+    }
+}
