@@ -1,4 +1,14 @@
+/**
+ * Nokhba Digital - Project Database
+ * Developer: Abdullah Al-Baloushi
+ */
+
 const projects = [
+    { 
+        id: "21", title: "سحر الوردي (Soft Pink)", category: "romantic", 
+        tags: ["رومانسي", "ناعم", "هادئ"], 
+        desc: "تصميم وردي ناعم بلمسات أوروبية، مثالي للمقاهي والمطاعم النسائية الراقية." 
+    },
     { 
         id: "20", title: "مذاق الرفاهية (Orbit UI)", category: "modern", 
         tags: ["تنقل_دائري", "هوية_خليجية", "تفاعلي"], 
