@@ -21,10 +21,9 @@ body {
     margin: 0;
     color: var(--text-main);
     overflow-x: hidden;
-    direction: rtl; /* جهت کلی سایت */
+    direction: rtl;
 }
 
-/* هدر و قهرمان سایت */
 .hero {
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     padding: 60px 0 120px;
@@ -48,7 +47,6 @@ body {
     margin: 0 auto;
 }
 
-/* نوار دکمه‌های ناوبری بالا */
 .nav-bar { 
     display: flex; 
     justify-content: center; 
@@ -84,7 +82,6 @@ body {
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-/* باکس فیلتر و جستجو */
 .filter-box {
     max-width: 900px; 
     margin: -70px auto 40px;
@@ -115,7 +112,6 @@ body {
     font-size: 20px;
 }
 
-/* اسکرول افقی دسته‌بندی‌ها */
 .filter-group { 
     display: flex; 
     gap: 12px; 
@@ -123,10 +119,10 @@ body {
     flex-wrap: nowrap;
     overflow-x: auto;
     padding: 5px 5px 20px;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
 }
 
-.filter-group::-webkit-scrollbar { display: none; } /* Chrome, Safari */
+.filter-group::-webkit-scrollbar { display: none; }
 
 .f-btn {
     flex: 0 0 auto;
@@ -150,7 +146,6 @@ body {
     box-shadow: 0 10px 20px var(--accent-glow); 
 }
 
-/* گرید و کارت‌های نمایش */
 .container { max-width: 1240px; margin: 0 auto; padding: 0 25px; }
 .grid { 
     display: grid; 
@@ -174,13 +169,11 @@ body {
     box-shadow: 0 40px 70px rgba(0,0,0,0.08); 
 }
 
-/* خط رنگی بالای کارت */
 .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 8px; }
 .card.luxury::before { background: var(--luxury); }
 .card.modern::before { background: var(--modern); }
 .card.romantic::before { background: var(--romantic); }
 
-/* المان جدید: شماره محصول کنار اسم */
 .card-header-flex {
     display: flex;
     align-items: center;
@@ -202,7 +195,6 @@ body {
     flex-shrink: 0;
 }
 
-/* رنگ شماره متناسب با دسته بندی */
 .card.luxury .item-number { color: var(--luxury); }
 .card.modern .item-number { color: var(--modern); }
 .card.romantic .item-number { color: var(--romantic); }
@@ -250,7 +242,6 @@ body {
 
 .card-btn:hover { background: var(--accent); }
 
-/* مودال نمایش دمو */
 .modal { 
     display: none; 
     position: fixed; 
@@ -258,14 +249,19 @@ body {
     background: rgba(15,23,42,0.92); 
     backdrop-filter: blur(12px); 
     z-index: 9999; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-body { 
-    position: relative; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 95%; 
     max-width: 1100px; 
     height: 88vh; 
-    margin: 2vh auto; 
     background: white; 
     border-radius: 45px; 
     overflow: hidden; 
@@ -290,7 +286,6 @@ body {
     color: var(--bg-dark); 
 }
 
-/* ریسپانسیو موبایل */
 @media (max-width: 768px) {
     .hero-title {
         font-size: clamp(22px, 6vw, 32px);
@@ -302,4 +297,12 @@ body {
 @media (max-width: 480px) {
     .top-btns { gap: 8px; }
     .btn-nav { padding: 10px 16px; font-size: 12px; }
+}
+
+/* 🔥 اصلاح نهایی برای نمایش کامل iframe */
+.modal-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
 }
